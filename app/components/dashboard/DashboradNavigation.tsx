@@ -10,19 +10,19 @@ const links = [
   },
   {
     name: 'Замовлення',
-    href: '/orders',
+    href: '/dashboard/orders',
   },
   {
     name: 'Товари',
-    href: '/products',
+    href: '/dashboard/products',
   },
   {
     name: 'Категорії',
-    href: '/category',
+    href: '/dashboard/category',
   },
   {
     name: 'Колекція',
-    href: '/collections',
+    href: '/dashboard/collections',
   },
 ];
 
@@ -36,7 +36,7 @@ export default function DashboradNavigation() {
         key={item.href}
           href={item.href}
           className={cn(
-            item.href === pathName ? 'text-black font-bold' : 'text-muted-foreground font-normal',
+            item.href === pathName ? 'text-black font-bold' : 'text-muted-foreground font-normal', 'uppercase tracking-wide'
           )}>
           {item.name}
         </Link>
