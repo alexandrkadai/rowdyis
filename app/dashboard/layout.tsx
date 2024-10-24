@@ -12,8 +12,14 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { getKindeServerSession, LogoutLink } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
-  
+export default async function DashboardLayout({ children }: { children: ReactNode }) {
+  // const { getUser } = getKindeServerSession();
+  // const user = await getUser();
+
+  // if (!user || user.email !== 'kaldikonly@gmail.com') {
+  //   return redirect('/');
+  // }
+
   return (
     <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <header className="sticky top-0 flex h-15 items-center justify-between gap-4 border-b bg-white mt-5 mb-2 pb-2">

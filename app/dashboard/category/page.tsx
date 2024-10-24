@@ -1,7 +1,16 @@
-import React from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import React from 'react';
 
 export default function CategoryRoute() {
   return (
-    <div>This is Categories Route</div>
-  )
+    <Card>
+      <CardHeader>
+        <CardTitle>Categories page</CardTitle>
+        <CardDescription>All categories</CardDescription>
+      </CardHeader>
+      <CardContent>
+        
+      </CardContent>
+    </Card>
+  );
 }
