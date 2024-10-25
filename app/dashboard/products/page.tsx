@@ -26,7 +26,7 @@ export default function ProductsRoute() {
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button asChild className="flex items-center gap-x-2">
+        <Button asChild className="flex items-center gap-x-2 font-bold">
           <Link href="/dashboard/products/create">
             <CirclePlus size={24} />
             Add product
@@ -52,7 +52,9 @@ export default function ProductsRoute() {
                 <TableHead className="text-end">Actions</TableHead>
               </TableRow>
             </TableHeader>
+
             <TableBody>
+
               <TableRow>
                 <TableCell>
                   <Image src={tee} alt="T-shirt image" width={50} height={50} />
@@ -64,9 +66,7 @@ export default function ProductsRoute() {
                 <TableCell className="text-end">
                   <DropdownMenu >
                     <DropdownMenuTrigger>
-                      <Button variant="ghost">
                         <MoreVertical size={24} />
-                      </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='center'>
                       <DropdownMenuLabel>
@@ -92,9 +92,7 @@ export default function ProductsRoute() {
                 <TableCell className="text-end">
                   <DropdownMenu >
                     <DropdownMenuTrigger>
-                      <Button variant="ghost">
                         <MoreVertical size={24} />
-                      </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='center'>
                       <DropdownMenuLabel>
@@ -119,9 +117,7 @@ export default function ProductsRoute() {
                 <TableCell className="text-end">
                   <DropdownMenu >
                     <DropdownMenuTrigger>
-                      <Button variant="ghost">
                         <MoreVertical size={24} />
-                      </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='center'>
                       <DropdownMenuLabel>
@@ -146,9 +142,7 @@ export default function ProductsRoute() {
                 <TableCell className="text-end">
                   <DropdownMenu >
                     <DropdownMenuTrigger>
-                      <Button variant="ghost">
                         <MoreVertical size={24} />
-                      </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='center'>
                       <DropdownMenuLabel>
@@ -162,6 +156,10 @@ export default function ProductsRoute() {
                   </DropdownMenu>
                 </TableCell>
               </TableRow>
+
+              {/* Never Will BE */}
+            
+              
             </TableBody>
           </Table>
         </CardContent>

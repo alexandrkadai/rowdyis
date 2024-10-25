@@ -18,7 +18,7 @@ export default function RecentSales() {
             <p className="text-md ">User Name</p>
             <p className="text-sm text-muted-foreground">User Email</p>
           </div>
-          <span className="text-sm ml-auto">99999 grn</span>
+          <span className="text-sm ml-auto">55555 grn</span>
         </div>
       </CardContent>
     </Card>
