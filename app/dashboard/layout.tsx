@@ -13,12 +13,12 @@ import { getKindeServerSession, LogoutLink } from '@kinde-oss/kinde-auth-nextjs/
 import { redirect } from 'next/navigation';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
-  // const { getUser } = getKindeServerSession();
-  // const user = await getUser();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
-  // if (!user || user.email !== 'kaldikonly@gmail.com') {
-  //   return redirect('/');
-  // }
+  if (!user || user.email !== 'kaldikonly@gmail.com') {
+    return redirect('/');
+  }
 
   return (
     <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +46,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>
-              <span>Log Out</span>
+              <LogoutLink>Log Out</LogoutLink>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
