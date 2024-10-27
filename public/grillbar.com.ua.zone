@@ -1,0 +1,62 @@
+;===================================================
+; zone file for grillbar.com.ua domain from dnshosting.org
+; last updated 2024-10-26 16:03:02
+;===================================================
+
+
+$TTL 3600
+@ IN SOA nsa2.srv53.net. support.dnshosting.org. 1729947782 1800 600 2419200 1800
+;===================================================
+; NAMESERVER LIST (12pcs)
+;===================================================
+grillbar.com.ua. IN NS nsa2.srv53.net.
+grillbar.com.ua. IN NS nsa2.srv53.com.
+grillbar.com.ua. IN NS nsa4.srv53.org.
+grillbar.com.ua. IN NS nsb1.srv53.net.
+grillbar.com.ua. IN NS nsb2.srv53.com.
+grillbar.com.ua. IN NS nsb1.srv53.org.
+grillbar.com.ua. IN NS nsc2.srv53.net.
+grillbar.com.ua. IN NS nsc1.srv53.com.
+grillbar.com.ua. IN NS nsc1.srv53.org.
+grillbar.com.ua. IN NS nsd4.srv53.net.
+grillbar.com.ua. IN NS nsd2.srv53.com.
+grillbar.com.ua. IN NS nsd4.srv53.org.
+
+
+;===================================================
+;*** ALTERNATE NAMESERVER LIST (2pcs), can be used instate listed NS above
+;===================================================
+;grillbar.com.ua. IN NS pid1.srv53.net.
+;grillbar.com.ua. IN NS pid2.srv53.org.
+
+
+;===================================================
+; RRs
+;===================================================
+
+
+grillbar.com.ua. 3600 IN MX 10 mail.imena.com.ua.
+;---------------------------------------------------
+; WEB REDIRECT FOR grillbar.com.ua
+grillbar.com.ua. 3600 IN A 5.39.10.93
+_srv4._dnshosting.grillbar.com.ua. 300 IN TXT "1|MQ=="
+;---------------------------------------------------
+
+;---------------------------------------------------
+; WEB REDIRECT FOR www.grillbar.com.ua
+www.grillbar.com.ua. 3600 IN A 5.39.10.93
+_srv4._dnshosting.www.grillbar.com.ua. 300 IN TXT "1|MQ=="
+;---------------------------------------------------
+
+;---------------------------------------------------
+; WEB REDIRECT FOR grillbar.com.ua
+grillbar.com.ua. 3600 IN AAAA 2001:41d0:b:a74:5:39:10:93
+_srv6._dnshosting.grillbar.com.ua. 300 IN TXT "1|MQ=="
+;---------------------------------------------------
+
+;---------------------------------------------------
+; WEB REDIRECT FOR www.grillbar.com.ua
+www.grillbar.com.ua. 3600 IN AAAA 2001:41d0:b:a74:5:39:10:93
+_srv6._dnshosting.www.grillbar.com.ua. 300 IN TXT "1|MQ=="
+;---------------------------------------------------
+

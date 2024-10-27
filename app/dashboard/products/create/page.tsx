@@ -1,7 +1,15 @@
 'use client';
 
+import SubmitButton from '@/app/components/SubmitButton';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -21,7 +29,7 @@ export default function page() {
     <>
       <div className="flex items-center gap-4 mt-2">
         <Button variant="outline" size="default" asChild>
-          <Link href="/dasboard/products">
+          <Link href="/dashboard/products">
             <ChevronLeft size={24} strokeWidth={3} />
             <span className="uppercase font-bold">Go Back</span>
           </Link>
@@ -95,11 +103,14 @@ export default function page() {
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Images</Label>
-                <UploadDropzone  endpoint="imageUploader" />
+                <UploadDropzone endpoint="imageUploader" />
                 {/* <p className=""></p> //ERROr */}
               </div>
             </div>
           </CardContent>
+          <CardFooter>
+            <SubmitButton text="create product" variant="default" />
+          </CardFooter>
         </Card>
       </form>
     </>

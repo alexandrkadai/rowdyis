@@ -25,7 +25,7 @@ export default function CollectionRoute() {
     <>
       <div className="flex items-center justify-end">
         <Button asChild className="flex gap-2">
-          <Link href="/dashboard/collection/create">
+          <Link href="/dashboard/collections/create">
             <PlusCircle className="h-5 w-5" />
             <span className="font-bold">Add Collection</span>
           </Link>

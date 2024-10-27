@@ -25,7 +25,7 @@ export default function CategoryRoute() {
     <>
       <div className="flex items-center justify-end">
         <Button asChild className="flex gap-2">
-          <Link href="/dashboard/collection/create">
+          <Link href="/dashboard/category/create">
             <PlusCircle className="h-5 w-5" />
             <span className="font-bold">Add Category</span>
           </Link>
