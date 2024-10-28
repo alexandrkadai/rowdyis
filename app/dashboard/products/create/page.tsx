@@ -1,5 +1,6 @@
 'use client';
 
+import { createProduct } from '@/app/actions';
 import SubmitButton from '@/app/components/SubmitButton';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,8 +24,25 @@ import { Textarea } from '@/components/ui/textarea';
 import { UploadDropzone } from '@/lib/uploadthing';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useForm } from '@conform-to/react';
+import { parseWithZod } from '@conform-to/zod';
+import { productShema } from '@/app/lib/zodSchemas';
+import { useActionState } from 'react';
 
-export default function page() {
+export default function ProductCreate() {
+  const [lastResult, action] = useActionState(createProduct, undefined);
+
+  const [form, fields] = useForm({
+    lastResult,
+
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: productShema });
+    },
+
+    shouldValidate: 'onBlur',
+    shouldRevalidate: 'onInput',
+  });
+
   return (
     <>
       <div className="flex items-center gap-4 mt-2">
@@ -35,18 +53,24 @@ export default function page() {
           </Link>
         </Button>
       </div>
-      <form className="mt-10 pb-10">
+      <form id={form.id} onSubmit={form.onSubmit} action={action} className="mt-10 pb-10">
         <Card>
           <CardHeader>
-            <CardTitle className='text-2xl uppercase'>Add new Product</CardTitle>
+            <CardTitle className="text-2xl uppercase">Add new Product</CardTitle>
             <CardDescription>Create new Product for your Store</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
                 <Label>Name</Label>
-                <Input type="text" placeholder="Please Enter the Name" />
-                {/* <p className=""></p> //////ERROr */}
+                <Input
+                  key={fields.name.key}
+                  name={fields.name.name}
+                  defaultValue={fields.name.initialValue}
+                  type="text"
+                  placeholder="Please Enter the Name"
+                />
+                <p className="text-red-500">{fields.name.errors}</p>
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Description</Label>
@@ -57,42 +81,40 @@ export default function page() {
                 <Label>Price</Label>
                 <Input type="number" placeholder="Please Enter the Price $" />
                 {/* <p className=""></p> //ERROr */}
-              </div><h2>Sizes</h2>
+              </div>
+              <h2>Sizes</h2>
               <div className="flex flex-row gap-4">
-              
-              <div className="flex flex-col gap-4 w-[150px]">
-                <Label>S</Label>
-                <Input type="number" placeholder="Please Enter the number of size S" />
-                {/* <p className=""></p> //ERROr */}
-              </div>
-              <div className="flex flex-col gap-4 w-[150px]">
-                <Label>M</Label>
-                <Input type="number" placeholder="Please Enter the number of size S" />
-                {/* <p className=""></p> //ERROr */}
-              </div>
-              <div className="flex flex-col gap-4 w-[150px]">
-                <Label>L</Label>
-                <Input type="number" placeholder="Please Enter the number of size S" />
-                {/* <p className=""></p> //ERROr */}
-              </div>
-              <div className="flex flex-col gap-4 w-[150px]">
-                <Label>XL</Label>
-                <Input type="number" placeholder="Please Enter the number of size S" />
-                {/* <p className=""></p> //ERROr */}
-              </div>
-              <div className="flex flex-col gap-4 w-[150px]">
-                <Label>2XL</Label>
-                <Input type="number" placeholder="Please Enter the number of size S" />
-                {/* <p className=""></p> //ERROr */}
-              </div>
+                <div className="flex flex-col gap-4 w-[150px]">
+                  <Label>S</Label>
+                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  {/* <p className=""></p> //ERROr */}
+                </div>
+                <div className="flex flex-col gap-4 w-[150px]">
+                  <Label>M</Label>
+                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  {/* <p className=""></p> //ERROr */}
+                </div>
+                <div className="flex flex-col gap-4 w-[150px]">
+                  <Label>L</Label>
+                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  {/* <p className=""></p> //ERROr */}
+                </div>
+                <div className="flex flex-col gap-4 w-[150px]">
+                  <Label>XL</Label>
+                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  {/* <p className=""></p> //ERROr */}
+                </div>
+                <div className="flex flex-col gap-4 w-[150px]">
+                  <Label>2XL</Label>
+                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  {/* <p className=""></p> //ERROr */}
+                </div>
 
-              <div className="flex flex-col gap-4 w-[150px]">
-                <Label>3XL</Label>
-                <Input type="number" placeholder="Please Enter the number of size S" />
-                {/* <p className=""></p> //ERROr */}
-              </div>
-
-
+                <div className="flex flex-col gap-4 w-[150px]">
+                  <Label>3XL</Label>
+                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  {/* <p className=""></p> //ERROr */}
+                </div>
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Status</Label>
