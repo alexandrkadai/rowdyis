@@ -9,12 +9,11 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 export default function OneProductRoute() {
   const [size, setSize] = useState<string>('');
-  const handleRadioClick = (item: string) => {
-    setSize(item);
-  };
+  
   const itemId = usePathname();
   return (
     <div className="w-ful flex  sm:flex-col-reverse md:flex-col-reverse lg:flex-row mt-10 ">
@@ -26,12 +25,11 @@ export default function OneProductRoute() {
       </div>
 
       <div className="w-full flex flex-col ml-5 text-left">
-        <h2 className="text-3xl font-bold uppercase">Tee Shirt</h2>
-        <span className="mt-2 font-bold text-xl">3099 &#8372;</span>
-        <span className="mt-5">Please Select Size</span>
+        <h2 className="text-[45px] font-bold uppercase">Tee Shirt</h2>
+        <span className="mt-2 font-bold text-[45px]">3099 &#8372;</span>
+        <span className="mt-5 uppercase tracking-wide">Please Select Size</span>
 
         <RadioGroup defaultValue="" className="flex flex-row mt-2 gap-5">
-
           <div className="flex items-center space-x-2 relative " onClick={() => setSize('s')}>
             <RadioGroupItem value="option-one" id="option-one" />
             <label
@@ -46,7 +44,7 @@ export default function OneProductRoute() {
 
           <div className="flex items-center space-x-2 relative" onClick={() => setSize('m')}>
             <RadioGroupItem value="option-two" id="option-two" />
-            <label 
+            <label
               htmlFor="option-two"
               className={cn(
                 size === 'm' ? 'text-black' : 'text-gray-300',
@@ -92,6 +90,14 @@ export default function OneProductRoute() {
             </label>
           </div>
         </RadioGroup>
+        <div className="mt-10">
+          <Button className="uppercase font-bold rounded-none">Add to Cart</Button>
+        </div>
+        <article className='mt-10 text-sm text-muted-foreground'>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+        been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+        galley of type and scrambled it to make a type specimen book.
+        </article>
       </div>
     </div>
   );
