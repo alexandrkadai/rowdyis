@@ -22,3 +22,31 @@ model User {
 
   createdAt DateTime @default(now())
 }
+
+model Product {
+  id          String        @id @default(uuid())
+  name        String
+  description String
+  status      ProductStatus
+  price       Int
+  images      String[]
+  category    Category
+  sizeS       Int
+  sizeM       Int
+  sizeL       Int
+  sizeXL      Int
+  size2xl     Int
+  size3xl     Int
+  createdAt   DateTime      @default(now())
+}
+
+enum ProductStatus {
+  draft
+  published
+  archived
+}
+
+enum Category {
+  men
+  women
+}

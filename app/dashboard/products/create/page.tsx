@@ -57,6 +57,42 @@ export default function page() {
                 <Label>Price</Label>
                 <Input type="number" placeholder="Please Enter the Price $" />
                 {/* <p className=""></p> //ERROr */}
+              </div><h2>Sizes</h2>
+              <div className="flex flex-row gap-4">
+              
+              <div className="flex flex-col gap-4 w-[150px]">
+                <Label>S</Label>
+                <Input type="number" placeholder="Please Enter the number of size S" />
+                {/* <p className=""></p> //ERROr */}
+              </div>
+              <div className="flex flex-col gap-4 w-[150px]">
+                <Label>M</Label>
+                <Input type="number" placeholder="Please Enter the number of size S" />
+                {/* <p className=""></p> //ERROr */}
+              </div>
+              <div className="flex flex-col gap-4 w-[150px]">
+                <Label>L</Label>
+                <Input type="number" placeholder="Please Enter the number of size S" />
+                {/* <p className=""></p> //ERROr */}
+              </div>
+              <div className="flex flex-col gap-4 w-[150px]">
+                <Label>XL</Label>
+                <Input type="number" placeholder="Please Enter the number of size S" />
+                {/* <p className=""></p> //ERROr */}
+              </div>
+              <div className="flex flex-col gap-4 w-[150px]">
+                <Label>2XL</Label>
+                <Input type="number" placeholder="Please Enter the number of size S" />
+                {/* <p className=""></p> //ERROr */}
+              </div>
+
+              <div className="flex flex-col gap-4 w-[150px]">
+                <Label>3XL</Label>
+                <Input type="number" placeholder="Please Enter the number of size S" />
+                {/* <p className=""></p> //ERROr */}
+              </div>
+
+
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Status</Label>
