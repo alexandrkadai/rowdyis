@@ -15,7 +15,9 @@ export default function Home() {
     }, 6000);
   }
   return (
-    <div className="w-full h-[100vh] relative flex text-center justify-center cursor-pointer bg-[#fcfcff] ">
+    <div
+      className="w-full h-[100vh] relative flex text-center justify-center cursor-pointer bg-[#fcfcff] "
+      onClick={() => setWokes(true)}>
       <div className="absolute top-28 left-0 right-0 m-auto text-center">
         <Image
           src={sleep}
