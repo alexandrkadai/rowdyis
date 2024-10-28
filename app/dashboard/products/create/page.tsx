@@ -35,12 +35,11 @@ export default function page() {
           </Link>
         </Button>
       </div>
-      <h1 className="uppercase font-bold text-2xl mt-5">Add new Product</h1>
-      <form className="mt-5 pb-10">
+      <form className="mt-10 pb-10">
         <Card>
           <CardHeader>
-            <CardTitle>Add new Product</CardTitle>
-            <CardDescription>Add new Product</CardDescription>
+            <CardTitle className='text-2xl uppercase'>Add new Product</CardTitle>
+            <CardDescription>Create new Product for your Store</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-6">
@@ -83,20 +82,6 @@ export default function page() {
                     <SelectItem value="draft">Hoody</SelectItem>
                     <SelectItem value="published">Sweatshirt</SelectItem>
                     <SelectItem value="archived">Tshirt</SelectItem>
-                  </SelectContent>
-                </Select>
-                {/* <p className=""></p> //ERROr */}
-              </div>
-              <div className="flex flex-col gap-4">
-                <Label>Collection</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Collection" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="draft">SweetVibe</SelectItem>
-                    <SelectItem value="published">Season 18</SelectItem>
-                    <SelectItem value="archived">Academy 1</SelectItem>
                   </SelectContent>
                 </Select>
                 {/* <p className=""></p> //ERROr */}

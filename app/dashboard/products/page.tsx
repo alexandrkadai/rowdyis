@@ -25,15 +25,15 @@ export default function ProductsRoute() {
   const mDate = Date.now();
   return (
     <>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end mt-2">
         <Button asChild className="flex items-center gap-x-2 font-bold">
-          <Link href="/dashboard/products/create">
+          <Link href="/dashboard/products/create" className='uppercase'>
             <CirclePlus size={24} />
-            Add product
+            Add Product
           </Link>
         </Button>
       </div>
-      <Card className="mt-5">
+      <Card className="mt-10">
         <CardHeader>
           <CardTitle className="text-md font-bold">All Products</CardTitle>
           <CardDescription className="text-sm text-muted-foreground">

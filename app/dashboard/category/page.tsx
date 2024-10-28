@@ -23,11 +23,11 @@ import React from 'react';
 export default function CategoryRoute() {
   return (
     <>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end mt-2">
         <Button asChild className="flex gap-2">
           <Link href="/dashboard/category/create">
             <PlusCircle className="h-5 w-5" />
-            <span className="font-bold">Add Category</span>
+            <span className="font-bold uppercase">Add Category</span>
           </Link>
         </Button>
       </div>

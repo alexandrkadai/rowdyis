@@ -23,11 +23,11 @@ import React from 'react';
 export default function CollectionRoute() {
   return (
     <>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end mt-2">
         <Button asChild className="flex gap-2">
           <Link href="/dashboard/collections/create">
             <PlusCircle className="h-5 w-5" />
-            <span className="font-bold">Add Collection</span>
+            <span className="font-bold uppercase">Add Collection</span>
           </Link>
         </Button>
       </div>
@@ -42,6 +42,7 @@ export default function CollectionRoute() {
               <TableRow>
                 <TableHead>Name</TableHead>
                 <TableHead>Description</TableHead>
+                <TableHead>Products</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead className="text-end">Actions</TableHead>
               </TableRow>
@@ -50,6 +51,7 @@ export default function CollectionRoute() {
               <TableRow>
                 <TableCell>Summer Vibe 18</TableCell>
                 <TableCell>Summer Vibe 18</TableCell>
+                <TableCell>18</TableCell>
                 <TableCell>24/10/2024</TableCell>
                 <TableCell className='text-end'>
                   <DropdownMenu>
@@ -69,6 +71,7 @@ export default function CollectionRoute() {
               <TableRow>
                 <TableCell>Drop Forewa</TableCell>
                 <TableCell>Drop Forewa</TableCell>
+                <TableCell>18</TableCell>
                 <TableCell>24/10/2024</TableCell>
                 <TableCell className='text-end'>
                   <DropdownMenu>
@@ -88,6 +91,7 @@ export default function CollectionRoute() {
               <TableRow>
                 <TableCell>Season 5</TableCell>
                 <TableCell>Season 5</TableCell>
+                <TableCell>18</TableCell>
                 <TableCell>24/10/2024</TableCell>
                 <TableCell className='text-end'>
                   <DropdownMenu>
