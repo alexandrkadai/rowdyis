@@ -4,6 +4,7 @@ import logo from '@/app/assets/logo.png';
 import Cart from './Cart';
 import { MenuIcon, XIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 export default function FrontSideNavigation() {
   return (
@@ -30,18 +31,24 @@ export default function FrontSideNavigation() {
             Контакти
           </Link>
         </div>
-        <Cart />
-        <div className="w-[300px] h-[100vh] fixed right-0 top-0 bg-white border-l-2 border-black z-50">
-          <Button variant="ghost" className="absolute top-4 right-4">
-            <XIcon size={35} strokeWidth={3} />
-          </Button>
-          <h2 className="text-[35px] font-bold text-uppercase mt-2 ml-2">Cart</h2>
-          <div className="w-full border-b-2 border-black"></div>
-          <span className="mt-10 text-center block font-bold"> Your Cart is Empty</span>
-          <Button disabled className="absolute bottom-0 left-0 w-full rounded-none">
-            Checkout
-          </Button>
-        </div>
+        
+        <Sheet>
+          <SheetTrigger className='uppercase font-bold'>Koshik</SheetTrigger>
+          <SheetContent className='p-0'>
+            <SheetHeader>
+            <SheetTitle className='hidden'>Cart</SheetTitle>
+            </SheetHeader>
+            <div>
+              <h2 className="text-[35px] font-bold text-uppercase mt-2 ml-2">Cart</h2>
+              <div className="w-full border-b-2 border-black"></div>
+              <span className="mt-10 text-center block font-bold"> Your Cart is Empty</span>
+              <Button disabled className="absolute bottom-0 left-0 w-full rounded-none">
+                Checkout
+              </Button>
+            </div>
+          </SheetContent>
+        </Sheet>
+       
       </nav>
     </header>
   );
