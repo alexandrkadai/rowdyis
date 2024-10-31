@@ -32,16 +32,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         {children}
-        <footer className="px-[50px] sm:px-[100px] lg:px-[120px] xl:px-[240px] mt-10 mb-10 flex items-center justify-center">
-          <div className="flex flex-row uppercase font-bold gap-5 textlg">
-            <Copyright size={24} />
-            <span className="">Rowdy</span>
-            <span className="">UKraine</span>
-            <span className="">Kiev</span>
-            <span>All Rights Reserved</span>
-            <span>Terms And Conditions</span>
-          </div>
-        </footer>
+       
       </body>
     </html>
   );

@@ -22,14 +22,16 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { UploadDropzone } from '@/lib/uploadthing';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { productShema } from '@/app/lib/zodSchemas';
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
+import Image from 'next/image';
 
 export default function ProductCreate() {
+  const [images, setImages] = useState<string[]>([]);
   const [lastResult, action] = useActionState(createProduct, undefined);
 
   const [form, fields] = useForm({
@@ -42,7 +44,9 @@ export default function ProductCreate() {
     shouldValidate: 'onBlur',
     shouldRevalidate: 'onInput',
   });
-
+  const handleDeleteImage = (index: number) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
   return (
     <>
       <div className="flex items-center gap-4 mt-2">
@@ -74,46 +78,51 @@ export default function ProductCreate() {
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Description</Label>
-                <Textarea placeholder="Please Enter the Description" />
-                {/* <p className=""></p> //ERROr */}
+                <Textarea
+                  key={fields.description.key}
+                  name={fields.description.name}
+                  defaultValue={fields.description.initialValue}
+                  placeholder="Please Enter the Description"
+                />
+                <p className="text-red-500">{fields.description.errors}</p>
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Price</Label>
-                <Input type="number" placeholder="Please Enter the Price $" />
-                {/* <p className=""></p> //ERROr */}
+                <Input
+                  key={fields.price.key}
+                  name={fields.price.name}
+                  defaultValue={fields.price.initialValue}
+                  type="number"
+                  placeholder="Please Enter the Price $"
+                />
+                <p className="text-red-500">{fields.price.errors}</p>
               </div>
               <h2>Sizes</h2>
               <div className="flex flex-row gap-4">
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>S</Label>
                   <Input type="number" placeholder="Please Enter the number of size S" />
-                  {/* <p className=""></p> //ERROr */}
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>M</Label>
                   <Input type="number" placeholder="Please Enter the number of size S" />
-                  {/* <p className=""></p> //ERROr */}
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>L</Label>
                   <Input type="number" placeholder="Please Enter the number of size S" />
-                  {/* <p className=""></p> //ERROr */}
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>XL</Label>
                   <Input type="number" placeholder="Please Enter the number of size S" />
-                  {/* <p className=""></p> //ERROr */}
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>2XL</Label>
                   <Input type="number" placeholder="Please Enter the number of size S" />
-                  {/* <p className=""></p> //ERROr */}
                 </div>
 
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>3XL</Label>
                   <Input type="number" placeholder="Please Enter the number of size S" />
-                  {/* <p className=""></p> //ERROr */}
                 </div>
               </div>
               <div className="flex flex-col gap-4">
@@ -128,26 +137,54 @@ export default function ProductCreate() {
                     <SelectItem value="archived">Archived</SelectItem>
                   </SelectContent>
                 </Select>
-                {/* <p className=""></p> //ERROr */}
+                <p className="text-red-500">{fields.status.errors}</p>
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Category</Label>
                 <Select>
                   <SelectTrigger>
-                    <SelectValue placeholder="Status" />
+                    <SelectValue placeholder="Sex" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="draft">Hoody</SelectItem>
-                    <SelectItem value="published">Sweatshirt</SelectItem>
-                    <SelectItem value="archived">Tshirt</SelectItem>
+                    <SelectItem value="draft">Men</SelectItem>
+                    <SelectItem value="published">Women</SelectItem>
                   </SelectContent>
                 </Select>
-                {/* <p className=""></p> //ERROr */}
+                <p className="text-red-500">{fields.category.errors}</p>
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Images</Label>
-                <UploadDropzone endpoint="imageUploader" />
-                {/* <p className=""></p> //ERROr */}
+                {images.length > 0 ? (
+                  <div className="flex gap-5">
+                    {images.map((image, index) => (
+                      <div className="relative w-[100px] h-[100px]" key={index}>
+                        <Image
+                          src={image}
+                          width={100}
+                          height={100}
+                          alt="product image"
+                          className="w-full h-full object-cover rounded-lg border-2 border-black"
+                        />
+                        <button
+                          type="button"
+                          className="absolute -top-3 -right-3 bg-red-500 p-2 rounded-lg"
+                          onClick={() => handleDeleteImage(index)}>
+                          <XIcon size={12} strokeWidth={4} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <UploadDropzone
+                    className="ut-button:bg-black"
+                    endpoint="imageUploader"
+                    onClientUploadComplete={(res) => {
+                      setImages(res.map((r) => r.url));
+                    }}
+                    onUploadError={() => alert('Something Went Wrong try again')}
+                  />
+                )}
+                <p className="text-red-500">{fields.images.errors}</p>
               </div>
             </div>
           </CardContent>
