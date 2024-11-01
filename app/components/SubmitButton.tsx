@@ -23,7 +23,7 @@ export default function SubmitButton({ text, variant }: buttonProps) {
     <>
       {pending ? (
         <Button disabled variant={variant} className="uppercase">
-          <Loader2Icon size={24} />
+          <Loader2Icon size={24} className="mr-2 h-2 w-2 animate-spin" />
           Please Wait ....
         </Button>
       ) : (

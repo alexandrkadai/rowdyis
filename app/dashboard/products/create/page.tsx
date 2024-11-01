@@ -44,6 +44,7 @@ export default function ProductCreate() {
     shouldValidate: 'onBlur',
     shouldRevalidate: 'onInput',
   });
+
   const handleDeleteImage = (index: number) => {
     setImages(images.filter((_, i) => i !== index));
   };
@@ -101,33 +102,73 @@ export default function ProductCreate() {
               <div className="flex flex-row gap-4">
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>S</Label>
-                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  <Input
+                    key={fields.sizeS.key}
+                    name={fields.sizeS.name}
+                    defaultValue={fields.sizeS.initialValue}
+                    type="number"
+                    placeholder="Please Enter the number of size S"
+                  />
+                  <p className="text-red-500">{fields.sizeS.errors}</p>
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>M</Label>
-                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  <Input
+                    key={fields.sizeM.key}
+                    name={fields.sizeM.name}
+                    defaultValue={fields.sizeM.initialValue}
+                    type="number"
+                    placeholder="Please Enter the number of size S"
+                  />
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>L</Label>
-                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  <Input
+                    key={fields.sizeL.key}
+                    name={fields.sizeL.name}
+                    defaultValue={fields.sizeL.initialValue}
+                    type="number"
+                    placeholder="Please Enter the number of size S"
+                  />
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>XL</Label>
-                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  <Input
+                    key={fields.sizeXl.key}
+                    name={fields.sizeXl.name}
+                    defaultValue={fields.sizeXl.initialValue}
+                    type="number"
+                    placeholder="Please Enter the number of size S"
+                  />
                 </div>
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>2XL</Label>
-                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  <Input
+                    key={fields.size2xl.key}
+                    name={fields.size2xl.name}
+                    defaultValue={fields.size2xl.initialValue}
+                    type="number"
+                    placeholder="Please Enter the number of size S"
+                  />
                 </div>
 
                 <div className="flex flex-col gap-4 w-[150px]">
                   <Label>3XL</Label>
-                  <Input type="number" placeholder="Please Enter the number of size S" />
+                  <Input
+                    key={fields.size3xl.key}
+                    name={fields.size3xl.name}
+                    defaultValue={fields.size3xl.initialValue}
+                    type="number"
+                    placeholder="Please Enter the number of size S"
+                  />
                 </div>
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Status</Label>
-                <Select>
+                <Select
+                  key={fields.status.key}
+                  name={fields.status.name}
+                  defaultValue={fields.status.initialValue}>
                   <SelectTrigger>
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
@@ -141,19 +182,29 @@ export default function ProductCreate() {
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Category</Label>
-                <Select>
+                <Select
+                  key={fields.category.key}
+                  name={fields.category.name}
+                  defaultValue={fields.category.initialValue}>
                   <SelectTrigger>
                     <SelectValue placeholder="Sex" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="draft">Men</SelectItem>
-                    <SelectItem value="published">Women</SelectItem>
+                    <SelectItem value="men">Men</SelectItem>
+                    <SelectItem value="women">Women</SelectItem>
                   </SelectContent>
                 </Select>
                 <p className="text-red-500">{fields.category.errors}</p>
               </div>
               <div className="flex flex-col gap-4">
                 <Label>Images</Label>
+                <input
+                  type="hidden"
+                  value={images}
+                  key={fields.images.key}
+                  name={fields.images.name}
+                  defaultValue={fields.images.initialValue as string}
+                />
                 {images.length > 0 ? (
                   <div className="flex gap-5">
                     {images.map((image, index) => (

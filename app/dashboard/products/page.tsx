@@ -20,14 +20,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import prisma from '@/app/lib/db';
 
-export default function ProductsRoute() {
+async function getData() {
+  const data = await prisma.product.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+  return data;
+}
+
+export default async function ProductsRoute() {
+  const data = await getData();
   const mDate = Date.now();
   return (
     <>
       <div className="flex items-center justify-end mt-2">
         <Button asChild className="flex items-center gap-x-2 font-bold">
-          <Link href="/dashboard/products/create" className='uppercase'>
+          <Link href="/dashboard/products/create" className="uppercase">
             <CirclePlus size={24} />
             Add Product
           </Link>
@@ -54,112 +65,30 @@ export default function ProductsRoute() {
             </TableHeader>
 
             <TableBody>
-
-              <TableRow>
+              {data.map( (item) => (
+                <TableRow key={item.id}>
                 <TableCell>
-                  <Image src={tee} alt="T-shirt image" width={50} height={50} />
+                  <Image src={item.images[0]} alt="product image" width={50} height={50} />
                 </TableCell>
-                <TableCell>T-shirt</TableCell>
-                <TableCell>Online</TableCell>
-                <TableCell>$ 42</TableCell>
-                <TableCell>{new Intl.DateTimeFormat('en-US').format(mDate)}</TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.status}</TableCell>
+                <TableCell>$ {item.price}</TableCell>
+                <TableCell>{new Intl.DateTimeFormat('en-US').format(item.createdAt)}</TableCell>
                 <TableCell className="text-end">
-                  <DropdownMenu >
+                  <DropdownMenu>
                     <DropdownMenuTrigger>
-                        <MoreVertical size={24} />
+                      <MoreVertical size={24} />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align='center'>
-                      <DropdownMenuLabel>
-                        Actions
-                      </DropdownMenuLabel>
+                    <DropdownMenuContent align="center">
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem className='text-red-500'>Delete</DropdownMenuItem>
-                      
+                      <DropdownMenuItem className="text-red-500">Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
               </TableRow>
-              {/* Never Will BE */}
-              <TableRow>
-                <TableCell>
-                  <Image src={tee} alt="T-shirt image" width={50} height={50} />
-                </TableCell>
-                <TableCell>T-shirt</TableCell>
-                <TableCell>Online</TableCell>
-                <TableCell>$ 42</TableCell>
-                <TableCell>{new Intl.DateTimeFormat('en-US').format(mDate)}</TableCell>
-                <TableCell className="text-end">
-                  <DropdownMenu >
-                    <DropdownMenuTrigger>
-                        <MoreVertical size={24} />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align='center'>
-                      <DropdownMenuLabel>
-                        Actions
-                      </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem className='text-red-500'>Delete</DropdownMenuItem>
-                      
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Image src={tee} alt="T-shirt image" width={50} height={50} />
-                </TableCell>
-                <TableCell>T-shirt</TableCell>
-                <TableCell>Online</TableCell>
-                <TableCell>$ 42</TableCell>
-                <TableCell>{new Intl.DateTimeFormat('en-US').format(mDate)}</TableCell>
-                <TableCell className="text-end">
-                  <DropdownMenu >
-                    <DropdownMenuTrigger>
-                        <MoreVertical size={24} />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align='center'>
-                      <DropdownMenuLabel>
-                        Actions
-                      </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem className='text-red-500'>Delete</DropdownMenuItem>
-                      
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Image src={tee} alt="T-shirt image" width={50} height={50} />
-                </TableCell>
-                <TableCell>T-shirt</TableCell>
-                <TableCell>Online</TableCell>
-                <TableCell>$ 42</TableCell>
-                <TableCell>{new Intl.DateTimeFormat('en-US').format(mDate)}</TableCell>
-                <TableCell className="text-end">
-                  <DropdownMenu >
-                    <DropdownMenuTrigger>
-                        <MoreVertical size={24} />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align='center'>
-                      <DropdownMenuLabel>
-                        Actions
-                      </DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem className='text-red-500'>Delete</DropdownMenuItem>
-                      
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-
-              {/* Never Will BE */}
-            
-              
+              ))}
             </TableBody>
           </Table>
         </CardContent>
