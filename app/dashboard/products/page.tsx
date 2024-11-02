@@ -11,7 +11,6 @@ import {
 import { CirclePlus, MoreVertical } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import tee from '@/app/assets/testimage/Misprint+Tee+1.png';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -65,29 +64,40 @@ export default async function ProductsRoute() {
             </TableHeader>
 
             <TableBody>
-              {data.map( (item) => (
+              {data.map((item) => (
                 <TableRow key={item.id}>
-                <TableCell>
-                  <Image src={item.images[0]} alt="product image" width={50} height={50} />
-                </TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.status}</TableCell>
-                <TableCell>$ {item.price}</TableCell>
-                <TableCell>{new Intl.DateTimeFormat('en-US').format(item.createdAt)}</TableCell>
-                <TableCell className="text-end">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>
-                      <MoreVertical size={24} />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="center">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem className="text-red-500">Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
+                  <TableCell>
+                    <Image
+                      src={item.images[0]}
+                      alt="product image"
+                      width={50}
+                      height={50}
+                      className="ronded-xl object-cover"
+                    />
+                  </TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.status}</TableCell>
+                  <TableCell>$ {item.price}</TableCell>
+                  <TableCell>{new Intl.DateTimeFormat('en-US').format(item.createdAt)}</TableCell>
+                  <TableCell className="text-end">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <MoreVertical size={24} />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="center">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                          <Link href={`/dashboard/products/${item.id}`}>Edit</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-red-500" asChild>
+                          
+                          <Link href={`/dashboard/products/${item.id}/delete`}>Delete</Link>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
               ))}
             </TableBody>
           </Table>

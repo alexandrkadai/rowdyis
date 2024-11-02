@@ -43,3 +43,46 @@ export async function createProduct(prevState: unknown, formData: FormData) {
 
   redirect('/dashboard/products');
 }
+
+export async function editProduct(prevState: unknown, formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  if (!user || user.email !== 'kaldikonly@gmail.com') {
+    redirect('/');
+  }
+
+  const submission = parseWithZod(formData, {
+    schema: productShema,
+  });
+
+  if (submission.status !== 'success') {
+    return submission.reply();
+  }
+  const productId = formData.get('productId') as string;
+
+  const flattenUrls = submission.value.images.flatMap((urlString) =>
+    urlString.split(',').map((url) => url.trim()),
+  );
+
+  await prisma.product.update({
+    where: {
+      id: productId,
+    },
+    data: {
+      name: submission.value.name,
+      description: submission.value.description,
+      category: submission.value.category,
+      price: submission.value.price,
+      status: submission.value.status,
+      sizeS: submission.value.sizeS ?? 0,
+      sizeM: submission.value.sizeM ?? 0,
+      sizeL: submission.value.sizeL ?? 0,
+      sizeXL: submission.value.sizeXl ?? 0,
+      size2xl: submission.value.size2xl ?? 0,
+      size3xl: submission.value.size3xl ?? 0,
+      images: flattenUrls,
+    },
+  });
+
+  redirect('/dashboard/products');
+}
