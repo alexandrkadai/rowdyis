@@ -210,7 +210,6 @@ export default function EditForm({ data }: iDataProduct) {
                 value={images}
                 key={fields.images.key}
                 name={fields.images.name}
-                
               />
               {images.length > 0 ? (
                 <div className="flex gap-5">
@@ -239,7 +238,9 @@ export default function EditForm({ data }: iDataProduct) {
                   onClientUploadComplete={(res) => {
                     setImages(res.map((r) => r.url));
                   }}
-                  onUploadError={() => alert('Something Went Wrong try again')}
+                  onUploadError={(e) =>
+                    alert('Something Went Wrong try again with smaller file' + e.code)
+                  }
                 />
               )}
               <p className="text-red-500">{fields.images.errors}</p>
