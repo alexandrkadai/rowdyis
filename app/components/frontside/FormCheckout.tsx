@@ -15,7 +15,7 @@ const FormCheckout = () => {
   let selectElement = document.getElementById('selectInput');
   let warhouseSelect = document.getElementById('warhouseSelect');
 
-  const warhouseRef = useRef(null);
+  const warhouseRef = useRef<HTMLInputElement>(null);
 
   const [inputCity, setInputCity] = useState<string>('');
 
@@ -52,7 +52,7 @@ const FormCheckout = () => {
   const warhouseOnChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setWarhouuseInput(event.target.value);
-    if (warhouseRef.current) {
+    if (warhouseRef.current !== null) {
       setTimeout(() => {
         setWarhouseChoose(warhouseRef.current.value);
         warhouseSelect!.style.display = 'block';
@@ -191,7 +191,7 @@ const FormCheckout = () => {
               type="text"
               name="warhouse"
               placeholder="Відділення"
-              ref={warhouseRef}
+              ref={warhouseRef} 
               value={warhouseInput}
               onChange={warhouseOnChangeHandler}
             />
@@ -209,7 +209,7 @@ const FormCheckout = () => {
             )}
           </div>
         </div>
-        <Button>vipravlennia</Button>
+        <Button className='mt-5 uppercase tracking-widest'>відправлення</Button>
       </form>
     </div>
   );
