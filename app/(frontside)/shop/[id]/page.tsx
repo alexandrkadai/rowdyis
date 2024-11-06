@@ -1,5 +1,3 @@
-'use client';
-import { usePathname } from 'next/navigation';
 import first from '@/app/assets/testimage/Misprint+Tee+1.png';
 import second from '@/app/assets/testimage/Misprint+Tee+2.png';
 import third from '@/app/assets/testimage/White+Tag+1.png';
@@ -10,26 +8,33 @@ import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import prisma from '@/app/lib/db';
 
-export default function OneProductRoute() {
-  const [size, setSize] = useState<string>('');
-  
-  const itemId = usePathname();
+async function getData(productId: string) {
+  const data = await prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+  });
+  return data;
+}
+
+export default async function OneProductRoute({ params }: { params: { id: string } }) {
+  const id = await params ;
+  const data = await getData(id.id);
+  // const [size, setSize] = useState<string>('');
+  // const images = data.map(({ images }) => images).flat();
+
+  console.log(data);
+
   return (
     <div className="w-ful flex  sm:flex-col-reverse md:flex-col-reverse lg:flex-row mt-10 ">
-      <div className="w-full flex flex-col gap-5 ">
-        <Image src={first} width={350} height={350} alt="Product Image" />
-        <Image src={second} width={350} height={350} alt="Product Image" />
-        <Image src={third} width={350} height={350} alt="Product Image" />
-        <Image src={fourth} width={350} height={350} alt="Product Image" />
-      </div>
-
       <div className="w-full flex flex-col ml-5 text-left">
         <h2 className="text-[45px] font-bold uppercase">Tee Shirt</h2>
         <span className="mt-2 font-bold text-[45px]">3099 &#8372;</span>
         <span className="mt-5 uppercase tracking-wide">Please Select Size</span>
 
-        <RadioGroup defaultValue="" className="flex flex-row mt-2 gap-5">
+        {/* <RadioGroup defaultValue="" className="flex flex-row mt-2 gap-5">
           <div className="flex items-center space-x-2 relative " onClick={() => setSize('s')}>
             <RadioGroupItem value="option-one" id="option-one" />
             <label
@@ -40,9 +45,9 @@ export default function OneProductRoute() {
               )}>
               S
             </label>
-          </div>
+          </div> */}
 
-          <div className="flex items-center space-x-2 relative" onClick={() => setSize('m')}>
+        {/* <div className="flex items-center space-x-2 relative" onClick={() => setSize('m')}>
             <RadioGroupItem value="option-two" id="option-two" />
             <label
               htmlFor="option-two"
@@ -89,14 +94,14 @@ export default function OneProductRoute() {
               2XL
             </label>
           </div>
-        </RadioGroup>
+        </RadioGroup> */}
         <div className="mt-10">
           <Button className="uppercase font-bold rounded-none">Add to Cart</Button>
         </div>
-        <article className='mt-10 text-sm text-muted-foreground'>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-        been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-        galley of type and scrambled it to make a type specimen book.
+        <article className="mt-10 text-sm text-muted-foreground">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+          been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+          a galley of type and scrambled it to make a type specimen book.
         </article>
       </div>
     </div>
