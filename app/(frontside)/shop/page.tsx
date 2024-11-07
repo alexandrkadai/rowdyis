@@ -12,6 +12,12 @@ async function getData() {
   return data;
 }
 export default async function ShopPage() {
+  // const userID = localStorage.getItem("lUserID");
+  // console.log(userID);
+  // if(userID === )
+  // const uuid = crypto.randomUUID();
+  // localStorage.setItem("lUserID", uuid);
+
   const data = await getData();
   return (
     <div className="mt-[150px] grid 2xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-10 justify-center items-center">

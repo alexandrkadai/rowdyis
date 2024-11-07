@@ -21,7 +21,6 @@ export default function ProductSize(data: iDataProps) {
   return (
     <>
       <span className="mt-5 uppercase tracking-wide">Please Select Size</span>
-
       <RadioGroup defaultValue="" className="flex flex-row mt-2 gap-5">
         <div className="flex items-center space-x-2 relative " onClick={() => setSize('s')}>
           <RadioGroupItem
