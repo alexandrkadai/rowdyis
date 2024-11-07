@@ -1,4 +1,3 @@
-import tee from '@/app/assets/testimage/Misprint+Tee+1.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import prisma from '@/app/lib/db';
@@ -16,7 +15,8 @@ export default async function ShopPage() {
   // console.log(userID);
   // if(userID === )
   // const uuid = crypto.randomUUID();
-  // localStorage.setItem("lUserID", uuid);
+  // // localStorage.setItem("lUserID", uuid);
+  // document.cookie = `userId=${uuid}`;
 
   const data = await getData();
   return (

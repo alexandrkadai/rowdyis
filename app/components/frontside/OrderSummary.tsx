@@ -2,7 +2,8 @@ import { Button } from '@/components/ui/button';
 
 export default function OrderSummary() {
   return (
-    <div className="w-full flex flex-col">
+    <div className="relative w-full flex">
+    <div className="w-[400px] flex flex-col fixed bg-white">
       <h4 className="text-2xl font-bold">Підсумок</h4>
       <div className="mt-5">
         <div className="mt-5 flex justify-between">
@@ -17,6 +18,7 @@ export default function OrderSummary() {
         <span className="uppercase">12344 GRN</span>
       </div>
       <Button className="uppercase mt-5">Оплатити</Button>
+    </div>
     </div>
   );
 }

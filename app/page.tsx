@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <Suspense fallback={<MainLoadingScreen />}>
       <div
-        className="w-full h-[100vh] relative flex text-center justify-center cursor-pointer bg-[#fcfcff] "
+        className="w-full h-[100vh] relative flex text-center justify-center cursor-[url(cursor.cur),_pointer] bg-[#fcfcff] "
         onClick={() => setWokes(true)}>
         <div className="absolute top-28 left-0 right-0 m-auto text-center">
           <Image
