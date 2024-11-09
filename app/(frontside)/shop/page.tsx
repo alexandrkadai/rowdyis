@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import prisma from '@/app/lib/db';
-
+import { cookies } from 'next/headers';
 async function getData() {
   const data = await prisma.product.findMany({
     orderBy: {
@@ -10,17 +10,8 @@ async function getData() {
   });
   return data;
 }
+
 export default async function ShopPage() {
-
-  
-  let uuid = crypto.randomUUID();
-  // const userID = localStorage.getItem("lUserID");
-  // console.log(userID);
-  // if(userID === )
-  // const uuid = crypto.randomUUID();
-  // // localStorage.setItem("lUserID", uuid);
-  // document.cookie = `userId=${uuid}`;
-
   const data = await getData();
   return (
     <div className="mt-[150px] grid 2xl:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-10 justify-center items-center">
@@ -34,7 +25,6 @@ export default async function ShopPage() {
           <div className="absolute flex flex-col left-10 bottom-10">
             <span className="uppercase text-md font-bold">{item.name}</span>
             <span className="uppercase text-md font-bold">{item.price} &#8372;</span>
-            <span>{uuid}</span>
           </div>
         </div>
       ))}

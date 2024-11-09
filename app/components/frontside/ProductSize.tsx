@@ -4,7 +4,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { cn } from '@/lib/utils';
 import { type $Enums } from '@prisma/client';
 import React, { useState } from 'react';
-
+import { addItem } from '@/app/actions';
 interface iDataProps {
   data: {
     id: string;
@@ -16,8 +16,10 @@ interface iDataProps {
     category: $Enums.Category;
   };
 }
-export default function ProductSize(data: iDataProps) {
+
+export default function ProductSize({ data }: iDataProps) {
   const [size, setSize] = useState<string>('');
+  const addProductShoppingCart = addItem.bind(null, data.id);
   return (
     <>
       <span className="mt-5 uppercase tracking-wide">Please Select Size</span>
@@ -102,9 +104,9 @@ export default function ProductSize(data: iDataProps) {
           </label>
         </div>
       </RadioGroup>
-      <div className="mt-10">
+      <form action={addProductShoppingCart} className="mt-10">
         <Button className="uppercase font-bold rounded-none">Add to Cart</Button>
-      </div>
+      </form>
     </>
   );
 }

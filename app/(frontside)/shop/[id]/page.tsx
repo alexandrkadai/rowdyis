@@ -2,6 +2,7 @@ import Image from 'next/image';
 import prisma from '@/app/lib/db';
 import ProductSize from '@/app/components/frontside/ProductSize';
 
+
 async function getData(productId: string) {
   const data = await prisma.product.findUnique({
     where: {
@@ -13,6 +14,7 @@ async function getData(productId: string) {
 }
 
 export default async function OneProductRoute({ params }: { params: { id: string } }) {
+  
   const id = await params;
   const data = await getData(id.id);
   const imagesP = data!.images;
@@ -27,7 +29,7 @@ export default async function OneProductRoute({ params }: { params: { id: string
       <div className="w-full flex flex-col ml-5 text-left">
         <h2 className="text-[45px] font-bold uppercase">{data?.name}</h2>
         <span className="mt-2 font-bold text-[45px]">{data?.price} &#8372;</span>
-        <ProductSize data={data!} />
+        <ProductSize data={data!}  />
         <article className="mt-10 text-sm text-muted-foreground">{data?.description}</article>
       </div>
     </div>

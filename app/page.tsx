@@ -4,9 +4,10 @@ import Image from 'next/image';
 import sleep from '@/app/assets/animation/RowdYSleep.gif';
 import woke from '@/app/assets/animation/RowdYWoke.gif';
 import { Button } from '@/components/ui/button';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
+
 
 export default function Home() {
   const [wokes, setWokes] = useState(false);

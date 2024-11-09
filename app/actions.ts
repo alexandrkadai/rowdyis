@@ -4,6 +4,12 @@ import { redirect } from 'next/navigation';
 import { parseWithZod } from '@conform-to/zod';
 import { productShema } from './lib/zodSchemas';
 import prisma from './lib/db';
+import { redis } from './lib/redis';
+import { iCart } from './lib/interfaces';
+import { setUserUUID } from './lib/uniquFineId';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { cookies } from 'next/headers';
+import { getUserId } from './lib/userClaude';
 
 export async function createProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -99,6 +105,73 @@ export async function deleteProduct(formData: FormData) {
       id: formData.get('productId') as string,
     },
   });
-  
+
   redirect('/dashboard/products');
+}
+
+export async function addItem(
+  productId: string,
+) {
+  const userID = await getUserId();
+
+  if (!userID) {
+    throw new Error('User ID is not set');
+  }
+
+  let cart: iCart | null = await redis.get(`cart-${userID}`);
+
+  const selectedProduct = await prisma.product.findUnique({
+    select: {
+      id: true,
+      name: true,
+      price: true,
+      images: true,
+    },
+    where: {
+      id: productId,
+    },
+  });
+
+  if (!selectedProduct) {
+    throw new Error('Product not found');
+  }
+
+  let myCart = {} as iCart;
+
+  if (!cart || !cart.items) {
+    myCart = {
+      userID: userID,
+      items: [
+        {
+          id: selectedProduct?.id,
+          name: selectedProduct?.name,
+          price: selectedProduct?.price,
+          image: selectedProduct?.images[0],
+          quantity: 1,
+        },
+      ],
+    };
+  } else {
+    let found = false;
+
+    myCart.items = cart.items.map((item) => {
+      if (item.id === productId) {
+        found = true;
+        item.quantity += 1;
+      }
+      return item;
+    });
+
+    if (!found) {
+      myCart.items.push({
+        id: selectedProduct.id,
+        name: selectedProduct.name,
+        price: selectedProduct.price,
+        image: selectedProduct.images[0],
+        quantity: 1,
+      });
+    }
+  }
+
+  await redis.set(`cart-${userID}`, myCart);
 }
