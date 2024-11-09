@@ -10,9 +10,8 @@ import {
 import React, { useEffect, useState, useRef } from 'react';
 
 const FormCheckout = () => {
-  // const apiKey = process.env.REACT_APP_PUBLIC_NOVA_KEY;
   const apiKey = process.env.PUBLIC_NOVA_KEY;
-  let selectElement = document.getElementById('selectInput');
+  let citySelect = document.getElementById('citySelect');
   let warhouseSelect = document.getElementById('warhouseSelect');
 
   const warhouseRef = useRef<HTMLInputElement>(null);
@@ -30,13 +29,13 @@ const FormCheckout = () => {
 
   const [optionsState, setOptionsState] = useState<string>('');
 
-  // input for user city to send for city search 1st step
+  // input for user city to send for city search 1st step  selectElement
   const cityOnChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setInputCity(event.target.value);
     setTimeout(() => {
       setCitiChoose(event.target.value);
-      selectElement!.style.display = 'block';
+      citySelect!.style.display = 'block';
     }, 2000);
   };
 
@@ -44,26 +43,25 @@ const FormCheckout = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setOptionsState(event.target.value);
     setInputCity(event.target.value);
-    selectElement!.style.display = 'none';
+    citySelect!.style.display = 'none';
     setCity([]);
   };
 
   //Start typing to see all warhouses 1st step
-  const warhouseOnChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const warhouseFinderHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setWarhouuseInput(event.target.value);
     if (warhouseRef.current !== null) {
       setTimeout(() => {
-        setWarhouseChoose(warhouseRef.current.value);
+        setWarhouseChoose(warhouseRef.current!.value);
         warhouseSelect!.style.display = 'block';
-      }, 300);
+      }, 2000);
     }
   };
 
   //Selecting warhouse that user Wish from warhouse list
   const handleWarhouseChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setWarhouuseInput(event.target.value);
-    // setWarhouseSetted(event.target.value);
     warhouseSelect!.style.display = 'none';
     setWarhouseW([]);
   };
@@ -113,7 +111,7 @@ const FormCheckout = () => {
           modelName: 'Address',
           calledMethod: 'getWarehouses',
           methodProperties: {
-            FindByString: 'Відділення №' + warhouseChoose,
+            FindByString: warhouseChoose ? 'Відділення №' + warhouseChoose : ' ',
             CityName: optionsState,
             Page: '1',
             Limit: '50',
@@ -126,7 +124,7 @@ const FormCheckout = () => {
           setWarhouseW(data.data);
         });
     getDepartment();
-  }, [warhouseChoose]);
+  }, [optionsState, warhouseChoose]);
 
   return (
     <div className="flex flex-col w-full">
@@ -170,17 +168,18 @@ const FormCheckout = () => {
               value={inputCity}
               onChange={cityOnChangeHandler}
             />
-
-            {city ? (
-              <select className="w-[350px]" onChange={handleSelectChange} id="selectInput">
+            {city && (
+              <select
+                className="w-[350px] mt-2 hidden p-1 border-2 border-black"
+                onChange={handleSelectChange}
+                id="citySelect">
+                <option selected={true}>Виберіть</option>
                 {city.map((item: any) => (
-                    <option key={item.Description} value={item.Description}>
-                      {item.Description}
-                    </option>
-                  ))}
+                  <option key={item.Description} value={item.Description}>
+                    {item.Description}
+                  </option>
+                ))}
               </select>
-            ) : (
-              <></>
             )}
           </div>
 
@@ -191,25 +190,28 @@ const FormCheckout = () => {
               type="text"
               name="warhouse"
               placeholder="Відділення"
-              ref={warhouseRef} 
+              ref={warhouseRef}
               value={warhouseInput}
-              onChange={warhouseOnChangeHandler}
+              onChange={warhouseFinderHandler}
             />
-            {warhouseInput ? (
-              <select className="w-[350px]" onChange={handleWarhouseChange} id="warhouseSelect">
-                {warhouseW &&
-                  warhouseW.map((item: any) => (
-                    <option key={item.SiteKey} value={item.Description}>
-                      {item.Description}
-                    </option>
-                  ))}
+
+            {warhouseW && (
+              <select
+                className="w-[350px] mt-2  p-1 border-2 border-black"
+                onChange={handleWarhouseChange}
+                id="warhouseSelect"
+                defaultValue={warhouseW[0]}>
+                <option selected={true}>Виберіть</option>
+                {warhouseW.map((item: any) => (
+                  <option key={item.SiteKey} value={item.Description}>
+                    {item.Description}
+                  </option>
+                ))}
               </select>
-            ) : (
-              <> </>
             )}
           </div>
         </div>
-        <Button className='mt-5 uppercase tracking-widest'>відправлення</Button>
+        <Button className="mt-5 uppercase tracking-widest">відправлення</Button>
       </form>
     </div>
   );

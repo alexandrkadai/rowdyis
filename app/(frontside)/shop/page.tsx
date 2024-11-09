@@ -11,6 +11,9 @@ async function getData() {
   return data;
 }
 export default async function ShopPage() {
+
+  
+  let uuid = crypto.randomUUID();
   // const userID = localStorage.getItem("lUserID");
   // console.log(userID);
   // if(userID === )
@@ -31,6 +34,7 @@ export default async function ShopPage() {
           <div className="absolute flex flex-col left-10 bottom-10">
             <span className="uppercase text-md font-bold">{item.name}</span>
             <span className="uppercase text-md font-bold">{item.price} &#8372;</span>
+            <span>{uuid}</span>
           </div>
         </div>
       ))}
