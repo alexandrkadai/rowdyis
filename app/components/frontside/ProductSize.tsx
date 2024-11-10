@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils';
 import { type $Enums } from '@prisma/client';
 import React, { useState } from 'react';
 import { addItem } from '@/app/actions';
+import { useAlertManager } from '@/app/hooks/useAlert';
+import { AlertManager } from './AlertManage';
 interface iDataProps {
   data: {
     id: string;
@@ -19,7 +21,18 @@ interface iDataProps {
 
 export default function ProductSize({ data }: iDataProps) {
   const [size, setSize] = useState<string>('');
-  const addProductShoppingCart = addItem.bind(null, data.id);
+  const { alerts, addAlert } = useAlertManager();
+
+  const handleSubmitForm = async () => {
+    if (size === '') {
+      addAlert('Please Select Size', 'error');
+      return;
+    }
+    const result = await addItem(data.id, size);
+    addAlert('Product added successfully!');
+    setSize('');
+  };
+
   return (
     <>
       <span className="mt-5 uppercase tracking-wide">Please Select Size</span>
@@ -39,7 +52,6 @@ export default function ProductSize({ data }: iDataProps) {
             S
           </label>
         </div>
-
         <div className="flex items-center space-x-2 relative" onClick={() => setSize('m')}>
           <RadioGroupItem
             value="option-two"
@@ -55,7 +67,6 @@ export default function ProductSize({ data }: iDataProps) {
             M
           </label>
         </div>
-
         <div className="flex items-center space-x-2 relative" onClick={() => setSize('l')}>
           <RadioGroupItem
             value="option-two"
@@ -104,9 +115,12 @@ export default function ProductSize({ data }: iDataProps) {
           </label>
         </div>
       </RadioGroup>
-      <form action={addProductShoppingCart} className="mt-10">
+
+      <form action={handleSubmitForm} className="mt-10">
         <Button className="uppercase font-bold rounded-none">Add to Cart</Button>
       </form>
+      <AlertManager alerts={alerts} />
+      
     </>
   );
 }

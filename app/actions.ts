@@ -6,9 +6,6 @@ import { productShema } from './lib/zodSchemas';
 import prisma from './lib/db';
 import { redis } from './lib/redis';
 import { iCart } from './lib/interfaces';
-import { setUserUUID } from './lib/uniquFineId';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { cookies } from 'next/headers';
 import { getUserId } from './lib/userClaude';
 
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -109,9 +106,7 @@ export async function deleteProduct(formData: FormData) {
   redirect('/dashboard/products');
 }
 
-export async function addItem(
-  productId: string,
-) {
+export async function addItem(productId: string, size: string) {
   const userID = await getUserId();
 
   if (!userID) {
@@ -147,6 +142,7 @@ export async function addItem(
           name: selectedProduct?.name,
           price: selectedProduct?.price,
           image: selectedProduct?.images[0],
+          sizeItem: size,
           quantity: 1,
         },
       ],
@@ -155,7 +151,7 @@ export async function addItem(
     let found = false;
 
     myCart.items = cart.items.map((item) => {
-      if (item.id === productId) {
+      if (item.id === productId && item.sizeItem === size) {
         found = true;
         item.quantity += 1;
       }
@@ -168,6 +164,7 @@ export async function addItem(
         name: selectedProduct.name,
         price: selectedProduct.price,
         image: selectedProduct.images[0],
+        sizeItem: size,
         quantity: 1,
       });
     }

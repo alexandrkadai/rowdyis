@@ -5,6 +5,7 @@ export type iCart = {
     name: string;
     price: number;
     image: string;
+    sizeItem: string;
     quantity: number;
   }>;
 };
