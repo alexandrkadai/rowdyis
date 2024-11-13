@@ -1,4 +1,6 @@
 'use client';
+import { placeOrder } from '@/app/actions';
+import { orderSchema } from '@/app/lib/zodSchemas';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -7,7 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import React, { useEffect, useState, useRef } from 'react';
+import { useForm } from '@conform-to/react';
+import { parseWithZod } from '@conform-to/zod';
+import React, { useEffect, useState, useRef, useActionState } from 'react';
 
 const FormCheckout = () => {
   const apiKey = process.env.PUBLIC_NOVA_KEY;
@@ -28,6 +32,20 @@ const FormCheckout = () => {
   const [warhouseInput, setWarhouuseInput] = useState<string>('');
 
   const [optionsState, setOptionsState] = useState<string>('');
+  //Validation point
+
+  const [lastResult, action] = useActionState(placeOrder, undefined);
+
+  const [form, fields] = useForm({
+    lastResult,
+
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: orderSchema });
+    },
+
+    shouldValidate: 'onBlur',
+    shouldRevalidate: 'onInput',
+  });
 
   // input for user city to send for city search 1st step  selectElement
   const cityOnChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,22 +147,55 @@ const FormCheckout = () => {
   return (
     <div className="flex flex-col w-full">
       <h4 className="text-2xl font-bold">Відправка</h4>
-      <form className="mt-10 flex flex-col gap-4">
+      <form
+        className="mt-10 flex flex-col gap-4"
+        action={action}
+        id={form.id}
+        onSubmit={form.onSubmit}>
         <div className="flex flex-col">
           <label htmlFor="name">І`мя</label>
-          <input className="border-2 border-black" type="text" name="name" placeholder="" />
+          <input
+            className="border-2 border-black"
+            type="text"
+            placeholder="Напишіть своє Імʼя"
+            key={fields.firstName.key}
+            name={fields.firstName.name}
+            defaultValue={fields.firstName.initialValue}
+          />
+          <p className="text-red-500">{fields.firstName.errors}</p>
         </div>
         <div className="flex flex-col">
           <label htmlFor="surname">Прізвище</label>
-          <input className="border-2 border-black" name="surname" type="text" placeholder="" />
+          <input
+            className="border-2 border-black"
+            key={fields.lastName.key}
+            name={fields.lastName.name}
+            defaultValue={fields.lastName.initialValue}
+            type="text"
+            placeholder="Напишіть свою Фамілію"
+          />
         </div>
         <div className="flex flex-col">
           <label htmlFor="phoneNum">Телефон</label>
-          <input className="border-2 border-black" name="phoneNum" type="tel" placeholder="" />
+          <input
+            className="border-2 border-black"
+            key={fields.phoneNum.key}
+            name={fields.phoneNum.name}
+            defaultValue={fields.phoneNum.initialValue}
+            type="tel"
+            placeholder="Напишіть свій Телефон"
+          />
         </div>
         <div className="flex flex-col">
           <label htmlFor="emailAd">Email адреса</label>
-          <input className="border-2 border-black" name="emailAd" type="email" placeholder="" />
+          <input
+            className="border-2 border-black"
+            key={fields.emailAdd.key}
+            name={fields.emailAdd.name}
+            defaultValue={fields.emailAdd.initialValue}
+            type="email"
+            placeholder="Напишіть свій Імейл"
+          />
         </div>
 
         <div className="mt-5">
@@ -163,7 +214,9 @@ const FormCheckout = () => {
             <input
               className="border-2 border-black p-1"
               type="text"
-              name="city"
+              key={fields.city.key}
+              name={fields.city.name}
+              defaultValue={fields.city.initialValue}
               placeholder="Назва міста"
               value={inputCity}
               onChange={cityOnChangeHandler}
@@ -188,7 +241,9 @@ const FormCheckout = () => {
             <input
               className="border-2 border-black p-1"
               type="text"
-              name="warhouse"
+              key={fields.warhouse.key}
+              name={fields.warhouse.name}
+              defaultValue={fields.warhouse.initialValue}
               placeholder="Відділення"
               ref={warhouseRef}
               value={warhouseInput}
@@ -211,6 +266,7 @@ const FormCheckout = () => {
             )}
           </div>
         </div>
+        <input type="hidden" />
         <Button className="mt-5 uppercase tracking-widest">відправлення</Button>
       </form>
     </div>

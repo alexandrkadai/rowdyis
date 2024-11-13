@@ -14,3 +14,17 @@ export const productShema = z.object({
   size2xl: z.number().optional(),
   size3xl: z.number().optional(),
 });
+
+const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
+
+const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+
+export const orderSchema = z.object({
+  firstName: z.string().min(3),
+  lastName: z.string().min(3),
+  phoneNum: z.string().regex(phoneRegex, 'Invalid phone'),
+  emailAdd: z.string().regex(emailRegex, 'Invalid Email'),
+  city: z.string().min(3),
+  warhouse: z.string().min(3),
+  cartId: z.string(),
+});

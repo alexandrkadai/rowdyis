@@ -50,3 +50,16 @@ enum Category {
   men
   women
 }
+
+model placeOrer {
+  id        String @id @default(uuid())
+  firstName String
+  lastName  String
+  phoneNum  String
+  emailAdd  String
+  city      String
+  warhouse  String
+  cartId    String
+
+  createdAt DateTime @default(now())
+}

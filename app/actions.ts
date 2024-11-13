@@ -2,7 +2,7 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 import { parseWithZod } from '@conform-to/zod';
-import { productShema } from './lib/zodSchemas';
+import { productShema, orderSchema } from './lib/zodSchemas';
 import prisma from './lib/db';
 import { redis } from './lib/redis';
 import { iCart } from './lib/interfaces';
@@ -171,4 +171,26 @@ export async function addItem(productId: string, size: string) {
   }
 
   await redis.set(`cart-${userID}`, myCart);
+}
+
+export async function placeOrder(prevState: unknown, formData: FormData) {
+  const submission = parseWithZod(formData, {
+    schema: orderSchema,
+  });
+
+  if (submission.status !== 'success') {
+    return submission.reply();
+  }
+
+  await prisma.placeOrer.create({
+    data: {
+      firstName: submission.value.firstName,
+      lastName: submission.value.lastName,
+      phoneNum: submission.value.phoneNum,
+      emailAdd: submission.value.emailAdd,
+      city: submission.value.city,
+      warhouse: submission.value.warhouse,
+      cartId: submission.value.cartId,
+    },
+  });
 }
