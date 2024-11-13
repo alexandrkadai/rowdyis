@@ -174,6 +174,7 @@ const FormCheckout = () => {
             type="text"
             placeholder="Напишіть свою Фамілію"
           />
+          <p className="text-red-500">{fields.lastName.errors}</p>
         </div>
         <div className="flex flex-col">
           <label htmlFor="phoneNum">Телефон</label>
@@ -185,6 +186,7 @@ const FormCheckout = () => {
             type="tel"
             placeholder="Напишіть свій Телефон"
           />
+          <p className="text-red-500">{fields.phoneNum.errors}</p>
         </div>
         <div className="flex flex-col">
           <label htmlFor="emailAd">Email адреса</label>
@@ -196,6 +198,8 @@ const FormCheckout = () => {
             type="email"
             placeholder="Напишіть свій Імейл"
           />
+
+          <p className="text-red-500">{fields.emailAdd.errors}</p>
         </div>
 
         <div className="mt-5">
@@ -221,6 +225,7 @@ const FormCheckout = () => {
               value={inputCity}
               onChange={cityOnChangeHandler}
             />
+            <p className="text-red-500">{fields.city.errors}</p>
             {city && (
               <select
                 className="w-[350px] mt-2 hidden p-1 border-2 border-black"
@@ -266,7 +271,12 @@ const FormCheckout = () => {
             )}
           </div>
         </div>
-        <input type="hidden" />
+        <input
+          type="hidden"
+          defaultValue={'121312'}
+          key={fields.cartId.key}
+          name={fields.cartId.name}
+        />
         <Button className="mt-5 uppercase tracking-widest">відправлення</Button>
       </form>
     </div>
