@@ -3,17 +3,11 @@ import { redis } from '@/app/lib/redis';
 import { getUserId } from '@/app/lib/userClaude';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import GetCart from './GetCart';
+
 export default async function OrderSummary() {
-  const userID = await getUserId();
+  const { itemsCart, total, totalPrice } = await GetCart();
 
-  if (!userID) {
-    throw new Error('User ID is not set');
-  }
-
-  const cart: iCart | null = await redis.get(`cart-${userID}`);
-  const itemsCart = cart?.items;
-  const total = cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
-  const totalPrice = cart?.items.reduce((sum, item) => sum + item.quantity * item.price, 0) || 0;
   return (
     <div className="relative w-full flex">
       <div className="w-[400px] flex flex-col bg-white">
