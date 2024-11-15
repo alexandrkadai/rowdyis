@@ -11,20 +11,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { redis } from '@/app/lib/redis';
-import { getUserId } from '@/app/lib/userClaude';
-import { iCart } from '@/app/lib/interfaces';
+import GetCart from './GetCart';
 
 export default async function FrontSideNavigation() {
-  const userID = await getUserId();
-
-  if (!userID) {
-    throw new Error('User ID is not set');
-  }
-
-  const cart: iCart | null = await redis.get(`cart-${userID}`);
-  const itemsCart = cart?.items;
-  const total = cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
+  const { itemsCart, total } = await GetCart(); 
   return (
     <header className="w-full">
       <nav className="flex flex-row justify-between items-center gap-4">
@@ -59,9 +49,9 @@ export default async function FrontSideNavigation() {
             <div>
               <h2 className="text-[35px] font-bold text-uppercase mt-2 ml-2">Cart</h2>
               <div className="w-full border-b-2 border-black"></div>
-              {cart ? (
+              {itemsCart && itemsCart.length > 0 ? (
                 <>
-                  {itemsCart?.map((item, index) => (
+                  {itemsCart.map((item, index) => (
                     <div
                       key={index}
                       className="flex flex-row justify-between px-2 mt-5 uppercase font-bold text-[20px]">
