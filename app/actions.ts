@@ -7,6 +7,7 @@ import prisma from './lib/db';
 import { redis } from './lib/redis';
 import { iCart } from './lib/interfaces';
 import { getUserId } from './lib/userClaude';
+import { revalidatePath } from 'next/cache';
 
 export async function createProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -171,6 +172,8 @@ export async function addItem(productId: string, size: string) {
   }
 
   await redis.set(`cart-${userID}`, myCart);
+  
+  revalidatePath('/', 'layout');
 }
 
 export async function placeOrder(prevState: unknown, formData: FormData) {

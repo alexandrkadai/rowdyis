@@ -12,6 +12,7 @@ import {
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import React, { useEffect, useState, useRef, useActionState } from 'react';
+import SubmitButton from '../SubmitButton';
 
 const FormCheckout = () => {
   const apiKey = process.env.PUBLIC_NOVA_KEY;
@@ -231,7 +232,7 @@ const FormCheckout = () => {
                 className="w-[350px] mt-2 hidden p-1 border-2 border-black"
                 onChange={handleSelectChange}
                 id="citySelect">
-                <option selected={true}>Виберіть</option>
+                <option value="вибуріть">Виберіть</option>
                 {city.map((item: any) => (
                   <option key={item.Description} value={item.Description}>
                     {item.Description}
@@ -261,7 +262,7 @@ const FormCheckout = () => {
                 onChange={handleWarhouseChange}
                 id="warhouseSelect"
                 defaultValue={warhouseW[0]}>
-                <option selected={true}>Виберіть</option>
+                <option value="вибуріть">Виберіть</option>
                 {warhouseW.map((item: any) => (
                   <option key={item.SiteKey} value={item.Description}>
                     {item.Description}
@@ -277,7 +278,11 @@ const FormCheckout = () => {
           key={fields.cartId.key}
           name={fields.cartId.name}
         />
-        <Button className="mt-5 uppercase tracking-widest">відправлення</Button>
+        <SubmitButton
+          className="mt-5 uppercase tracking-widest"
+          variant="default"
+          text="відправлення"
+        />
       </form>
     </div>
   );
