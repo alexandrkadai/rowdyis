@@ -1,13 +1,9 @@
-import { iCart } from '@/app/lib/interfaces';
-import { redis } from '@/app/lib/redis';
-import { getUserId } from '@/app/lib/userClaude';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import GetCart from './GetCart';
 
 export default async function OrderSummary() {
   const { itemsCart, total, totalPrice } = await GetCart();
-
   return (
     <div className="relative w-full flex">
       <div className="w-[400px] flex flex-col bg-white">
