@@ -172,7 +172,38 @@ export async function addItem(productId: string, size: string) {
   }
 
   await redis.set(`cart-${userID}`, myCart);
-  
+
+  revalidatePath('/', 'layout');
+}
+
+export async function deleteItem(formData: FormData) {
+  const userID = await getUserId();
+  const itemId = formData.get('itemId') as string;
+  const sizeToD = formData.get('sizeToD') as string;
+  if (!userID) {
+    throw new Error('User ID is not set');
+  }
+
+  let cart: iCart | null = await redis.get(`cart-${userID}`);
+
+  let updatedCart = cart?.items.map((item) => {
+    if (item.id === itemId && item.sizeItem === sizeToD) {
+      if (item.quantity > 1) {
+        return {
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          sizeItem: item.sizeItem,
+          quantity: item.quantity - 1,
+        };
+      } else {
+        return cart.items.filter((item) => item.id !== itemId && item.sizeItem !== sizeToD);
+      }
+    }
+  });
+
+  await redis.set(`cart-${userID}`, updatedCart);
   revalidatePath('/', 'layout');
 }
 

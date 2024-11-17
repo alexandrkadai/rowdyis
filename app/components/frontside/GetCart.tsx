@@ -10,8 +10,12 @@ export default async function GetCart() {
   }
 
   const cart: iCart | null = await redis.get(`cart-${userID}`);
-  const itemsCart = cart?.items;
-  const total = cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
-  const totalPrice = cart?.items.reduce((sum, item) => sum + item.quantity * item.price, 0) || 0;
-  return { itemsCart, total, totalPrice };
+
+  if (cart !== null && Array.isArray(cart.items)) {
+    const itemsCart = cart.items;
+    const total = itemsCart.reduce((sum, item) => sum + (item?.quantity || 0), 0);
+    const totalPrice = itemsCart.reduce((sum, item) => sum + ((item?.quantity || 0) * (item?.price || 0)), 0);
+    return { itemsCart, total, totalPrice };
+  }
+  return { itemsCart: [], total: 0, totalPrice: 0 };
 }

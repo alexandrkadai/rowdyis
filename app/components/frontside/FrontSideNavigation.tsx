@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/app/assets/logo.png';
-import { MenuIcon } from 'lucide-react';
+import { Delete, DeleteIcon, MenuIcon, MinusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -12,9 +12,11 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import GetCart from './GetCart';
+import { deleteItem } from '@/app/actions';
 
 export default async function FrontSideNavigation() {
-  const { itemsCart, total } = await GetCart(); 
+  const { itemsCart, total } = await GetCart();
+
   return (
     <header className="w-full">
       <nav className="flex flex-row justify-between items-center gap-4">
@@ -52,21 +54,31 @@ export default async function FrontSideNavigation() {
               {itemsCart && itemsCart.length > 0 ? (
                 <>
                   {itemsCart.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-row justify-between px-2 mt-5 uppercase font-bold text-[20px]">
-                      <span>{item.name}</span>
-                      <Image
-                        src={item.image}
-                        alt="Product Image"
-                        width={32}
-                        height={32}
-                        className="rounded-xl"
-                      />
-                      <span>{item.price}</span>
-                      <span className="">{item.sizeItem}</span>
-                      <span className="">{item.quantity}</span>
-                    </div>
+                    <>
+                      <div
+                        key={index}
+                        className="flex flex-row justify-between px-2 mt-5 uppercase font-bold text-[20px]">
+                        <span>{item.name}</span>
+                        <Image
+                          src={item.image}
+                          alt="Product Image"
+                          width={32}
+                          height={32}
+                          className="rounded-xl"
+                        />
+                        <span>{item.price}</span>
+                        <span className="">{item.sizeItem}</span>
+                        <span className="">{item.quantity}</span>
+                      </div>
+                      <form action={deleteItem}>
+                        <input type="hidden" name="itemId" value={item.id} />
+                        <input type="hidden" name="sizeToD" value={item.sizeItem} />
+                        <Button variant="default" type="submit" >
+                        delete
+                        </Button>
+                       
+                      </form>
+                    </>
                   ))}
                   <SheetClose asChild>
                     <Button asChild className="absolute bottom-0 left-0 w-full rounded-none">
