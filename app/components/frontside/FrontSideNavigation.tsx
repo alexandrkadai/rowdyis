@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/app/assets/logo.png';
-import { Delete, DeleteIcon, MenuIcon, MinusCircle } from 'lucide-react';
+import { MenuIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
