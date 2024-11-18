@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import FrontSideNavigation from '../components/frontside/FrontSideNavigation';
 import { Copyright } from 'lucide-react';
+import Link from 'next/link';
 
 export default function FrontSideLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,7 +15,7 @@ export default function FrontSideLayout({ children }: { children: ReactNode }) {
           <span className="">UKraine</span>
           <span className="">Kiev</span>
           <span>All Rights Reserved</span>
-          <span>Terms And Conditions</span>
+          <Link href="/terms" className='underline'>Terms And Conditions</Link>
         </div>
       </footer>
     </div>

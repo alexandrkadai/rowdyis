@@ -176,11 +176,10 @@ export async function addItem(productId: string, size: string) {
   revalidatePath('/', 'layout');
 }
 
-export async function deleteItem(formData: FormData) {
+export async function deleteOneItem(formData: FormData) {
   const userID = await getUserId();
   const itemId = formData.get('itemId') as string;
   const sizeToD = formData.get('sizeToD') as string;
-  console.log(sizeToD);
   if (!userID) {
     throw new Error('User ID is not set');
   }
@@ -188,18 +187,45 @@ export async function deleteItem(formData: FormData) {
   let cart: iCart | null = await redis.get(`cart-${userID}`);
 
   let updatedCart = {
-    userID,
+    items: cart?.items
+      .map((item) => {
+        if (item.id === itemId && item.sizeItem === sizeToD) {
+          return {
+            ...item,
+            quantity: item.quantity - 1,
+          };
+        }
+        return item;
+      })
+      .filter((item) => item.quantity !== 0),
+  };
+
+  await redis.set(`cart-${userID}`, updatedCart);
+
+  revalidatePath('/', 'layout');
+}
+export async function addOneItem(formData: FormData) {
+  const userID = await getUserId();
+  const itemId = formData.get('itemId') as string;
+  const sizeToD = formData.get('sizeToD') as string;
+  if (!userID) {
+    throw new Error('User ID is not set');
+  }
+
+  let cart: iCart | null = await redis.get(`cart-${userID}`);
+
+  let updatedCart = {
     items: cart?.items.map((item) => {
       if (item.id === itemId && item.sizeItem === sizeToD) {
         return {
           ...item,
-          quantity: item.quantity - 1,
+          quantity: item.quantity + 1,
         };
       }
+      return item;
     }),
   };
 
-  console.log(updatedCart);
   await redis.set(`cart-${userID}`, updatedCart);
 
   revalidatePath('/', 'layout');

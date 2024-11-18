@@ -12,7 +12,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import GetCart from './GetCart';
-import { deleteItem } from '@/app/actions';
+import { deleteOneItem, addOneItem } from '@/app/actions';
 
 export default async function FrontSideNavigation() {
   const { itemsCart, total } = await GetCart();
@@ -67,17 +67,25 @@ export default async function FrontSideNavigation() {
                           className="rounded-xl"
                         />
                         <span>{item.price}</span>
-                        <span className="">{item.sizeItem}</span>
                         <span className="">{item.quantity}</span>
+                        <span className="">{item.sizeItem}</span>
                       </div>
-                      <form action={deleteItem}>
-                        <input type="hidden" name="itemId" value={item.id} />
-                        <input type="hidden" name="sizeToD" value={item.sizeItem} />
-                        <Button variant="default" type="submit" >
-                        delete
-                        </Button>
-                       
-                      </form>
+                      <div className="flex justify-around">
+                        <form action={deleteOneItem}>
+                          <input type="hidden" name="itemId" value={item.id} />
+                          <input type="hidden" name="sizeToD" value={item.sizeItem} />
+                          <Button variant="default" type="submit">
+                            minus
+                          </Button>
+                        </form>
+                        <form action={addOneItem}>
+                          <input type="hidden" name="itemId" value={item.id} />
+                          <input type="hidden" name="sizeToD" value={item.sizeItem} />
+                          <Button variant="default" type="submit">
+                            plus
+                          </Button>
+                        </form>
+                      </div>
                     </>
                   ))}
                   <SheetClose asChild>
