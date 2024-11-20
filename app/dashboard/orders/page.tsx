@@ -1,5 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -14,15 +20,15 @@ import Link from 'next/link';
 export default function OrdersRoute() {
   return (
     <>
-      <div className="flex items-center justify-end mt-2">
+      <div className="mt-2 flex items-center justify-end">
         <Button asChild className="flex gap-2">
-          <Link href="/dashboard/collection/create" className='uppercase'>
+          <Link href="/dashboard/collection/create" className="uppercase">
             <FilterIcon className="h-5 w-5" />
             <span className="font-bold">Filters</span>
           </Link>
         </Button>
       </div>
-      <Card className='mt-10'>
+      <Card className="mt-10">
         <CardHeader>
           <CardTitle>Recent Orders</CardTitle>
           <CardDescription>All orders from the shop</CardDescription>

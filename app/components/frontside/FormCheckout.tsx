@@ -66,7 +66,9 @@ const FormCheckout = () => {
   };
 
   //Start typing to see all warhouses 1st step
-  const warhouseFinderHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const warhouseFinderHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     event.preventDefault();
     setWarhouuseInput(event.target.value);
     if (warhouseRef.current !== null) {
@@ -78,7 +80,9 @@ const FormCheckout = () => {
   };
 
   //Selecting warhouse that user Wish from warhouse list
-  const handleWarhouseChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleWarhouseChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setWarhouuseInput(event.target.value);
     warhouseSelect!.style.display = 'none';
     setWarhouseW([]);
@@ -129,7 +133,9 @@ const FormCheckout = () => {
           modelName: 'Address',
           calledMethod: 'getWarehouses',
           methodProperties: {
-            FindByString: warhouseChoose ? 'Відділення №' + warhouseChoose : ' ',
+            FindByString: warhouseChoose
+              ? 'Відділення №' + warhouseChoose
+              : ' ',
             CityName: optionsState,
             Page: '1',
             Limit: '50',
@@ -145,13 +151,14 @@ const FormCheckout = () => {
   }, [optionsState, warhouseChoose]);
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       <h4 className="text-2xl font-bold">Відправка</h4>
       <form
         className="mt-10 flex flex-col gap-4"
         action={action}
         id={form.id}
-        onSubmit={form.onSubmit}>
+        onSubmit={form.onSubmit}
+      >
         <div className="flex flex-col">
           <label htmlFor="name">І`мя</label>
           <input
@@ -213,7 +220,7 @@ const FormCheckout = () => {
               <SelectItem value="world">World</SelectItem>
             </SelectContent>
           </Select>
-          <div className="flex flex-col mt-5">
+          <div className="mt-5 flex flex-col">
             <label htmlFor="city">Місто доставки</label>
             <input
               className="border-2 border-black p-1"
@@ -228,9 +235,10 @@ const FormCheckout = () => {
             <p className="text-red-500">{fields.city.errors}</p>
             {city && (
               <select
-                className="w-[350px] mt-2 hidden p-1 border-2 border-black"
+                className="mt-2 hidden w-[350px] border-2 border-black p-1"
                 onChange={handleSelectChange}
-                id="citySelect">
+                id="citySelect"
+              >
                 <option value="вибуріть">Виберіть</option>
                 {city.map((item: any) => (
                   <option key={item.Description} value={item.Description}>
@@ -257,10 +265,11 @@ const FormCheckout = () => {
 
             {warhouseW && (
               <select
-                className="w-[350px] mt-2  p-1 border-2 border-black"
+                className="mt-2 w-[350px] border-2 border-black p-1"
                 onChange={handleWarhouseChange}
                 id="warhouseSelect"
-                defaultValue={warhouseW[0]}>
+                defaultValue={warhouseW[0]}
+              >
                 <option value="вибуріть">Виберіть</option>
                 {warhouseW.map((item: any) => (
                   <option key={item.SiteKey} value={item.Description}>

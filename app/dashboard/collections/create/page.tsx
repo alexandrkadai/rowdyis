@@ -19,7 +19,7 @@ export default function CareateCollection() {
     <>
       <div className="mt-5">
         <Button asChild variant="outline">
-          <Link href="/dashboard/collections" className="uppercase font-bold">
+          <Link href="/dashboard/collections" className="font-bold uppercase">
             <ChevronLeft size={24} strokeWidth={3} />
             Go back
           </Link>
@@ -28,7 +28,9 @@ export default function CareateCollection() {
       <form className="mt-10 pb-10">
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl uppercase">Create New Collection</CardTitle>
+            <CardTitle className="text-2xl uppercase">
+              Create New Collection
+            </CardTitle>
             <CardDescription>
               Create new Colection for the drop or starting new season.
             </CardDescription>
@@ -45,7 +47,6 @@ export default function CareateCollection() {
                 <Textarea placeholder="Please Enter the Description" />
                 {/* <p className=""></p> //ERROr */}
               </div>
-              
             </div>
           </CardContent>
           <CardFooter>

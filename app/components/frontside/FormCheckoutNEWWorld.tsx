@@ -18,7 +18,11 @@ interface CheckoutFormData {
 
 const CheckoutForm = () => {
   const [isUkraine, setIsUkraine] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CheckoutFormData>();
 
   const onSubmit = (data: CheckoutFormData) => {
     console.log('Checkout form data:', data);
@@ -28,7 +32,10 @@ const CheckoutForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
-        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="country"
+          className="block text-sm font-medium text-gray-700"
+        >
           Country
         </label>
         <select
@@ -41,12 +48,17 @@ const CheckoutForm = () => {
           <option value="Ukraine">Ukraine</option>
           <option value="Other">Other</option>
         </select>
-        {errors.country && <div className="text-red-500">{errors.country.message}</div>}
+        {errors.country && (
+          <div className="text-red-500">{errors.country.message}</div>
+        )}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="firstName"
+            className="block text-sm font-medium text-gray-700"
+          >
             First Name
           </label>
           <input
@@ -55,10 +67,15 @@ const CheckoutForm = () => {
             {...register('firstName', { required: 'First name is required' })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
-          {errors.firstName && <div className="text-red-500">{errors.firstName.message}</div>}
+          {errors.firstName && (
+            <div className="text-red-500">{errors.firstName.message}</div>
+          )}
         </div>
         <div>
-          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="lastName"
+            className="block text-sm font-medium text-gray-700"
+          >
             Last Name
           </label>
           <input
@@ -67,25 +84,38 @@ const CheckoutForm = () => {
             {...register('lastName', { required: 'Last name is required' })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
-          {errors.lastName && <div className="text-red-500">{errors.lastName.message}</div>}
+          {errors.lastName && (
+            <div className="text-red-500">{errors.lastName.message}</div>
+          )}
         </div>
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700"
+        >
           Email
         </label>
         <input
           id="email"
           type="email"
-          {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' } })}
+          {...register('email', {
+            required: 'Email is required',
+            pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' },
+          })}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
-        {errors.email && <div className="text-red-500">{errors.email.message}</div>}
+        {errors.email && (
+          <div className="text-red-500">{errors.email.message}</div>
+        )}
       </div>
 
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="phone"
+          className="block text-sm font-medium text-gray-700"
+        >
           Phone
         </label>
         <input
@@ -94,11 +124,16 @@ const CheckoutForm = () => {
           {...register('phone', { required: 'Phone is required' })}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
-        {errors.phone && <div className="text-red-500">{errors.phone.message}</div>}
+        {errors.phone && (
+          <div className="text-red-500">{errors.phone.message}</div>
+        )}
       </div>
 
       <div>
-        <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="address"
+          className="block text-sm font-medium text-gray-700"
+        >
           Address
         </label>
         <input
@@ -107,12 +142,17 @@ const CheckoutForm = () => {
           {...register('address', { required: 'Address is required' })}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
-        {errors.address && <div className="text-red-500">{errors.address.message}</div>}
+        {errors.address && (
+          <div className="text-red-500">{errors.address.message}</div>
+        )}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="city"
+            className="block text-sm font-medium text-gray-700"
+          >
             City
           </label>
           <input
@@ -121,10 +161,15 @@ const CheckoutForm = () => {
             {...register('city', { required: 'City is required' })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
-          {errors.city && <div className="text-red-500">{errors.city.message}</div>}
+          {errors.city && (
+            <div className="text-red-500">{errors.city.message}</div>
+          )}
         </div>
         <div>
-          <label htmlFor="state" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="state"
+            className="block text-sm font-medium text-gray-700"
+          >
             State/Region
           </label>
           <input
@@ -133,12 +178,17 @@ const CheckoutForm = () => {
             {...register('state', { required: 'State/Region is required' })}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
-          {errors.state && <div className="text-red-500">{errors.state.message}</div>}
+          {errors.state && (
+            <div className="text-red-500">{errors.state.message}</div>
+          )}
         </div>
       </div>
 
       <div>
-        <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="zip"
+          className="block text-sm font-medium text-gray-700"
+        >
           Zip/Postal Code
         </label>
         <input
@@ -153,7 +203,10 @@ const CheckoutForm = () => {
       {isUkraine && (
         <>
           <div>
-            <label htmlFor="passport" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="passport"
+              className="block text-sm font-medium text-gray-700"
+            >
               Passport
             </label>
             <input
@@ -162,10 +215,15 @@ const CheckoutForm = () => {
               {...register('passport', { required: 'Passport is required' })}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
-            {errors.passport && <div className="text-red-500">{errors.passport.message}</div>}
+            {errors.passport && (
+              <div className="text-red-500">{errors.passport.message}</div>
+            )}
           </div>
           <div>
-            <label htmlFor="inn" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="inn"
+              className="block text-sm font-medium text-gray-700"
+            >
               INN
             </label>
             <input
@@ -174,14 +232,16 @@ const CheckoutForm = () => {
               {...register('inn', { required: 'INN is required' })}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
-            {errors.inn && <div className="text-red-500">{errors.inn.message}</div>}
+            {errors.inn && (
+              <div className="text-red-500">{errors.inn.message}</div>
+            )}
           </div>
         </>
       )}
 
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        className="w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         Place Order
       </button>

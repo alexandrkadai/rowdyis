@@ -19,12 +19,20 @@ interface buttonProps {
     | undefined;
 }
 
-export default function SubmitButton({ text, variant, className }: buttonProps) {
+export default function SubmitButton({
+  text,
+  variant,
+  className,
+}: buttonProps) {
   const { pending } = useFormStatus();
   return (
     <>
       {pending ? (
-        <Button disabled variant={variant} className={cn(className, "uppercase")}>
+        <Button
+          disabled
+          variant={variant}
+          className={cn(className, 'uppercase')}
+        >
           <Loader2Icon size={24} className="mr-2 h-2 w-2 animate-spin" />
           Please Wait ....
         </Button>
@@ -37,18 +45,16 @@ export default function SubmitButton({ text, variant, className }: buttonProps) 
   );
 }
 
-export function shoppingBagButton({text, variant} :buttonProps) {
+export function shoppingBagButton({ text, variant }: buttonProps) {
   const { pending } = useFormStatus();
   return (
     <>
       {pending ? (
         <Button disabled variant={variant} className="uppercase">
-          Adding Item
+          Adding Item ... 
         </Button>
       ) : (
-        <Button>
-          {text}
-        </Button>
+        <Button>{text}</Button>
       )}
     </>
   );

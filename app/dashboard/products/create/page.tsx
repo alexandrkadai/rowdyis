@@ -50,18 +50,25 @@ export default function ProductCreate() {
   };
   return (
     <>
-      <div className="flex items-center gap-4 mt-2">
+      <div className="mt-2 flex items-center gap-4">
         <Button variant="outline" size="default" asChild>
           <Link href="/dashboard/products">
             <ChevronLeft size={24} strokeWidth={3} />
-            <span className="uppercase font-bold">Go Back</span>
+            <span className="font-bold uppercase">Go Back</span>
           </Link>
         </Button>
       </div>
-      <form id={form.id} onSubmit={form.onSubmit} action={action} className="mt-10 pb-10">
+      <form
+        id={form.id}
+        onSubmit={form.onSubmit}
+        action={action}
+        className="mt-10 pb-10"
+      >
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl uppercase">Add new Product</CardTitle>
+            <CardTitle className="text-2xl uppercase">
+              Add new Product
+            </CardTitle>
             <CardDescription>Create new Product for your Store</CardDescription>
           </CardHeader>
           <CardContent>
@@ -100,7 +107,7 @@ export default function ProductCreate() {
               </div>
               <h2>Sizes</h2>
               <div className="flex flex-row gap-4">
-                <div className="flex flex-col gap-4 w-[150px]">
+                <div className="flex w-[150px] flex-col gap-4">
                   <Label>S</Label>
                   <Input
                     key={fields.sizeS.key}
@@ -111,7 +118,7 @@ export default function ProductCreate() {
                   />
                   <p className="text-red-500">{fields.sizeS.errors}</p>
                 </div>
-                <div className="flex flex-col gap-4 w-[150px]">
+                <div className="flex w-[150px] flex-col gap-4">
                   <Label>M</Label>
                   <Input
                     key={fields.sizeM.key}
@@ -121,7 +128,7 @@ export default function ProductCreate() {
                     placeholder="Please Enter the number of size S"
                   />
                 </div>
-                <div className="flex flex-col gap-4 w-[150px]">
+                <div className="flex w-[150px] flex-col gap-4">
                   <Label>L</Label>
                   <Input
                     key={fields.sizeL.key}
@@ -131,7 +138,7 @@ export default function ProductCreate() {
                     placeholder="Please Enter the number of size S"
                   />
                 </div>
-                <div className="flex flex-col gap-4 w-[150px]">
+                <div className="flex w-[150px] flex-col gap-4">
                   <Label>XL</Label>
                   <Input
                     key={fields.sizeXl.key}
@@ -141,7 +148,7 @@ export default function ProductCreate() {
                     placeholder="Please Enter the number of size S"
                   />
                 </div>
-                <div className="flex flex-col gap-4 w-[150px]">
+                <div className="flex w-[150px] flex-col gap-4">
                   <Label>2XL</Label>
                   <Input
                     key={fields.size2xl.key}
@@ -152,7 +159,7 @@ export default function ProductCreate() {
                   />
                 </div>
 
-                <div className="flex flex-col gap-4 w-[150px]">
+                <div className="flex w-[150px] flex-col gap-4">
                   <Label>3XL</Label>
                   <Input
                     key={fields.size3xl.key}
@@ -168,7 +175,8 @@ export default function ProductCreate() {
                 <Select
                   key={fields.status.key}
                   name={fields.status.name}
-                  defaultValue={fields.status.initialValue}>
+                  defaultValue={fields.status.initialValue}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
@@ -185,7 +193,8 @@ export default function ProductCreate() {
                 <Select
                   key={fields.category.key}
                   name={fields.category.name}
-                  defaultValue={fields.category.initialValue}>
+                  defaultValue={fields.category.initialValue}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Sex" />
                   </SelectTrigger>
@@ -208,18 +217,19 @@ export default function ProductCreate() {
                 {images.length > 0 ? (
                   <div className="flex gap-5">
                     {images.map((image, index) => (
-                      <div className="relative w-[100px] h-[100px]" key={index}>
+                      <div className="relative h-[100px] w-[100px]" key={index}>
                         <Image
                           src={image}
                           width={100}
                           height={100}
                           alt="product image"
-                          className="w-full h-full object-cover rounded-lg border-2 border-black"
+                          className="h-full w-full rounded-lg border-2 border-black object-cover"
                         />
                         <button
                           type="button"
-                          className="absolute -top-3 -right-3 bg-red-500 p-2 rounded-lg"
-                          onClick={() => handleDeleteImage(index)}>
+                          className="absolute -right-3 -top-3 rounded-lg bg-red-500 p-2"
+                          onClick={() => handleDeleteImage(index)}
+                        >
                           <XIcon size={12} strokeWidth={4} />
                         </button>
                       </div>
@@ -232,7 +242,9 @@ export default function ProductCreate() {
                     onClientUploadComplete={(res) => {
                       setImages(res.map((r) => r.url));
                     }}
-                    onUploadError={() => alert('Something Went Wrong try again')}
+                    onUploadError={() =>
+                      alert('Something Went Wrong try again')
+                    }
                   />
                 )}
                 <p className="text-red-500">{fields.images.errors}</p>

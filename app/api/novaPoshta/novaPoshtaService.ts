@@ -1,4 +1,9 @@
-import { NovaPoshtaConfig, NovaPoshtaResponse, City, Warehouse } from '../../interfaces/novaPoshta';
+import {
+  NovaPoshtaConfig,
+  NovaPoshtaResponse,
+  City,
+  Warehouse,
+} from '../../interfaces/novaPoshta';
 
 class NovaPoshtaService {
   private config: NovaPoshtaConfig;
@@ -7,7 +12,11 @@ class NovaPoshtaService {
     this.config = config;
   }
 
-  private async makeRequest<T>(modelName: string, calledMethod: string, methodProperties: any): Promise<T[]> {
+  private async makeRequest<T>(
+    modelName: string,
+    calledMethod: string,
+    methodProperties: any
+  ): Promise<T[]> {
     try {
       const response = await fetch(this.config.baseUrl, {
         method: 'POST',
@@ -54,7 +63,9 @@ class NovaPoshtaService {
   }): Promise<Warehouse[]> {
     return this.makeRequest<Warehouse>('Address', 'getWarehouses', {
       CityName: params.cityName,
-      FindByString: params.searchQuery ? `Відділення №${params.searchQuery}` : '',
+      FindByString: params.searchQuery
+        ? `Відділення №${params.searchQuery}`
+        : '',
       Page: params.page || 1,
       Limit: params.limit || 50,
       Language: 'UA',
@@ -63,26 +74,29 @@ class NovaPoshtaService {
 }
 
 export class NovaPoshtaError extends Error {
-    constructor(message: string, public code?: string) {
-      super(message);
-      this.name = 'NovaPoshtaError';
-    }
+  constructor(
+    message: string,
+    public code?: string
+  ) {
+    super(message);
+    this.name = 'NovaPoshtaError';
   }
-  
-  export const handleNovaPoshtaError = (error: unknown) => {
-    if (error instanceof NovaPoshtaError) {
-      // Handle specific Nova Poshta errors
-      return {
-        message: error.message,
-        code: error.code,
-      };
-    }
-    
-    // Handle generic errors
+}
+
+export const handleNovaPoshtaError = (error: unknown) => {
+  if (error instanceof NovaPoshtaError) {
+    // Handle specific Nova Poshta errors
     return {
-      message: 'An unexpected error occurred',
-      code: 'UNKNOWN_ERROR',
+      message: error.message,
+      code: error.code,
     };
+  }
+
+  // Handle generic errors
+  return {
+    message: 'An unexpected error occurred',
+    code: 'UNKNOWN_ERROR',
   };
-  
+};
+
 export default NovaPoshtaService;

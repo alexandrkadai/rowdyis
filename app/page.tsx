@@ -15,7 +15,7 @@ export default function Home() {
   if (wokes === true) {
     setTimeout(() => {
       redirect('/shop');
-    }, 5000);
+    }, 4700);
   }
 
   return (
@@ -36,6 +36,7 @@ export default function Home() {
               width={100}
               height={100}
               alt="animation sleep"
+              priority
               className={cn(
                 wokes === false ? 'opacity-100' : 'opacity-0',
                 isLoading ? 'opacity-0' : 'opacity-100',

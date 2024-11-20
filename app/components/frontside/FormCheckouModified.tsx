@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/select';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
-import useDebounce  from '../../hooks/useDebounce'; 
+import useDebounce from '../../hooks/useDebounce';
 import { novaPoshtaService } from '@/app/services';
 import React, { useActionState, useEffect, useState } from 'react';
 import SubmitButton from '../SubmitButton';
@@ -43,9 +43,12 @@ const FormCheckout = () => {
   });
 
   const [lastResult, action] = useActionState(placeOrder, undefined);
-  
+
   const debouncedCitySearch = useDebounce(deliveryState.city.input, 500);
-  const debouncedWarehouseSearch = useDebounce(deliveryState.warehouse.input, 500);
+  const debouncedWarehouseSearch = useDebounce(
+    deliveryState.warehouse.input,
+    500
+  );
 
   const [form, fields] = useForm({
     lastResult,
@@ -56,45 +59,49 @@ const FormCheckout = () => {
     shouldRevalidate: 'onInput',
   });
 
-  const handleCityInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDeliveryState(prev => ({
+  const handleCityInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDeliveryState((prev) => ({
       ...prev,
       city: {
         ...prev.city,
-        input: event.target.value
-      }
+        input: event.target.value,
+      },
     }));
   };
 
   const handleCitySelect = (cityName: string) => {
-    setDeliveryState(prev => ({
+    setDeliveryState((prev) => ({
       ...prev,
       city: {
         ...prev.city,
         selected: cityName,
-        input: cityName
-      }
+        input: cityName,
+      },
     }));
   };
 
-  const handleWarehouseInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDeliveryState(prev => ({
+  const handleWarehouseInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setDeliveryState((prev) => ({
       ...prev,
       warehouse: {
         ...prev.warehouse,
-        input: event.target.value
-      }
+        input: event.target.value,
+      },
     }));
   };
 
   const handleWarehouseSelect = (warehouse: string) => {
-    setDeliveryState(prev => ({
+    setDeliveryState((prev) => ({
       ...prev,
       warehouse: {
         ...prev.warehouse,
         selected: warehouse,
-        input: warehouse
-      }
+        input: warehouse,
+      },
     }));
   };
 
@@ -102,14 +109,14 @@ const FormCheckout = () => {
   useEffect(() => {
     const fetchCities = async () => {
       if (!debouncedCitySearch) return;
-      
+
       const cities = await novaPoshtaService.getCities(debouncedCitySearch);
-      setDeliveryState(prev => ({
+      setDeliveryState((prev) => ({
         ...prev,
         city: {
           ...prev.city,
-          options: cities
-        }
+          options: cities,
+        },
       }));
     };
 
@@ -119,18 +126,18 @@ const FormCheckout = () => {
   useEffect(() => {
     const fetchWarehouses = async () => {
       if (!deliveryState.city.selected || !debouncedWarehouseSearch) return;
-      
+
       const warehouses = await novaPoshtaService.getWarehouses({
         cityName: deliveryState.city.selected,
-        searchQuery: debouncedWarehouseSearch
+        searchQuery: debouncedWarehouseSearch,
       });
-      
-      setDeliveryState(prev => ({
+
+      setDeliveryState((prev) => ({
         ...prev,
         warehouse: {
           ...prev.warehouse,
-          options: warehouses
-        }
+          options: warehouses,
+        },
       }));
     };
 

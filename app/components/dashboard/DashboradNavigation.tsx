@@ -33,11 +33,15 @@ export default function DashboradNavigation() {
     <>
       {links.map((item) => (
         <Link
-        key={item.href}
+          key={item.href}
           href={item.href}
           className={cn(
-            item.href === pathName ? 'text-black font-bold' : 'text-muted-foreground font-normal', 'uppercase tracking-wide'
-          )}>
+            item.href === pathName
+              ? 'font-bold text-black'
+              : 'font-normal text-muted-foreground',
+            'uppercase tracking-wide'
+          )}
+        >
           {item.name}
         </Link>
       ))}

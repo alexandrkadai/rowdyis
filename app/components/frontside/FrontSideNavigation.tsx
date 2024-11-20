@@ -19,7 +19,7 @@ export default async function FrontSideNavigation() {
 
   return (
     <header className="w-full">
-      <nav className="flex flex-row justify-between items-center gap-4">
+      <nav className="flex flex-row items-center justify-between gap-4">
         <MenuIcon size={24} className="lg:hidden" />
         <Link href="/shop">
           <Image
@@ -27,29 +27,33 @@ export default async function FrontSideNavigation() {
             alt="Rowdy Logo"
             width={150}
             height={100}
-            className="object-contain w-[75px] h-[50px] lg:w-[150px] lg:h-[100px]"
+            className="h-[50px] w-[75px] object-contain lg:h-[100px] lg:w-[150px]"
           />
         </Link>
-        <div className="hidden lg:flex flex-row justify-between items-center gap-4">
-          <Link className="uppercase font-bold" href="/shop">
+        <div className="hidden flex-row items-center justify-between gap-4 lg:flex">
+          <Link className="font-bold uppercase" href="/shop">
             Магазин
           </Link>
-          <Link className="uppercase font-bold" href="/lookbook">
+          <Link className="font-bold uppercase" href="/lookbook">
             Лукбук
           </Link>
-          <Link className="uppercase font-bold" href="/contacts">
+          <Link className="font-bold uppercase" href="/contacts">
             Контакти
           </Link>
         </div>
 
         <Sheet>
-          <SheetTrigger className="uppercase font-bold">Koshik ({total})</SheetTrigger>
+          <SheetTrigger className="font-bold uppercase">
+            Koshik ({total})
+          </SheetTrigger>
           <SheetContent className="p-0">
             <SheetHeader>
               <SheetTitle className="hidden">Cart</SheetTitle>
             </SheetHeader>
             <div>
-              <h2 className="text-[35px] font-bold text-uppercase mt-2 ml-2">Cart</h2>
+              <h2 className="text-uppercase ml-2 mt-2 text-[35px] font-bold">
+                Cart
+              </h2>
               <div className="w-full border-b-2 border-black"></div>
               {itemsCart && itemsCart.length > 0 ? (
                 <>
@@ -57,7 +61,8 @@ export default async function FrontSideNavigation() {
                     <>
                       <div
                         key={index}
-                        className="flex flex-row justify-between px-2 mt-5 uppercase font-bold text-[20px]">
+                        className="mt-5 flex flex-row justify-between px-2 text-[20px] font-bold uppercase"
+                      >
                         <span>{item.name}</span>
                         <Image
                           src={item.image}
@@ -73,14 +78,22 @@ export default async function FrontSideNavigation() {
                       <div className="flex justify-around">
                         <form action={deleteOneItem}>
                           <input type="hidden" name="itemId" value={item.id} />
-                          <input type="hidden" name="sizeToD" value={item.sizeItem} />
+                          <input
+                            type="hidden"
+                            name="sizeToD"
+                            value={item.sizeItem}
+                          />
                           <Button variant="default" type="submit">
                             minus
                           </Button>
                         </form>
                         <form action={addOneItem}>
                           <input type="hidden" name="itemId" value={item.id} />
-                          <input type="hidden" name="sizeToD" value={item.sizeItem} />
+                          <input
+                            type="hidden"
+                            name="sizeToD"
+                            value={item.sizeItem}
+                          />
                           <Button variant="default" type="submit">
                             plus
                           </Button>
@@ -89,15 +102,24 @@ export default async function FrontSideNavigation() {
                     </>
                   ))}
                   <SheetClose asChild>
-                    <Button asChild className="absolute bottom-0 left-0 w-full rounded-none">
+                    <Button
+                      asChild
+                      className="absolute bottom-0 left-0 w-full rounded-none"
+                    >
                       <Link href="/checkout">Checkout</Link>
                     </Button>
                   </SheetClose>
                 </>
               ) : (
                 <>
-                  <span className="mt-10 text-center block font-bold"> Your Cart is Empty</span>
-                  <Button disabled className="absolute bottom-0 left-0 w-full rounded-none">
+                  <span className="mt-10 block text-center font-bold">
+                    {' '}
+                    Your Cart is Empty
+                  </span>
+                  <Button
+                    disabled
+                    className="absolute bottom-0 left-0 w-full rounded-none"
+                  >
                     Checkout
                   </Button>
                 </>

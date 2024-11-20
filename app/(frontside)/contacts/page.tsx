@@ -2,12 +2,12 @@ import { Button } from '@/components/ui/button';
 
 export default function ConatcsPage() {
   return (
-    <div className="w-full mt-10 text-center justify-center">
+    <div className="mt-10 w-full justify-center text-center">
       <h2 className="text-2xl font-bold">Lets get in touch</h2>
-      <div className="w-[350px] flex flex-col items-center justify-center m-auto">
+      <div className="m-auto flex w-[350px] flex-col items-center justify-center">
         <form className="">
-          <div className="text-left mt-2">
-            <label htmlFor="nameUser" className="uppercase font-bold">
+          <div className="mt-2 text-left">
+            <label htmlFor="nameUser" className="font-bold uppercase">
               Name
             </label>
             <input
@@ -19,8 +19,8 @@ export default function ConatcsPage() {
               placeholder="Enter Your Name"
             />
           </div>
-          <div className="flex flex-col text-left mt-2">
-            <label htmlFor="phone" className="uppercase font-bold">
+          <div className="mt-2 flex flex-col text-left">
+            <label htmlFor="phone" className="font-bold uppercase">
               Phone
             </label>
             <input
@@ -32,8 +32,8 @@ export default function ConatcsPage() {
               className="w-[350px] border-2 border-black p-1"
             />
           </div>
-          <div className="flex flex-col text-left mt-2">
-            <label htmlFor="email" className="uppercase font-bold">
+          <div className="mt-2 flex flex-col text-left">
+            <label htmlFor="email" className="font-bold uppercase">
               Email
             </label>
             <input
@@ -45,8 +45,8 @@ export default function ConatcsPage() {
               className="w-[350px] border-2 border-black p-1"
             />
           </div>
-          <div className="flex flex-col text-left mt-2">
-            <label htmlFor="messageText" className="uppercase font-bold">
+          <div className="mt-2 flex flex-col text-left">
+            <label htmlFor="messageText" className="font-bold uppercase">
               Your Message
             </label>
             <textarea
@@ -57,7 +57,7 @@ export default function ConatcsPage() {
               className="w-[350px] border-2 border-black p-1"
             />
           </div>
-          <Button className="w-full mt-5 uppercase font-bold" type="submit">
+          <Button className="mt-5 w-full font-bold uppercase" type="submit">
             Send
           </Button>
         </form>

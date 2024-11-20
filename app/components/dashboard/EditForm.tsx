@@ -67,7 +67,12 @@ export default function EditForm({ data }: iDataProduct) {
   };
 
   return (
-    <form id={form.id} onSubmit={form.onSubmit} action={action} className="mt-10 pb-10">
+    <form
+      id={form.id}
+      onSubmit={form.onSubmit}
+      action={action}
+      className="mt-10 pb-10"
+    >
       <input type="hidden" name="productId" value={data.id} />
       <Card>
         <CardHeader>
@@ -110,7 +115,7 @@ export default function EditForm({ data }: iDataProduct) {
             </div>
             <h2>Sizes</h2>
             <div className="flex flex-row gap-4">
-              <div className="flex flex-col gap-4 w-[150px]">
+              <div className="flex w-[150px] flex-col gap-4">
                 <Label>S</Label>
                 <Input
                   key={fields.sizeS.key}
@@ -121,7 +126,7 @@ export default function EditForm({ data }: iDataProduct) {
                 />
                 <p className="text-red-500">{fields.sizeS.errors}</p>
               </div>
-              <div className="flex flex-col gap-4 w-[150px]">
+              <div className="flex w-[150px] flex-col gap-4">
                 <Label>M</Label>
                 <Input
                   key={fields.sizeM.key}
@@ -131,7 +136,7 @@ export default function EditForm({ data }: iDataProduct) {
                   placeholder="Please Enter the number of size S"
                 />
               </div>
-              <div className="flex flex-col gap-4 w-[150px]">
+              <div className="flex w-[150px] flex-col gap-4">
                 <Label>L</Label>
                 <Input
                   key={fields.sizeL.key}
@@ -141,7 +146,7 @@ export default function EditForm({ data }: iDataProduct) {
                   placeholder="Please Enter the number of size S"
                 />
               </div>
-              <div className="flex flex-col gap-4 w-[150px]">
+              <div className="flex w-[150px] flex-col gap-4">
                 <Label>XL</Label>
                 <Input
                   key={fields.sizeXl.key}
@@ -151,7 +156,7 @@ export default function EditForm({ data }: iDataProduct) {
                   placeholder="Please Enter the number of size S"
                 />
               </div>
-              <div className="flex flex-col gap-4 w-[150px]">
+              <div className="flex w-[150px] flex-col gap-4">
                 <Label>2XL</Label>
                 <Input
                   key={fields.size2xl.key}
@@ -162,7 +167,7 @@ export default function EditForm({ data }: iDataProduct) {
                 />
               </div>
 
-              <div className="flex flex-col gap-4 w-[150px]">
+              <div className="flex w-[150px] flex-col gap-4">
                 <Label>3XL</Label>
                 <Input
                   key={fields.size3xl.key}
@@ -175,7 +180,11 @@ export default function EditForm({ data }: iDataProduct) {
             </div>
             <div className="flex flex-col gap-4">
               <Label>Status</Label>
-              <Select key={fields.status.key} name={fields.status.name} defaultValue={data.status}>
+              <Select
+                key={fields.status.key}
+                name={fields.status.name}
+                defaultValue={data.status}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
@@ -192,7 +201,8 @@ export default function EditForm({ data }: iDataProduct) {
               <Select
                 key={fields.category.key}
                 name={fields.category.name}
-                defaultValue={data.category}>
+                defaultValue={data.category}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Sex" />
                 </SelectTrigger>
@@ -214,18 +224,19 @@ export default function EditForm({ data }: iDataProduct) {
               {images.length > 0 ? (
                 <div className="flex gap-5">
                   {images.map((image, index) => (
-                    <div className="relative w-[100px] h-[100px]" key={index}>
+                    <div className="relative h-[100px] w-[100px]" key={index}>
                       <Image
                         src={image}
                         width={100}
                         height={100}
                         alt="product image"
-                        className="w-full h-full object-cover rounded-lg border-2 border-black"
+                        className="h-full w-full rounded-lg border-2 border-black object-cover"
                       />
                       <button
                         type="button"
-                        className="absolute -top-3 -right-3 bg-red-500 p-2 rounded-lg"
-                        onClick={() => handleDeleteImage(index)}>
+                        className="absolute -right-3 -top-3 rounded-lg bg-red-500 p-2"
+                        onClick={() => handleDeleteImage(index)}
+                      >
                         <XIcon size={12} strokeWidth={4} />
                       </button>
                     </div>
@@ -239,7 +250,10 @@ export default function EditForm({ data }: iDataProduct) {
                     setImages(res.map((r) => r.url));
                   }}
                   onUploadError={(e) =>
-                    alert('Something Went Wrong try again with smaller file' + e.code)
+                    alert(
+                      'Something Went Wrong try again with smaller file' +
+                        e.code
+                    )
                   }
                 />
               )}

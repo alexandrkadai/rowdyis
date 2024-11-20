@@ -57,7 +57,9 @@ const FormCheckout = () => {
         modelName: 'Address',
         calledMethod: 'getWarehouses',
         methodProperties: {
-          FindByString: warehouseNumber ? `Відділення №${warehouseNumber}` : ' ',
+          FindByString: warehouseNumber
+            ? `Відділення №${warehouseNumber}`
+            : ' ',
           CityName: cityName,
           Page: '1',
           Limit: '50',
@@ -97,30 +99,52 @@ const FormCheckout = () => {
     setWarhouseChoose(event.target.value);
   };
 
-  const handleWarhouseSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleWarhouseSelect = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setWarhouseInput(event.target.value);
     setWarhouses([]);
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       <h4 className="text-2xl font-bold">Відправка</h4>
       <form className="mt-10 flex flex-col gap-4">
         <div className="flex flex-col">
           <label htmlFor="name">І`мя</label>
-          <input className="border-2 border-black" type="text" name="name" placeholder="" />
+          <input
+            className="border-2 border-black"
+            type="text"
+            name="name"
+            placeholder=""
+          />
         </div>
         <div className="flex flex-col">
           <label htmlFor="surname">Прізвище</label>
-          <input className="border-2 border-black" name="surname" type="text" placeholder="" />
+          <input
+            className="border-2 border-black"
+            name="surname"
+            type="text"
+            placeholder=""
+          />
         </div>
         <div className="flex flex-col">
           <label htmlFor="phoneNum">Телефон</label>
-          <input className="border-2 border-black" name="phoneNum" type="tel" placeholder="" />
+          <input
+            className="border-2 border-black"
+            name="phoneNum"
+            type="tel"
+            placeholder=""
+          />
         </div>
         <div className="flex flex-col">
           <label htmlFor="emailAd">Email адреса</label>
-          <input className="border-2 border-black" name="emailAd" type="email" placeholder="" />
+          <input
+            className="border-2 border-black"
+            name="emailAd"
+            type="email"
+            placeholder=""
+          />
         </div>
 
         <div className="mt-5">
@@ -134,7 +158,7 @@ const FormCheckout = () => {
               <SelectItem value="world">World</SelectItem>
             </SelectContent>
           </Select>
-          <div className="flex flex-col mt-5">
+          <div className="mt-5 flex flex-col">
             <label htmlFor="city">Місто доставки</label>
             <input
               className="border-2 border-black p-1"
@@ -146,9 +170,10 @@ const FormCheckout = () => {
             />
             {cities.length > 0 && (
               <select
-                className="w-[350px] mt-2 p-1 border-2 border-black"
+                className="mt-2 w-[350px] border-2 border-black p-1"
                 onChange={handleCitySelect}
-                id="citySelect">
+                id="citySelect"
+              >
                 <option value="">Виберіть</option>
                 {cities.map((item: any) => (
                   <option key={item.Description} value={item.Description}>
@@ -173,9 +198,10 @@ const FormCheckout = () => {
 
             {warhouses.length > 0 && (
               <select
-                className="w-[350px] mt-2 p-1 border-2 border-black"
+                className="mt-2 w-[350px] border-2 border-black p-1"
                 onChange={handleWarhouseSelect}
-                id="warhouseSelect">
+                id="warhouseSelect"
+              >
                 <option value="">Виберіть</option>
                 {warhouses.map((item: any) => (
                   <option key={item.SiteKey} value={item.Description}>

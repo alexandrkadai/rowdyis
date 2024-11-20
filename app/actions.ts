@@ -25,7 +25,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
   }
 
   const flattenUrls = submission.value.images.flatMap((urlString) =>
-    urlString.split(',').map((url) => url.trim()),
+    urlString.split(',').map((url) => url.trim())
   );
 
   await prisma.product.create({
@@ -65,7 +65,7 @@ export async function editProduct(prevState: unknown, formData: FormData) {
   const productId = formData.get('productId') as string;
 
   const flattenUrls = submission.value.images.flatMap((urlString) =>
-    urlString.split(',').map((url) => url.trim()),
+    urlString.split(',').map((url) => url.trim())
   );
 
   await prisma.product.update({

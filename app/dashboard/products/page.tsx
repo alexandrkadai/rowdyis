@@ -1,5 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import {
   TableBody,
   TableHead,
@@ -35,7 +41,7 @@ export default async function ProductsRoute() {
   const mDate = Date.now();
   return (
     <>
-      <div className="flex items-center justify-end mt-2">
+      <div className="mt-2 flex items-center justify-end">
         <Button asChild className="flex items-center gap-x-2 font-bold">
           <Link href="/dashboard/products/create" className="uppercase">
             <CirclePlus size={24} />
@@ -78,7 +84,9 @@ export default async function ProductsRoute() {
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.status}</TableCell>
                   <TableCell>$ {item.price}</TableCell>
-                  <TableCell>{new Intl.DateTimeFormat('en-US').format(item.createdAt)}</TableCell>
+                  <TableCell>
+                    {new Intl.DateTimeFormat('en-US').format(item.createdAt)}
+                  </TableCell>
                   <TableCell className="text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger>
@@ -88,11 +96,14 @@ export default async function ProductsRoute() {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
-                          <Link href={`/dashboard/products/${item.id}`}>Edit</Link>
+                          <Link href={`/dashboard/products/${item.id}`}>
+                            Edit
+                          </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem className="text-red-500" asChild>
-                          
-                          <Link href={`/dashboard/products/${item.id}/delete`}>Delete</Link>
+                          <Link href={`/dashboard/products/${item.id}/delete`}>
+                            Delete
+                          </Link>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

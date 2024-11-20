@@ -13,8 +13,14 @@ export default async function GetCart() {
 
   if (cart !== null && Array.isArray(cart.items)) {
     const itemsCart = cart.items;
-    const total = itemsCart.reduce((sum, item) => sum + (item?.quantity || 0), 0);
-    const totalPrice = itemsCart.reduce((sum, item) => sum + ((item?.quantity || 0) * (item?.price || 0)), 0);
+    const total = itemsCart.reduce(
+      (sum, item) => sum + (item?.quantity || 0),
+      0
+    );
+    const totalPrice = itemsCart.reduce(
+      (sum, item) => sum + (item?.quantity || 0) * (item?.price || 0),
+      0
+    );
     return { itemsCart, total, totalPrice };
   }
   return { itemsCart: [], total: 0, totalPrice: 0 };
