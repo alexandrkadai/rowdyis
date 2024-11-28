@@ -14,18 +14,20 @@ async function getData() {
 export default async function ShopPage() {
   const data = await getData();
   return (
-    <div className="mt-[150px] grid items-center justify-center gap-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+    <div className="mt-[150px] flex flex-row justify-between">
       {data.map((item) => (
         <div
-          className="relative m-auto h-[400px] w-[350px] cursor-pointer border-2 border-black"
+          className="relative h-[500px] w-[500px] cursor-pointer border-[4px] border-blue-700"
           key={item.id}
         >
           <Link href={`/shop/${item.id}`}>
             <Image src={item.images[0]} alt="tshirt test" fill />
           </Link>
           <div className="absolute bottom-10 left-10 flex flex-col">
-            <span className="text-md font-bold uppercase">{item.name}</span>
-            <span className="text-md font-bold uppercase">
+            <span className="text-md text-blue-700 font-bold uppercase">
+              {item.name}
+            </span>
+            <span className="text-md text-blue-700 font-bold uppercase">
               {item.price} &#8372;
             </span>
           </div>

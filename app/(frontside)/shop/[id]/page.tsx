@@ -23,12 +23,12 @@ export default async function OneProductRoute({
 
   return (
     <div className="w-ful mt-10 flex sm:flex-col-reverse md:flex-col-reverse lg:flex-row">
-      <div className="flex w-full flex-col gap-5">
+      <div className="flex w-full flex-col gap-5 relative">
         {imagesP.map((item) => (
           <Image
             src={item}
-            width={350}
-            height={350}
+            className='w-auto h-[400px]'
+            fill
             alt="Product Image"
             key={item}
           />

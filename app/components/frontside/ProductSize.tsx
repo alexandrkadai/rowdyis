@@ -35,7 +35,7 @@ export default function ProductSize({ data }: iDataProps) {
 
   return (
     <>
-      <span className="mt-5 uppercase tracking-wide">Please Select Size</span>
+      
       <RadioGroup defaultValue="" className="mt-2 flex flex-row gap-5">
         <div
           className="relative flex items-center space-x-2"

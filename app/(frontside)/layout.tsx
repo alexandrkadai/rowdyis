@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function FrontSideLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="w-full p-[50px] sm:p-[100px] lg:p-[120px] xl:p-[240px]">
+    <div className="w-full md:p-[50px] lg:px-[120px] lg:py-[50px]">
       <FrontSideNavigation />
       <main className="w-full">{children}</main>
       <footer className="mb-10 mt-[200px] flex w-full items-center justify-center">

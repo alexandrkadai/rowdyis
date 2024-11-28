@@ -19,7 +19,8 @@ export default async function FrontSideNavigation() {
 
   return (
     <header className="w-full">
-      <nav className="flex flex-row items-center justify-between gap-4">
+      <nav className="flex flex-row items-center justify-around gap-4">
+        <div className="w-full">
         <MenuIcon size={24} className="lg:hidden" />
         <Link href="/shop">
           <Image
@@ -30,6 +31,8 @@ export default async function FrontSideNavigation() {
             className="h-[50px] w-[75px] object-contain lg:h-[100px] lg:w-[150px]"
           />
         </Link>
+        </div>
+        <div className="w-full flex flex-row justify-between">
         <div className="hidden flex-row items-center justify-between gap-4 lg:flex">
           <Link className="font-bold uppercase" href="/shop">
             Магазин
@@ -127,6 +130,7 @@ export default async function FrontSideNavigation() {
             </div>
           </SheetContent>
         </Sheet>
+        </div>
       </nav>
     </header>
   );
