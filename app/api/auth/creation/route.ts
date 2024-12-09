@@ -10,7 +10,7 @@ export async function GET() {
     throw new Error('Something went Wrong');
   }
 
-  var dbUser = await prisma.user.findUnique({
+  let dbUser = await prisma.user.findUnique({
     where: {
       id: user.id,
     },

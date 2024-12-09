@@ -32,7 +32,7 @@ export default function page() {
           shipping costs are calculated at checkout. Please note that taxes/duties/VAT are not
           included in International shipping costs and will be additionally added to the cost of
           each order. Please allow 3-5 days for processing and verification, and an additional 7-10
-          days for any items marked as a "pre-order" item. Tracking information will be provided
+          days for any items marked as a &quotpre-order&quot item. Tracking information will be provided
           upon dispatch, but may also be retrieved by sending a request along with your order number
           to studio@advisoryboardcrystals.com. Advisory Board Crystals does not take responsibility
           for any customs fees for international orders and these charges. The customs charges are
@@ -42,7 +42,7 @@ export default function page() {
           according to the billing location. Terms of Use By using our website you agree to our
           terms of use. We may alter these terms without notice. Please check these regularly, since
           we reserve the right to correct any errors at any time. By consenting to Advisory Board
-          Crystals' SMS marketing in the checkout and initializing a purchase or subscribing via our
+          Crystals&quot SMS marketing in the checkout and initializing a purchase or subscribing via our
           subscription tools, you agree to receive recurring text notifications (for your order,
           including abandoned checkout reminders), text marketing offers, and transactional texts,
           including requests for reviews from us, even if your mobile number is registered on any

@@ -11,11 +11,12 @@ async function getData(productId: string) {
 
   return data;
 }
+type Params = Promise<{ id: string }>
 
 export default async function OneProductRoute({
   params,
 }: {
-  params: { id: string };
+  params: Params ;
 }) {
   const id = await params;
   const data = await getData(id.id);

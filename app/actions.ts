@@ -114,7 +114,7 @@ export async function addItem(productId: string, size: string) {
     throw new Error('User ID is not set');
   }
 
-  let cart: iCart | null = await redis.get(`cart-${userID}`);
+  const cart: iCart | null = await redis.get(`cart-${userID}`);
 
   const selectedProduct = await prisma.product.findUnique({
     select: {
@@ -184,9 +184,9 @@ export async function deleteOneItem(formData: FormData) {
     throw new Error('User ID is not set');
   }
 
-  let cart: iCart | null = await redis.get(`cart-${userID}`);
+  const cart: iCart | null = await redis.get(`cart-${userID}`);
 
-  let updatedCart = {
+  const updatedCart = {
     items: cart?.items
       .map((item) => {
         if (item.id === itemId && item.sizeItem === sizeToD) {
@@ -212,9 +212,9 @@ export async function addOneItem(formData: FormData) {
     throw new Error('User ID is not set');
   }
 
-  let cart: iCart | null = await redis.get(`cart-${userID}`);
+  const cart: iCart | null = await redis.get(`cart-${userID}`);
 
-  let updatedCart = {
+  const updatedCart = {
     items: cart?.items.map((item) => {
       if (item.id === itemId && item.sizeItem === sizeToD) {
         return {

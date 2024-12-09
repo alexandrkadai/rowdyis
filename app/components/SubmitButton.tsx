@@ -45,7 +45,7 @@ export default function SubmitButton({
   );
 }
 
-export function shoppingBagButton({ text, variant }: buttonProps) {
+export function ShoppingBagButton({ text, variant }: buttonProps) {
   const { pending } = useFormStatus();
   return (
     <>

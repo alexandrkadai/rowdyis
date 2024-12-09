@@ -1,37 +1,39 @@
 {
-    "env": {
-      "browser": true,
-      "es2021": true,
-      "node": true
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-      "next/core-web-vitals",
-      "next/typescript",
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "plugin:react-hooks/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": "latest",
-      "sourceType": "module"
-    },
-    "plugins": ["react", "@typescript-eslint", "import"],
-    "rules": {
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-unused-vars": ["error"],
-      "no-console": ["warn", { "allow": ["warn", "error"] }],
-      "@typescript-eslint/no-explicit-any": "off"
-    },
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-object-type": "off",
+    "no-useless-escape": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
   }
+}

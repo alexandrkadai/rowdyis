@@ -10,10 +10,12 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 
+type Params = Promise<{ id: string }>
+
 export default async function DeleteRoute({
   params,
 }: {
-  params: { id: string };
+  params: Params;
 }) {
   const { id } = await params;
   return (

@@ -75,8 +75,8 @@ export default async function FrontSideNavigation() {
                           className="rounded-xl"
                         />
                         <span>{item.price}</span>
-                        <span className="">{item.quantity}</span>
-                        <span className="">{item.sizeItem}</span>
+                        <span >{item.quantity}</span>
+                        <span >{item.sizeItem}</span>
                       </div>
                       <div className="flex justify-around">
                         <form action={deleteOneItem}>

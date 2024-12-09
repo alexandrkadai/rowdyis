@@ -15,8 +15,10 @@ import SubmitButton from '../SubmitButton';
 
 const FormCheckout = () => {
   const apiKey = process.env.PUBLIC_NOVA_KEY;
-  let citySelect = document.getElementById('citySelect');
-  let warhouseSelect = document.getElementById('warhouseSelect');
+  const [isCitySelectVisible, setIsCitySelectVisible] = useState(false);
+  const [isWarhouseVisible, setIsWarhouseVisible] = useState(false);
+  
+  const warhouseSelect = document.getElementById('warhouseSelect');
 
   const warhouseRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +55,7 @@ const FormCheckout = () => {
     setInputCity(event.target.value);
     setTimeout(() => {
       setCitiChoose(event.target.value);
-      citySelect!.style.display = 'block';
+      setIsCitySelectVisible(true);
     }, 2000);
   };
 
@@ -61,7 +63,7 @@ const FormCheckout = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setOptionsState(event.target.value);
     setInputCity(event.target.value);
-    citySelect!.style.display = 'none';
+    setIsCitySelectVisible(false);
     setCity([]);
   };
 
@@ -74,7 +76,7 @@ const FormCheckout = () => {
     if (warhouseRef.current !== null) {
       setTimeout(() => {
         setWarhouseChoose(warhouseRef.current!.value);
-        warhouseSelect!.style.display = 'block';
+        setIsWarhouseVisible(true);
       }, 2000);
     }
   };
@@ -84,11 +86,12 @@ const FormCheckout = () => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setWarhouuseInput(event.target.value);
-    warhouseSelect!.style.display = 'none';
+    setIsWarhouseVisible(false);
+    
     setWarhouseW([]);
   };
 
-  var url: string = 'https://api.novaposhta.ua/v2.0/json/';
+  const url: string = 'https://api.novaposhta.ua/v2.0/json/';
 
   // Find City of Delivery
   useEffect(() => {
@@ -233,11 +236,11 @@ const FormCheckout = () => {
               onChange={cityOnChangeHandler}
             />
             <p className="text-red-500">{fields.city.errors}</p>
-            {city && (
+            {city && isCitySelectVisible && (
               <select
                 className="mt-2 hidden w-[350px] border-2 border-black p-1"
                 onChange={handleSelectChange}
-                id="citySelect"
+                
               >
                 <option value="вибуріть">Виберіть</option>
                 {city.map((item: any) => (
@@ -263,11 +266,11 @@ const FormCheckout = () => {
               onChange={warhouseFinderHandler}
             />
 
-            {warhouseW && (
+            {warhouseW && isWarhouseVisible && (
               <select
                 className="mt-2 w-[350px] border-2 border-black p-1"
                 onChange={handleWarhouseChange}
-                id="warhouseSelect"
+            
                 defaultValue={warhouseW[0]}
               >
                 <option value="вибуріть">Виберіть</option>
