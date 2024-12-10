@@ -12,13 +12,12 @@ import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import React, { useEffect, useState, useRef, useActionState } from 'react';
 import SubmitButton from '../SubmitButton';
+import findCities from '@/app/api/FindNovaPoshta/findCities';
 
 const FormCheckout = () => {
   const apiKey = process.env.PUBLIC_NOVA_KEY;
   const [isCitySelectVisible, setIsCitySelectVisible] = useState(false);
   const [isWarhouseVisible, setIsWarhouseVisible] = useState(false);
-  
-  const warhouseSelect = document.getElementById('warhouseSelect');
 
   const warhouseRef = useRef<HTMLInputElement>(null);
 
@@ -34,7 +33,7 @@ const FormCheckout = () => {
   const [warhouseInput, setWarhouuseInput] = useState<string>('');
 
   const [optionsState, setOptionsState] = useState<string>('');
-  //Validation point
+  //Validation point ------------
 
   const [lastResult, action] = useActionState(placeOrder, undefined);
 
@@ -63,7 +62,7 @@ const FormCheckout = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setOptionsState(event.target.value);
     setInputCity(event.target.value);
-    setIsCitySelectVisible(false);
+    setIsCitySelectVisible(true);
     setCity([]);
   };
 
@@ -87,40 +86,20 @@ const FormCheckout = () => {
   ) => {
     setWarhouuseInput(event.target.value);
     setIsWarhouseVisible(false);
-    
+
     setWarhouseW([]);
   };
 
   const url: string = 'https://api.novaposhta.ua/v2.0/json/';
 
   // Find City of Delivery
-  useEffect(() => {
-    if (cityChoose) {
-      const getDepartment = async (): Promise<any> =>
-        fetch(url, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-
-          body: JSON.stringify({
-            apiKey: apiKey,
-            modelName: 'Address',
-            calledMethod: 'getCities',
-            methodProperties: {
-              FindByString: cityChoose,
-            },
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setCity(data.data);
-          });
-      getDepartment();
+  
+    useEffect(() => {
+      if (cityChoose) {
+      findCities({ cityChoose, setCity });
     }
-  }, [cityChoose]);
-
+    }, [cityChoose]);
+  
   // Choose an delivery warehouse
   useEffect(() => {
     const getDepartment = async (): Promise<any> =>
@@ -236,11 +215,10 @@ const FormCheckout = () => {
               onChange={cityOnChangeHandler}
             />
             <p className="text-red-500">{fields.city.errors}</p>
-            {city && isCitySelectVisible && (
+            {city && (
               <select
-                className="mt-2 hidden w-[350px] border-2 border-black p-1"
+                className="mt-2 w-[350px] border-2 border-black p-1"
                 onChange={handleSelectChange}
-                
               >
                 <option value="вибуріть">Виберіть</option>
                 {city.map((item: any) => (
@@ -270,7 +248,6 @@ const FormCheckout = () => {
               <select
                 className="mt-2 w-[350px] border-2 border-black p-1"
                 onChange={handleWarhouseChange}
-            
                 defaultValue={warhouseW[0]}
               >
                 <option value="вибуріть">Виберіть</option>

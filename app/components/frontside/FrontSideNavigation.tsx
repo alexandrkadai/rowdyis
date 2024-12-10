@@ -61,9 +61,9 @@ export default async function FrontSideNavigation() {
               {itemsCart && itemsCart.length > 0 ? (
                 <>
                   {itemsCart.map((item, index) => (
-                    <>
+                    <div key={index}>
                       <div
-                        key={index}
+                        
                         className="mt-5 flex flex-row justify-between px-2 text-[20px] font-bold uppercase"
                       >
                         <span>{item.name}</span>
@@ -102,7 +102,7 @@ export default async function FrontSideNavigation() {
                           </Button>
                         </form>
                       </div>
-                    </>
+                    </div>
                   ))}
                   <SheetClose asChild>
                     <Button
@@ -116,7 +116,7 @@ export default async function FrontSideNavigation() {
               ) : (
                 <>
                   <span className="mt-10 block text-center font-bold">
-                    {' '}
+                    
                     Your Cart is Empty
                   </span>
                   <Button
