@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'ereg';
+  src:url('./fonts/e-Ukraine-Regular.otf'), format(otf);
+}
+@font-face {
+  font-family: 'ebold';
+  src: url('./fonts/e-Ukraine-Bold.otf'), format(otf);
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer base {
   :root {
+  font-family: "ereg","ebold", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 1px;
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -65,6 +79,8 @@ body {
 @layer base {
   * {
     @apply border-border;
+    font-family: "ebold";
+
   }
   body {
     @apply bg-background text-foreground;
