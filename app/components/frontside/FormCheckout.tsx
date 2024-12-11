@@ -13,9 +13,8 @@ import { parseWithZod } from '@conform-to/zod';
 import React, { useEffect, useState, useRef, useActionState } from 'react';
 import SubmitButton from '../SubmitButton';
 import findCities from '@/app/api/FindNovaPoshta/findCities';
-
+import findWarhouses from '@/app/api/FindNovaPoshta/findWarhouses';
 const FormCheckout = () => {
-  const apiKey = process.env.PUBLIC_NOVA_KEY;
   const [isCitySelectVisible, setIsCitySelectVisible] = useState(false);
   const [isWarhouseVisible, setIsWarhouseVisible] = useState(false);
 
@@ -33,6 +32,8 @@ const FormCheckout = () => {
   const [warhouseInput, setWarhouuseInput] = useState<string>('');
 
   const [optionsState, setOptionsState] = useState<string>('');
+
+
   //Validation point ------------
 
   const [lastResult, action] = useActionState(placeOrder, undefined);
@@ -102,34 +103,9 @@ const FormCheckout = () => {
   
   // Choose an delivery warehouse
   useEffect(() => {
-    const getDepartment = async (): Promise<any> =>
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-
-        body: JSON.stringify({
-          apiKey: apiKey,
-          modelName: 'Address',
-          calledMethod: 'getWarehouses',
-          methodProperties: {
-            FindByString: warhouseChoose
-              ? 'Відділення №' + warhouseChoose
-              : ' ',
-            CityName: optionsState,
-            Page: '1',
-            Limit: '50',
-            Language: 'UA',
-          },
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setWarhouseW(data.data);
-        });
-    getDepartment();
+    if(warhouseChoose ){
+    findWarhouses({optionsState, warhouseChoose, setWarhouseW});
+  }
   }, [optionsState, warhouseChoose]);
 
   return (
@@ -269,7 +245,7 @@ const FormCheckout = () => {
         <SubmitButton
           className="mt-5 uppercase tracking-widest"
           variant="default"
-          text="відправлення"
+          text="перейти до оплати"
         />
       </form>
     </div>

@@ -31,11 +31,10 @@ export default async function OrderSummary() {
             <span>Всього :</span>
             <span>{total}</span>
           </div>
-          <div className="mt-10 flex justify-between">
+          <div className="mt-10 flex items-center justify-between rounded-md bg-black p-2 text-white">
             <span className="uppercase"> Що по грошам :</span>
             <span className="uppercase">{totalPrice} GRN</span>
           </div>
-          <Button className="mt-5 uppercase">Оплатити</Button>
         </div>
       </div>
     </div>
