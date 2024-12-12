@@ -57,14 +57,14 @@ export default async function FrontSideNavigation() {
               <h2 className="text-uppercase ml-2 mt-2 text-[35px] font-bold">
                 Cart
               </h2>
-              <div className="w-full border-b-2 border-black"></div>
+              <div className="w-full border-b-2 border-black "></div>
               {itemsCart && itemsCart.length > 0 ? (
                 <>
                   {itemsCart.map((item, index) => (
-                    <div key={index}>
+                    <div key={index} className='border-b-2 border-black'>
                       <div
                         
-                        className="mt-5 flex flex-row justify-between px-2 text-[20px] font-bold uppercase"
+                        className="mt-5 flex flex-row justify-between items-center gap-4 px-2 text-[20px] font-bold uppercase"
                       >
                         <span>{item.name}</span>
                         <Image
@@ -73,12 +73,13 @@ export default async function FrontSideNavigation() {
                           width={32}
                           height={32}
                           className="rounded-xl"
-                        />
-                        <span>{item.price}</span>
-                        <span >{item.quantity}</span>
+                        />ç
+                        <span className=''>{item.price} &#8372;</span>
+                       
                         <span >{item.sizeItem}</span>
                       </div>
-                      <div className="flex justify-around">
+                      <div className="flex justify-start">
+                      <div className="flex flex-row items-center">
                         <form action={deleteOneItem}>
                           <input type="hidden" name="itemId" value={item.id} />
                           <input
@@ -86,10 +87,11 @@ export default async function FrontSideNavigation() {
                             name="sizeToD"
                             value={item.sizeItem}
                           />
-                          <Button variant="default" type="submit">
-                            minus
+                          <Button variant="ghost" type="submit">
+                            -
                           </Button>
                         </form>
+                        <span >{item.quantity}</span>
                         <form action={addOneItem}>
                           <input type="hidden" name="itemId" value={item.id} />
                           <input
@@ -97,10 +99,12 @@ export default async function FrontSideNavigation() {
                             name="sizeToD"
                             value={item.sizeItem}
                           />
-                          <Button variant="default" type="submit">
-                            plus
+                          <Button variant="ghost" type="submit">
+                            +
                           </Button>
                         </form>
+                        </div>
+                       
                       </div>
                     </div>
                   ))}
