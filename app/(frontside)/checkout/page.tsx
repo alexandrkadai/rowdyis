@@ -1,4 +1,5 @@
 import FormCheckout from '@/app/components/frontside/FormCheckout';
+import CheckoutForm from '@/app/components/frontside/FormCheckoutNEWWorld';
 import OrderSummary from '@/app/components/frontside/OrderSummary';
 
 export default function CheckoutRoute() {
@@ -8,6 +9,7 @@ export default function CheckoutRoute() {
         <FormCheckout />
         <OrderSummary />
       </div>
+      <CheckoutForm />
     </>
   );
 }

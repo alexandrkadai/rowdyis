@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -11,9 +12,7 @@ interface CheckoutFormData {
   state: string;
   zip: string;
   country: string;
-  // Additional fields for Ukraine
-  passport: string;
-  inn: string;
+
 }
 
 const CheckoutForm = () => {
@@ -200,44 +199,7 @@ const CheckoutForm = () => {
         {errors.zip && <div className="text-red-500">{errors.zip.message}</div>}
       </div>
 
-      {isUkraine && (
-        <>
-          <div>
-            <label
-              htmlFor="passport"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Passport
-            </label>
-            <input
-              id="passport"
-              type="text"
-              {...register('passport', { required: 'Passport is required' })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
-            {errors.passport && (
-              <div className="text-red-500">{errors.passport.message}</div>
-            )}
-          </div>
-          <div>
-            <label
-              htmlFor="inn"
-              className="block text-sm font-medium text-gray-700"
-            >
-              INN
-            </label>
-            <input
-              id="inn"
-              type="text"
-              {...register('inn', { required: 'INN is required' })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            />
-            {errors.inn && (
-              <div className="text-red-500">{errors.inn.message}</div>
-            )}
-          </div>
-        </>
-      )}
+     
 
       <button
         type="submit"

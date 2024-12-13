@@ -111,7 +111,7 @@ const FormCheckout = () => {
   return (
     <div className="flex w-full flex-col">
       <h4 className="text-2xl font-bold">Відправка</h4>
-      <span className='mt-2 font-bold '>Виберіть Країну Доставки</span>
+      <span className='mt-2 font-bold'>Виберіть Країну Доставки</span>
       <Select >
             <SelectTrigger className="mt-5">
               <SelectValue placeholder="Country" />
