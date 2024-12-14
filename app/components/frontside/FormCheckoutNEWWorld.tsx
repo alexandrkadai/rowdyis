@@ -1,5 +1,4 @@
 'use client';
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface CheckoutFormData {
@@ -15,8 +14,9 @@ interface CheckoutFormData {
 
 }
 
+
 const CheckoutForm = () => {
-  const [isUkraine, setIsUkraine] = useState(false);
+  
   const {
     register,
     handleSubmit,
@@ -29,30 +29,10 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <label
-          htmlFor="country"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Country
-        </label>
-        <select
-          id="country"
-          {...register('country', { required: 'Country is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          onChange={(e) => setIsUkraine(e.target.value === 'Ukraine')}
-        >
-          <option value="">Select a country</option>
-          <option value="Ukraine">Ukraine</option>
-          <option value="Other">Other</option>
-        </select>
-        {errors.country && (
-          <div className="text-red-500">{errors.country.message}</div>
-        )}
-      </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
+     
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         <div>
           <label
             htmlFor="firstName"
@@ -64,7 +44,8 @@ const CheckoutForm = () => {
             id="firstName"
             type="text"
             {...register('firstName', { required: 'First name is required' })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            placeholder="Enter your name"
           />
           {errors.firstName && (
             <div className="text-red-500">{errors.firstName.message}</div>
@@ -81,7 +62,7 @@ const CheckoutForm = () => {
             id="lastName"
             type="text"
             {...register('lastName', { required: 'Last name is required' })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.lastName && (
             <div className="text-red-500">{errors.lastName.message}</div>
@@ -103,7 +84,7 @@ const CheckoutForm = () => {
             required: 'Email is required',
             pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' },
           })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full  border-black border-2 focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.email && (
           <div className="text-red-500">{errors.email.message}</div>
@@ -121,7 +102,7 @@ const CheckoutForm = () => {
           id="phone"
           type="tel"
           {...register('phone', { required: 'Phone is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full  border-black border-2 focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.phone && (
           <div className="text-red-500">{errors.phone.message}</div>
@@ -139,7 +120,7 @@ const CheckoutForm = () => {
           id="address"
           type="text"
           {...register('address', { required: 'Address is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full  border-black border-2 focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.address && (
           <div className="text-red-500">{errors.address.message}</div>
@@ -158,7 +139,7 @@ const CheckoutForm = () => {
             id="city"
             type="text"
             {...register('city', { required: 'City is required' })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.city && (
             <div className="text-red-500">{errors.city.message}</div>
@@ -175,7 +156,7 @@ const CheckoutForm = () => {
             id="state"
             type="text"
             {...register('state', { required: 'State/Region is required' })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.state && (
             <div className="text-red-500">{errors.state.message}</div>
@@ -194,7 +175,7 @@ const CheckoutForm = () => {
           id="zip"
           type="text"
           {...register('zip', { required: 'Zip/Postal code is required' })}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.zip && <div className="text-red-500">{errors.zip.message}</div>}
       </div>
@@ -203,7 +184,7 @@ const CheckoutForm = () => {
 
       <button
         type="submit"
-        className="w-full rounded-md bg-blue-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        className="w-full rounded-md bg-black px-4 py-2 font-medium text-white shadow-sm hover:bg-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
         Place Order
       </button>
