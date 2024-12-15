@@ -11,9 +11,7 @@ interface CheckoutFormData {
   state: string;
   zip: string;
   country: string;
-
 }
-
 
 const CheckoutForm = () => {
   
@@ -29,9 +27,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
-     
-
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4">
       <div className="grid grid-cols-1 gap-4">
         <div>
           <label
@@ -44,7 +40,7 @@ const CheckoutForm = () => {
             id="firstName"
             type="text"
             {...register('firstName', { required: 'First name is required' })}
-            className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
             placeholder="Enter your name"
           />
           {errors.firstName && (
@@ -62,7 +58,7 @@ const CheckoutForm = () => {
             id="lastName"
             type="text"
             {...register('lastName', { required: 'Last name is required' })}
-            className="mt-1 block w-full border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.lastName && (
             <div className="text-red-500">{errors.lastName.message}</div>
@@ -84,7 +80,7 @@ const CheckoutForm = () => {
             required: 'Email is required',
             pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' },
           })}
-          className="mt-1 block w-full  border-black border-2 focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border-2 border-black focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.email && (
           <div className="text-red-500">{errors.email.message}</div>
@@ -102,7 +98,7 @@ const CheckoutForm = () => {
           id="phone"
           type="tel"
           {...register('phone', { required: 'Phone is required' })}
-          className="mt-1 block w-full  border-black border-2 focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border-2 border-black focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.phone && (
           <div className="text-red-500">{errors.phone.message}</div>
@@ -120,7 +116,7 @@ const CheckoutForm = () => {
           id="address"
           type="text"
           {...register('address', { required: 'Address is required' })}
-          className="mt-1 block w-full  border-black border-2 focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border-2 border-black focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.address && (
           <div className="text-red-500">{errors.address.message}</div>
@@ -139,7 +135,7 @@ const CheckoutForm = () => {
             id="city"
             type="text"
             {...register('city', { required: 'City is required' })}
-            className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.city && (
             <div className="text-red-500">{errors.city.message}</div>
@@ -156,7 +152,7 @@ const CheckoutForm = () => {
             id="state"
             type="text"
             {...register('state', { required: 'State/Region is required' })}
-            className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.state && (
             <div className="text-red-500">{errors.state.message}</div>
@@ -175,12 +171,10 @@ const CheckoutForm = () => {
           id="zip"
           type="text"
           {...register('zip', { required: 'Zip/Postal code is required' })}
-          className="mt-1 block w-full  border-black border-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
         {errors.zip && <div className="text-red-500">{errors.zip.message}</div>}
       </div>
-
-     
 
       <button
         type="submit"
