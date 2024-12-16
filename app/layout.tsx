@@ -5,6 +5,7 @@ import './globals.css';
 import { extractRouterConfig } from 'uploadthing/server';
 import { ourFileRouter } from './api/uploadthing/core';
 import { Copyright } from 'lucide-react';
+import { StoreProvider } from './store/storeProvider';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -29,9 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        {children}
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 'use client';
+import { useAppSelector } from '@/lib/hooks/reduxHooks';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -15,6 +16,7 @@ interface CheckoutFormData {
 }
 
 export default function DeliveryCountry() {
+  const check = useAppSelector((state) => state.formSet.checked);
   const {
     register,
     handleSubmit,
@@ -24,7 +26,7 @@ export default function DeliveryCountry() {
   const [isUkraine, setIsUkraine] = useState(false);
 
   return (
-    <div className="mt-10 flex gap-5 w-[350px] items-center justify-center">
+    <div className="mt-10 flex w-[350px] items-center justify-center gap-5">
       <label
         htmlFor="country"
         className="block text-sm font-medium text-gray-700"
@@ -44,6 +46,7 @@ export default function DeliveryCountry() {
       {/* {errors.country && (
     <div className="text-red-500">{errors.country.message}</div>
   )} */}
+  
     </div>
   );
 }

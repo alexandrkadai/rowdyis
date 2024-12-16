@@ -11,7 +11,7 @@ export default function page() {
           Terms & Conditions Return Policy All sales final. No returns. In case of damaged or
           missing merchandise, we are able to offer either store credit or exchange for the item in
           question within two weeks of customer receipt date and depending upon availability.
-        </p>{' '}
+        </p>
         <article>
           We cannot guarantee that purchased items will remain in stock. To acquire store credit or
           exchange, we require a receipt and visual proof of damage. In case of damaged merchandise,
