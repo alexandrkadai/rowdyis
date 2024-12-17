@@ -1,8 +1,9 @@
 'use client';
+import { formSet } from '@/app/store/formsSlice';
 import { useAppSelector } from '@/lib/hooks/reduxHooks';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useDispatch } from 'react-redux';
 interface CheckoutFormData {
   firstName: string;
   lastName: string;
@@ -16,6 +17,7 @@ interface CheckoutFormData {
 }
 
 export default function DeliveryCountry() {
+  const dispatch = useDispatch();
   const check = useAppSelector((state) => state.formSet.checked);
   const {
     register,
@@ -40,13 +42,13 @@ export default function DeliveryCountry() {
         onChange={(e) => setIsUkraine(e.target.value === 'Ukraine')}
       >
         <option value="">Select a country</option>
-        <option value="Ukraine">Ukraine</option>
+        <option  value="Ukraine">Ukraine</option>
         <option value="Other">All World</option>
       </select>
       {/* {errors.country && (
     <div className="text-red-500">{errors.country.message}</div>
   )} */}
-  
+    {check ? <span onClick={() => dispatch(formSet())} >Check</span> : <span onClick={() => dispatch(formSet())} >No Check</span>}
     </div>
   );
 }
