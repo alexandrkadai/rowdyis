@@ -18,7 +18,9 @@ interface buttonProps {
     | null
     | undefined;
 }
-
+interface newButtonProps extends buttonProps {
+  onClick: () => void;
+}
 export default function SubmitButton({
   text,
   variant,
@@ -47,15 +49,28 @@ export default function SubmitButton({
 
 export function ShoppingBagButton({ text, variant }: buttonProps) {
   const { pending } = useFormStatus();
+
   return (
     <>
       {pending ? (
         <Button disabled variant={variant} className="uppercase">
-          Adding Item ... 
+          Adding Item ...
         </Button>
       ) : (
         <Button>{text}</Button>
       )}
     </>
+  );
+}
+
+export function ChooseButton({ text, variant, onClick }: newButtonProps) {
+  return (
+    <Button
+      variant={variant}
+      className={cn('h-[20px] w-[120px] py-4 px-6 uppercase')}
+      onClick={onClick}
+    >
+      {text}
+    </Button>
   );
 }
