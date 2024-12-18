@@ -33,7 +33,6 @@ const FormCheckout = () => {
 
   const [optionsState, setOptionsState] = useState<string>('');
 
-
   //Validation point ------------
 
   const [lastResult, action] = useActionState(placeOrder, undefined);
@@ -94,33 +93,23 @@ const FormCheckout = () => {
   const url: string = 'https://api.novaposhta.ua/v2.0/json/';
 
   // Find City of Delivery
-  
-    useEffect(() => {
-      if (cityChoose) {
+
+  useEffect(() => {
+    if (cityChoose) {
       findCities({ cityChoose, setCity });
     }
-    }, [cityChoose]);
-  
+  }, [cityChoose]);
+
   // Choose an delivery warehouse
   useEffect(() => {
-    if(warhouseChoose ){
-    findWarhouses({optionsState, warhouseChoose, setWarhouseW});
-  }
+    if (warhouseChoose) {
+      findWarhouses({ optionsState, warhouseChoose, setWarhouseW });
+    }
   }, [optionsState, warhouseChoose]);
 
   return (
     <div className="flex w-full flex-col">
-      <h4 className="text-2xl font-bold">Відправка</h4>
-      <span className='mt-2 font-bold'>Виберіть Країну Доставки</span>
-      <Select >
-            <SelectTrigger className="mt-5">
-              <SelectValue placeholder="Country" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="ukraine">Ukraine</SelectItem>
-              <SelectItem value="world">World</SelectItem>
-            </SelectContent>
-          </Select>
+    
       <form
         className="mt-10 flex flex-col gap-4"
         action={action}
@@ -179,7 +168,7 @@ const FormCheckout = () => {
 
         <div className="mt-5">
           <h4 className="text-xl">Доставка</h4>
-         
+
           <div className="mt-5 flex flex-col">
             <label htmlFor="city">Місто доставки</label>
             <input

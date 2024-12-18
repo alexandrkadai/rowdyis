@@ -27,7 +27,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4 mt-10">
       <div className="grid grid-cols-1 gap-4">
         <div>
           <label
