@@ -18,22 +18,22 @@ export default async function FrontSideNavigation() {
   const { itemsCart, total } = await GetCart();
 
   return (
-    <header className="w-full">
+    <header className="w-full mt-5 py-5 lg:mt-0 lg:ml-0">
       <nav className="flex flex-row items-center justify-around gap-4">
         <div className="w-full">
-        <MenuIcon size={24} className="lg:hidden" />
+        
         <Link href="/shop">
           <Image
             src={logo}
             alt="Rowdy Logo"
             width={150}
             height={100}
-            className="h-[50px] w-[75px] object-contain lg:h-[100px] lg:w-[150px]"
+            className="h-[50px] w-[75px] ml-7 object-contain lg:h-[100px] lg:w-[150px]"
           />
         </Link>
         </div>
         <div className="w-full flex flex-row justify-between">
-        <div className="hidden flex-row items-center justify-between gap-4 lg:flex">
+        <div className="flex flex-row absolute left-7 top-[120px] items-center justify-between gap-4 lg:flex-row lg:static lg:top-0 lg:left-0">
           <Link className="font-bold uppercase" href="/shop">
             Магазин
           </Link>

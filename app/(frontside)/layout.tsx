@@ -9,11 +9,11 @@ export default function FrontSideLayout({ children }: { children: ReactNode }) {
       <FrontSideNavigation />
       <main className="w-full">{children}</main>
       <footer className="mb-10 mt-[200px] flex w-full items-center justify-center">
-        <div className="textlg flex flex-row gap-5 font-bold uppercase">
-          <Copyright size={24} />
-          <span className="">Rowdy</span>
-          <span className="">UKraine</span>
-          <span className="">Kiev</span>
+        <div className="text-lg flex flex-col lg:flex-row gap-5 font-bold uppercase">
+          
+          <span className="flex flex-row gap-4 ">Rowdy <Copyright size={24} /></span>
+          <span className="">UKraine, Kiev</span>
+          
           <span>All Rights Reserved</span>
           <Link href="/terms" className="underline">
             Terms And Conditions

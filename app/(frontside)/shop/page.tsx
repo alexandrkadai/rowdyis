@@ -14,10 +14,11 @@ async function getData() {
 export default async function ShopPage() {
   const data = await getData();
   return (
-    <div className="mt-[150px] flex flex-row justify-between">
+    <div className="mt-[150px] flex flex-col justify-center items-center gap-y-5 lg:flex-row lg:justify-between">
       {data.map((item) => (
         <div
-          className="relative h-[500px] w-[500px] cursor-pointer border-[4px] border-blue-700"
+          className="relative h-[350px]
+w-[350px] lg:h-[500px] lg:w-[500px] cursor-pointer border-[4px] border-blue-700"
           key={item.id}
         >
           <Link href={`/shop/${item.id}`}>

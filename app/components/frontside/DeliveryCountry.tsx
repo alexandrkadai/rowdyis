@@ -11,7 +11,7 @@ export default function DeliveryCountry() {
   const check = useAppSelector((state) => state.formSet.checked);
 
   return (
-    <div className="flex flex-col  gap-5">
+    <div className="flex flex-col w-full gap-5">
       <h4 className="text-2xl font-bold">Відправка</h4>
       <span className="mt-2 font-bold">Виберіть Країну Доставки</span>
 
