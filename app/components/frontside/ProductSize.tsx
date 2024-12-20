@@ -35,8 +35,7 @@ export default function ProductSize({ data }: iDataProps) {
 
   return (
     <>
-      
-      <RadioGroup defaultValue="" className="mt-2 flex flex-row gap-5">
+      <RadioGroup className="mt-2 flex w-full flex-row gap-5">
         <div
           className="relative flex items-center space-x-2"
           onClick={() => setSize('s')}
@@ -57,7 +56,7 @@ export default function ProductSize({ data }: iDataProps) {
           </label>
         </div>
         <div
-          className="relative flex items-center space-x-2"
+          className="relative flex items-center space-x-2 px-1.5"
           onClick={() => setSize('m')}
         >
           <RadioGroupItem
@@ -96,7 +95,7 @@ export default function ProductSize({ data }: iDataProps) {
         </div>
 
         <div
-          className="relative flex items-center space-x-2"
+          className="relative flex items-center space-x-2 px-2"
           onClick={() => setSize('xl')}
         >
           <RadioGroupItem
@@ -108,7 +107,7 @@ export default function ProductSize({ data }: iDataProps) {
             htmlFor="option-two"
             className={cn(
               size === 'xl' ? 'text-black' : 'text-gray-300',
-              'pointer-events-none absolute right-[4px] text-[25px] font-bold'
+              'pointer-events-none absolute right-[7px] text-nowrap text-[24px] font-bold lg:right-[9px]'
             )}
           >
             XL
@@ -116,7 +115,7 @@ export default function ProductSize({ data }: iDataProps) {
         </div>
 
         <div
-          className="relative flex items-center space-x-2"
+          className="relative flex w-[120px] items-center space-x-5 lg:w-[95px]"
           onClick={() => setSize('xxl')}
         >
           <RadioGroupItem
@@ -131,7 +130,7 @@ export default function ProductSize({ data }: iDataProps) {
             htmlFor="option-two"
             className={cn(
               size === 'xxl' ? 'text-black' : 'text-gray-300',
-              'pointer-events-none absolute right-[5px] text-[25px] font-bold'
+              'pointer-events-none absolute right-[25px] text-[23px] lg:text-[25px] font-bold lg:right-[38px]'
             )}
           >
             2XL

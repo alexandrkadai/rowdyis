@@ -11,31 +11,27 @@ async function getData(productId: string) {
 
   return data;
 }
-type Params = Promise<{ id: string }>
+type Params = Promise<{ id: string }>;
 
-export default async function OneProductRoute({
-  params,
-}: {
-  params: Params ;
-}) {
+export default async function OneProductRoute({ params }: { params: Params }) {
   const id = await params;
   const data = await getData(id.id);
   const imagesP = data!.images;
 
   return (
-    <div className="w-ful mt-10 flex sm:flex-col-reverse md:flex-col-reverse lg:flex-row">
-      <div className="flex w-full flex-col gap-5 relative">
+    <div className="mt-10 flex w-full flex-col-reverse lg:flex-row">
+      <div className="mt-5 flex w-full flex-col items-center gap-5 lg:mt-0">
         {imagesP.map((item) => (
           <Image
             src={item}
-            className='w-auto h-[400px]'
-            fill
+            width={350}
+            height={400}
             alt="Product Image"
             key={item}
           />
         ))}
       </div>
-      <div className="ml-5 flex w-full flex-col text-left">
+      <div className="flex w-full flex-col text-left p-5 lg:ml-5">
         <h2 className="text-[45px] font-bold uppercase">{data?.name}</h2>
         <span className="mt-2 text-[45px] font-bold">
           {data?.price} &#8372;

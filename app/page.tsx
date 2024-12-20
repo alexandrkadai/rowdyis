@@ -56,7 +56,7 @@ export default function Home() {
             />
           </>
         </div>
-        <Button className="uppercase absolute bottom-12  m-auto" onClick={() => setWokes(true)}>
+        <Button className="uppercase absolute bottom-[20%]  m-auto" onClick={() => setWokes(true)}>
           Start
         </Button>
       </div>

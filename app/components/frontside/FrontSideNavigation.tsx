@@ -73,12 +73,12 @@ export default async function FrontSideNavigation() {
                           width={32}
                           height={32}
                           className="rounded-xl"
-                        />ç
-                        <span className=''>{item.price} &#8372;</span>
+                        />
+                    
                        
                         <span >{item.sizeItem}</span>
                       </div>
-                      <div className="flex justify-start">
+                      <div className="flex justify-between">
                       <div className="flex flex-row items-center">
                         <form action={deleteOneItem}>
                           <input type="hidden" name="itemId" value={item.id} />
@@ -104,8 +104,9 @@ export default async function FrontSideNavigation() {
                           </Button>
                         </form>
                         </div>
-                       
+                        <span className='flex items-center justify-end font-bold'>{item.price} &#8372;</span>
                       </div>
+                   
                     </div>
                   ))}
                   <SheetClose asChild>
