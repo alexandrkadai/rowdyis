@@ -38,7 +38,7 @@ export default function Home() {
               alt="animation sleep"
               priority
               className={cn(
-                wokes === false ? 'opacity-100' : 'opacity-0',
+                wokes ? 'opacity-0' : 'opacity-100',
                 isLoading ? 'opacity-0' : 'opacity-100',
                 'absolute top-10 left-0 right-0 m-auto text-center w-96 transition-opacity duration-300',
               )}
@@ -50,7 +50,7 @@ export default function Home() {
               height={100}
               alt="animation woke"
               className={cn(
-                wokes === false ? 'opacity-0' : 'opacity-100',
+                wokes ? 'opacity-100' : 'opacity-0',
                 'absolute top-10 left-0 right-0 m-auto text-center w-96 transition-opacity duration-300',
               )}
             />
