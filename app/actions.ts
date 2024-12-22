@@ -2,12 +2,13 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 import { parseWithZod } from '@conform-to/zod';
-import { productShema, orderSchema, orederWorldSchema } from './lib/zodSchemas';
+import { productShema, orderSchema, orederWorldSchema, contactFormSchema } from './lib/zodSchemas';
 import prisma from './lib/db';
 import { redis } from './lib/redis';
 import { iCart } from './lib/interfaces';
 import { getUserId } from './lib/userClaude';
 import { revalidatePath } from 'next/cache';
+import emailjs from '@emailjs/browser';
 
 export async function createProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -276,4 +277,29 @@ export async function placeOrderWorld(prevState: unknown, formData: FormData) {
       country: submission.value.country,
     },
   });
+}
+
+export async function contactFormAction(prevState: unknown, formData: FormData) {
+
+  const submission = parseWithZod(formData, {
+    schema: contactFormSchema,
+  });
+
+  if (submission.status !== 'success') {
+    return submission.reply();
+  }
+
+  console.log('Sending email...');
+
+  // try {
+  //   await emailjs.sendForm(
+  //     'service_pjfg8i4',  
+  //     'template_lku7kb6', 
+  //     formData,           
+  //     'w708rAApM2HcJVWv7' 
+  //   );
+  //   console.log('Email sent successfully!');
+  // } catch (error) {
+  //   console.error('Failed to send email:', error);
+  // }
 }

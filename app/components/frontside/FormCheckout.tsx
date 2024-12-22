@@ -1,13 +1,6 @@
 'use client';
 import { placeOrder } from '@/app/actions';
 import { orderSchema } from '@/app/lib/zodSchemas';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import React, { useEffect, useState, useRef, useActionState } from 'react';
