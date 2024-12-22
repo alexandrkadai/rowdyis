@@ -1,5 +1,9 @@
 'use client';
-import { useForm } from 'react-hook-form';
+import { placeOrderWorld } from '@/app/actions';
+import { useActionState } from 'react';
+import { useForm } from '@conform-to/react';
+import { parseWithZod } from '@conform-to/zod';
+import { orederWorldSchema } from '@/app/lib/zodSchemas';
 
 interface CheckoutFormData {
   firstName: string;
@@ -14,20 +18,27 @@ interface CheckoutFormData {
 }
 
 const CheckoutForm = () => {
-  
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CheckoutFormData>();
+  const [lastResult, action] = useActionState(placeOrderWorld, undefined);
 
+  const [form, fields] = useForm({
+      lastResult,
+  
+      onValidate({ formData }) {
+        return parseWithZod(formData, { schema: orederWorldSchema });
+      },
+  
+      shouldValidate: 'onBlur',
+      shouldRevalidate: 'onInput',
+    });
+
+  
   const onSubmit = (data: CheckoutFormData) => {
     console.log('Checkout form data:', data);
     // Implement your form submission logic here
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4 mt-10">
+    <form  className="w-full space-y-4 mt-10">
       <div className="grid grid-cols-1 gap-4">
         <div>
           <label
@@ -39,13 +50,11 @@ const CheckoutForm = () => {
           <input
             id="firstName"
             type="text"
-            {...register('firstName', { required: 'First name is required' })}
+           
             className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
             placeholder="Enter your name"
           />
-          {errors.firstName && (
-            <div className="text-red-500">{errors.firstName.message}</div>
-          )}
+         
         </div>
         <div>
           <label
@@ -57,12 +66,10 @@ const CheckoutForm = () => {
           <input
             id="lastName"
             type="text"
-            {...register('lastName', { required: 'Last name is required' })}
+            
             className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
-          {errors.lastName && (
-            <div className="text-red-500">{errors.lastName.message}</div>
-          )}
+          
         </div>
       </div>
 
@@ -76,15 +83,10 @@ const CheckoutForm = () => {
         <input
           id="email"
           type="email"
-          {...register('email', {
-            required: 'Email is required',
-            pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' },
-          })}
+         
           className="mt-1 block w-full border-2 border-black focus:border-blue-500 focus:ring-blue-500"
         />
-        {errors.email && (
-          <div className="text-red-500">{errors.email.message}</div>
-        )}
+       
       </div>
 
       <div>
@@ -97,12 +99,10 @@ const CheckoutForm = () => {
         <input
           id="phone"
           type="tel"
-          {...register('phone', { required: 'Phone is required' })}
+         
           className="mt-1 block w-full border-2 border-black focus:border-blue-500 focus:ring-blue-500"
         />
-        {errors.phone && (
-          <div className="text-red-500">{errors.phone.message}</div>
-        )}
+       
       </div>
 
       <div>
@@ -115,12 +115,10 @@ const CheckoutForm = () => {
         <input
           id="address"
           type="text"
-          {...register('address', { required: 'Address is required' })}
+         
           className="mt-1 block w-full border-2 border-black focus:border-blue-500 focus:ring-blue-500"
         />
-        {errors.address && (
-          <div className="text-red-500">{errors.address.message}</div>
-        )}
+     
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -134,12 +132,10 @@ const CheckoutForm = () => {
           <input
             id="city"
             type="text"
-            {...register('city', { required: 'City is required' })}
+           
             className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
-          {errors.city && (
-            <div className="text-red-500">{errors.city.message}</div>
-          )}
+          
         </div>
         <div>
           <label
@@ -151,12 +147,10 @@ const CheckoutForm = () => {
           <input
             id="state"
             type="text"
-            {...register('state', { required: 'State/Region is required' })}
+           
             className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
-          {errors.state && (
-            <div className="text-red-500">{errors.state.message}</div>
-          )}
+         
         </div>
       </div>
 
@@ -170,10 +164,10 @@ const CheckoutForm = () => {
         <input
           id="zip"
           type="text"
-          {...register('zip', { required: 'Zip/Postal code is required' })}
+          
           className="mt-1 block w-full border-2 border-black shadow-sm focus:border-blue-500 focus:ring-blue-500"
         />
-        {errors.zip && <div className="text-red-500">{errors.zip.message}</div>}
+     
       </div>
 
       <button

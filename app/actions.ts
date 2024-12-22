@@ -2,7 +2,7 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 import { parseWithZod } from '@conform-to/zod';
-import { productShema, orderSchema } from './lib/zodSchemas';
+import { productShema, orderSchema, orederWorldSchema } from './lib/zodSchemas';
 import prisma from './lib/db';
 import { redis } from './lib/redis';
 import { iCart } from './lib/interfaces';
@@ -249,6 +249,31 @@ export async function placeOrder(prevState: unknown, formData: FormData) {
       city: submission.value.city,
       warhouse: submission.value.warhouse,
       cartId: submission.value.cartId,
+    },
+  });
+}
+
+export async function placeOrderWorld(prevState: unknown, formData: FormData) {
+  
+  const submission = parseWithZod(formData, {
+    schema: orederWorldSchema,
+  });
+
+  if (submission.status !== 'success') {
+    return submission.reply();
+  }
+
+  await prisma.placeWorldOrder.create({
+    data: {
+      firstName: submission.value.firstName,
+      lastName: submission.value.lastName,
+      emailAdd: submission.value.emailAdd,
+      phoneNum: submission.value.phoneNum,
+      address: submission.value.address,
+      city: submission.value.city,
+      state: submission.value.state,
+      zip: submission.value.zip,
+      country: submission.value.country,
     },
   });
 }

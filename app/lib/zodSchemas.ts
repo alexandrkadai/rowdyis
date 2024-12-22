@@ -28,3 +28,14 @@ export const orderSchema = z.object({
   warhouse: z.string().min(3),
   cartId: z.string(),
 });
+export const orederWorldSchema = z.object({
+  firstName: z.string().min(3),
+  lastName: z.string().min(3),
+  email: z.string().regex(emailRegex, 'Invalid Email'),
+  phone: z.string().regex(phoneRegex, 'Invalid phone'),
+  address: z.string().min(3),
+  city: z.string().min(3),
+  state: z.string().min(3),
+  zip: z.string().min(3),
+  country: z.string().min(3),
+});

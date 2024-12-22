@@ -37,7 +37,3 @@ w-[350px] lg:h-[500px] lg:w-[500px] cursor-pointer border-[4px] border-blue-700"
     </div>
   );
 }
-
-// onMouseEnter={() => setHovered(true)}
-// onMouseLeave={() => setHovered(false)}
-//  src={hovered && item.images[1] ? item.images[1] : item.images[0]}
