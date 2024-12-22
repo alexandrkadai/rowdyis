@@ -31,8 +31,8 @@ export const orderSchema = z.object({
 export const orederWorldSchema = z.object({
   firstName: z.string().min(3),
   lastName: z.string().min(3),
-  email: z.string().regex(emailRegex, 'Invalid Email'),
-  phone: z.string().regex(phoneRegex, 'Invalid phone'),
+  emailAdd: z.string().regex(emailRegex, 'Invalid Email'),
+  phoneNum: z.string().regex(phoneRegex, 'Invalid phone'),
   address: z.string().min(3),
   city: z.string().min(3),
   state: z.string().min(3),
