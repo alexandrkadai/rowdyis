@@ -4,12 +4,14 @@ import { contactFormSchema } from '@/app/lib/zodSchemas';
 import { Button } from '@/components/ui/button';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
-import { useActionState, useRef } from 'react';
+import { useActionState, useState } from 'react';
 
 
 
-export default async function ConatcsPage() {
+export default function ConatcsPage() {
+
   const [lastResult, action] = useActionState(contactFormAction, undefined);
+
   
   const [form, fields] = useForm({
     lastResult,
@@ -23,11 +25,15 @@ export default async function ConatcsPage() {
   });
 
   
+ 
   return (
     <div className="mt-14 w-full justify-center text-center lg:mt-10">
       <h2 className="text-2xl font-bold">Будемо на звʼязку</h2>
       <div className="mx-auto mt-5 flex w-[350px] flex-col items-center justify-center lg:mx-auto lg:mt-10">
-        <form >
+        <form    
+        action={action}
+        id={form.id}
+        onSubmit={form.onSubmit} >
           <div className="mt-2 text-left">
             <label htmlFor="nameUser" className="font-bold uppercase">
               Імʼя
@@ -99,4 +105,5 @@ export default async function ConatcsPage() {
       </div>
     </div>
   );
-}
+
+};

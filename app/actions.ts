@@ -2,13 +2,17 @@
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { redirect } from 'next/navigation';
 import { parseWithZod } from '@conform-to/zod';
-import { productShema, orderSchema, orederWorldSchema, contactFormSchema } from './lib/zodSchemas';
+import {
+  productShema,
+  orderSchema,
+  orederWorldSchema,
+  contactFormSchema,
+} from './lib/zodSchemas';
 import prisma from './lib/db';
 import { redis } from './lib/redis';
 import { iCart } from './lib/interfaces';
 import { getUserId } from './lib/userClaude';
 import { revalidatePath } from 'next/cache';
-import emailjs from '@emailjs/browser';
 
 export async function createProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -255,7 +259,6 @@ export async function placeOrder(prevState: unknown, formData: FormData) {
 }
 
 export async function placeOrderWorld(prevState: unknown, formData: FormData) {
-  
   const submission = parseWithZod(formData, {
     schema: orederWorldSchema,
   });
@@ -279,8 +282,11 @@ export async function placeOrderWorld(prevState: unknown, formData: FormData) {
   });
 }
 
-export async function contactFormAction(prevState: unknown, formData: FormData) {
 
+export async function contactFormAction(
+  prevState: unknown,
+  formData: FormData
+) {
   const submission = parseWithZod(formData, {
     schema: contactFormSchema,
   });
@@ -288,18 +294,30 @@ export async function contactFormAction(prevState: unknown, formData: FormData) 
   if (submission.status !== 'success') {
     return submission.reply();
   }
+  const verifiedData = {
+    name: submission.value.name,
+    phone: submission.value.phone,
+    email: submission.value.email,
+    message: submission.value.message,
+  };
+
+  try {
+    const response = await fetch('http://localhost:3000/api/sendRoute', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(verifiedData),
+    });
+
+    if (!response.ok) throw new Error('Failed to send message');
 
   console.log('Sending email...');
+    
+  } catch (error: any) {
+    console.log('Failed to send message. Please try again.' + error.message);
+  }
 
-  // try {
-  //   await emailjs.sendForm(
-  //     'service_pjfg8i4',  
-  //     'template_lku7kb6', 
-  //     formData,           
-  //     'w708rAApM2HcJVWv7' 
-  //   );
-  //   console.log('Email sent successfully!');
-  // } catch (error) {
-  //   console.error('Failed to send email:', error);
-  // }
-}
+};
+  
+
