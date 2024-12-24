@@ -13,6 +13,9 @@ import { redis } from './lib/redis';
 import { iCart } from './lib/interfaces';
 import { getUserId } from './lib/userClaude';
 import { revalidatePath } from 'next/cache';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function createProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -285,7 +288,7 @@ export async function placeOrderWorld(prevState: unknown, formData: FormData) {
 
 export async function contactFormAction(
   prevState: unknown,
-  formData: FormData
+  formData: FormData,
 ) {
   const submission = parseWithZod(formData, {
     schema: contactFormSchema,
@@ -301,8 +304,10 @@ export async function contactFormAction(
     message: submission.value.message,
   };
 
+  
+
   try {
-    const response = await fetch('http://localhost:3000/api/sendRoute', {
+    const response = await fetch('http://192.168.0.100:3000/api/sendRoute', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
