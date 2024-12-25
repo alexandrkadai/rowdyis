@@ -1,20 +1,35 @@
 'use client';
 import { contactFormAction } from '@/app/actions';
+import { AlertManager } from '@/app/components/frontside/AlertManage';
+import { useAlertManager } from '@/app/hooks/useAlert';
 import { contactFormSchema } from '@/app/lib/zodSchemas';
 import { Button } from '@/components/ui/button';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { useActionState } from 'react';
+import { useEffect } from 'react';
 
-
-
-export default function ConatcsPage() {
-
+type Enum = 'error' | 'success' | undefined;
+interface iLastResult{
+  status: Enum;
+  message: string;
+}
+export default function ContactsPage() {
+  const { alerts, addAlert } = useAlertManager();
+  
   const [lastResult, action] = useActionState(contactFormAction, undefined);
 
-  
+  useEffect(() => {
+    if (lastResult?.status === 'success') {
+      addAlert('Message sent successfully!', 'success');
+    }
+    if (lastResult?.status === 'error') {
+      addAlert('Message not sent!', 'error');
+    }
+  }, [lastResult]);
+
   const [form, fields] = useForm({
-    lastResult,
+    lastResult: lastResult as iLastResult,
 
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: contactFormSchema });
@@ -24,16 +39,15 @@ export default function ConatcsPage() {
     shouldRevalidate: 'onInput',
   });
 
-  
- 
   return (
     <div className="mt-14 w-full justify-center text-center lg:mt-10">
       <h2 className="text-2xl font-bold">Будемо на звʼязку</h2>
       <div className="mx-auto mt-5 flex w-[350px] flex-col items-center justify-center lg:mx-auto lg:mt-10">
-        <form    
-        action={action}
-        id={form.id}
-        onSubmit={form.onSubmit} >
+        <form
+          action={action}
+          id={form.id}
+          onSubmit={form.onSubmit}
+        >
           <div className="mt-2 text-left">
             <label htmlFor="nameUser" className="font-bold uppercase">
               Імʼя
@@ -48,7 +62,7 @@ export default function ConatcsPage() {
               required
               placeholder="Введіть ваше імʼя"
             />
-             <p className="text-red-500">{fields.name.errors}</p>
+            <p className="text-red-500">{fields.name.errors}</p>
           </div>
           <div className="mt-2 flex flex-col text-left">
             <label htmlFor="phone" className="font-bold uppercase">
@@ -64,7 +78,7 @@ export default function ConatcsPage() {
               placeholder="Введіть ваш номер телефону"
               className="w-[350px] border-2 border-black p-1"
             />
-             <p className="text-red-500">{fields.phone.errors}</p>
+            <p className="text-red-500">{fields.phone.errors}</p>
           </div>
           <div className="mt-2 flex flex-col text-left">
             <label htmlFor="email" className="font-bold uppercase">
@@ -97,13 +111,12 @@ export default function ConatcsPage() {
             />
             <p className="text-red-500">{fields.message.errors}</p>
           </div>
-          <Button className="mt-5 w-full font-bold uppercase" type="submit"> 
+          <Button className="mt-5 w-full font-bold uppercase" type="submit">
             Відправити
           </Button>
-          
         </form>
       </div>
+      <AlertManager alerts={alerts} />
     </div>
   );
-
-};
+}

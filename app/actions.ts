@@ -14,6 +14,7 @@ import { iCart } from './lib/interfaces';
 import { getUserId } from './lib/userClaude';
 import { revalidatePath } from 'next/cache';
 import { Resend } from 'resend';
+import { EmailTemplate } from './components/email-template/emailResend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -304,23 +305,20 @@ export async function contactFormAction(
     message: submission.value.message,
   };
 
-  
-
   try {
-    const response = await fetch('http://192.168.0.100:3000/api/sendRoute', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(verifiedData),
-    });
+    const data = await resend.emails.send({
+         from: 'Rowdy <onboarding@resend.dev>',
+         to: ['kaldikonly@gmail.com'],
+         subject: 'New Customer Message',
+         react: EmailTemplate(verifiedData),
+       });
+       console.log('Success! Message sent !');
 
-    if (!response.ok) throw new Error('Failed to send message');
+       return {status: 'success', message: 'Message sent successfully!'};
 
-  console.log('Sending email...');
-    
   } catch (error: any) {
-    console.log('Failed to send message. Please try again.' + error.message);
+    console.log('Failed to send message. Please try again.' + error.message + error);
+    return {status: 'Failed', message: 'Message not sent, Try again!'};
   }
 
 };
