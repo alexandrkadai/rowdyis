@@ -35,11 +35,15 @@ export default function SubmitButton({
           variant={variant}
           className={cn(className, 'uppercase')}
         >
-          <Loader2Icon size={24} className="mr-2 h-2 w-2 animate-spin" />
+          <Loader2Icon size={24} className=" mr-2 h-2 w-2 animate-spin" />
           Будь Ласка Зачекайте ....
         </Button>
       ) : (
-        <Button variant={variant} type="submit"   className={cn(className, 'uppercase')}>
+        <Button
+          variant={variant}
+          type="submit"
+          className={cn(className, 'uppercase')}
+        >
           {text}
         </Button>
       )}
@@ -67,7 +71,7 @@ export function ChooseButton({ text, variant, onClick }: newButtonProps) {
   return (
     <Button
       variant={variant}
-      className={cn('h-[20px] w-[120px] py-4 px-6 uppercase')}
+      className={cn('h-[20px] w-[120px] px-6 py-4 uppercase')}
       onClick={onClick}
     >
       {text}

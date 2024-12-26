@@ -286,10 +286,9 @@ export async function placeOrderWorld(prevState: unknown, formData: FormData) {
   });
 }
 
-
 export async function contactFormAction(
   prevState: unknown,
-  formData: FormData,
+  formData: FormData
 ) {
   const submission = parseWithZod(formData, {
     schema: contactFormSchema,
@@ -307,20 +306,18 @@ export async function contactFormAction(
 
   try {
     const data = await resend.emails.send({
-         from: 'Rowdy <onboarding@resend.dev>',
-         to: ['kaldikonly@gmail.com'],
-         subject: 'New Customer Message',
-         react: EmailTemplate(verifiedData),
-       });
-       console.log('Success! Message sent !');
+      from: 'Rowdy <onboarding@resend.dev>',
+      to: ['kaldikonly@gmail.com'],
+      subject: 'New Customer Message',
+      react: EmailTemplate(verifiedData),
+    });
+    console.log('Success! Message sent !');
 
-       return {status: 'success', message: 'Message sent successfully!'};
-
+    return { status: 'success', message: 'Message sent successfully!' };
   } catch (error: any) {
-    console.log('Failed to send message. Please try again.' + error.message + error);
-    return {status: 'Failed', message: 'Message not sent, Try again!'};
+    console.log(
+      'Failed to send message. Please try again.' + error.message + error
+    );
+    return { status: 'Failed', message: 'Message not sent, Try again!' };
   }
-
-};
-  
-
+}
