@@ -47,7 +47,7 @@ export default async function FrontSideNavigation() {
 
         <Sheet>
           <SheetTrigger className="font-bold uppercase">
-            Koshik ({total})
+            Кошик ({total})
           </SheetTrigger>
           <SheetContent className="p-0">
             <SheetHeader>
@@ -63,8 +63,7 @@ export default async function FrontSideNavigation() {
                   {itemsCart.map((item, index) => (
                     <div key={index} className='border-b-2 border-black'>
                       <div
-                        
-                        className="mt-5 flex flex-row justify-between items-center gap-4 px-2 text-[20px] font-bold uppercase"
+                        className="mt-5 flex flex-row justify-between items-center gap-4 px-4 text-[20px] font-bold uppercase"
                       >
                         <span>{item.name}</span>
                         <Image
@@ -78,7 +77,7 @@ export default async function FrontSideNavigation() {
                        
                         <span >{item.sizeItem}</span>
                       </div>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between px-4">
                       <div className="flex flex-row items-center">
                         <form action={deleteOneItem}>
                           <input type="hidden" name="itemId" value={item.id} />

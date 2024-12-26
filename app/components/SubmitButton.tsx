@@ -36,10 +36,10 @@ export default function SubmitButton({
           className={cn(className, 'uppercase')}
         >
           <Loader2Icon size={24} className="mr-2 h-2 w-2 animate-spin" />
-          Please Wait ....
+          Будь Ласка Зачекайте ....
         </Button>
       ) : (
-        <Button variant={variant} type="submit" className="uppercase">
+        <Button variant={variant} type="submit"   className={cn(className, 'uppercase')}>
           {text}
         </Button>
       )}

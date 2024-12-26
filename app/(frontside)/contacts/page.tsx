@@ -1,6 +1,7 @@
 'use client';
 import { contactFormAction } from '@/app/actions';
 import { AlertManager } from '@/app/components/frontside/AlertManage';
+import SubmitButton from '@/app/components/SubmitButton';
 import { useAlertManager } from '@/app/hooks/useAlert';
 import { contactFormSchema } from '@/app/lib/zodSchemas';
 import { Button } from '@/components/ui/button';
@@ -111,9 +112,8 @@ export default function ContactsPage() {
             />
             <p className="text-red-500">{fields.message.errors}</p>
           </div>
-          <Button className="mt-5 w-full font-bold uppercase" type="submit">
-            Відправити
-          </Button>
+          <SubmitButton className="mt-5 w-full font-bold uppercase" variant="default" text="Відправити" />
+           
         </form>
       </div>
       <AlertManager alerts={alerts} />
