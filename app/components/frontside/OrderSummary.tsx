@@ -14,7 +14,7 @@ export default async function OrderSummary() {
               key={index}
               className="mt-5 flex flex-row justify-between text-[20px] font-bold uppercase"
             >
-              <span>{item.name}</span>
+              <span>{item.name.substring(0, 10)}</span>
               <Image
                 src={item.image}
                 alt="Product Image"

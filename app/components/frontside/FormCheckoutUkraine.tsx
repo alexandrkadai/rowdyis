@@ -8,7 +8,7 @@ import SubmitButton from '../SubmitButton';
 import findCities from '@/app/api/FindNovaPoshta/findCities';
 import findWarhouses from '@/app/api/FindNovaPoshta/findWarhouses';
 
-const FormCheckout = () => {
+const FormCheckoutUkraine = () => {
   const [isCitySelectVisible, setIsCitySelectVisible] = useState(false);
   const [isWarhouseVisible, setIsWarhouseVisible] = useState(false);
 
@@ -237,4 +237,4 @@ const FormCheckout = () => {
   );
 };
 
-export default FormCheckout;
+export default FormCheckoutUkraine;

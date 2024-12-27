@@ -113,7 +113,6 @@ export default function ContactsPage() {
             <p className="text-red-500">{fields.message.errors}</p>
           </div>
           <SubmitButton className="mt-5 w-full font-bold uppercase" variant="default" text="Відправити" />
-           
         </form>
       </div>
       <AlertManager alerts={alerts} />

@@ -58,7 +58,7 @@ export function ShoppingBagButton({ text, variant }: buttonProps) {
     <>
       {pending ? (
         <Button disabled variant={variant} className="uppercase">
-          Adding Item ...
+          Додаємо в Кошик...
         </Button>
       ) : (
         <Button>{text}</Button>

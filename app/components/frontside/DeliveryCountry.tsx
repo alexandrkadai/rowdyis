@@ -1,10 +1,11 @@
 'use client';
+
 import { formSet } from '@/app/store/formsSlice';
 import { useAppSelector } from '@/lib/hooks/reduxHooks';
 import { useDispatch } from 'react-redux';
 import { ChooseButton } from '../SubmitButton';
-import CheckoutForm from './FormCheckoutNEWWorld';
-import FormCheckout from './FormCheckout';
+import FormCheckoutWorld from './FormChekoutWorld';
+import FormCheckoutUkraine from './FormCheckoutUkraine';
 
 export default function DeliveryCountry() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function DeliveryCountry() {
           text="all world"
         />
       </div>
-      {check ? <FormCheckout /> : <CheckoutForm />}
+      {check ?  <FormCheckoutUkraine /> : <FormCheckoutWorld /> }
     </div>
   );
 }

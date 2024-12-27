@@ -5,7 +5,7 @@ interface iFormSet {
 }
 
 const initialState: iFormSet = {
-  checked: false,
+  checked: true,
 };
 
 const formSlice = createSlice({
