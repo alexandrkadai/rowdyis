@@ -25,9 +25,10 @@ export default function Home() {
         onClick={() => setWokes(true)}>
         <div className="absolute top-28 left-0 right-0 m-auto text-center">
           {isLoading && (
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center gap-4 justify-center">
+              
+              <span className="font-bold text-lg">Loading ...</span>
               <Loader2 className="animate-spin" />
-              <span className="font-bold text-lg">Loading...</span>
             </div>
           )}
           <>
@@ -42,7 +43,7 @@ export default function Home() {
                 isLoading ? 'opacity-0' : 'opacity-100',
                 'absolute top-10 left-0 right-0 m-auto text-center w-96 transition-opacity duration-300',
               )}
-              onLoadingComplete={() => setIsLoading(false)}
+              onLoad={() => setIsLoading(false)}
             />
             <Image
               src={woke}
