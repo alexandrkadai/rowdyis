@@ -27,7 +27,7 @@ export default function ContactsPage() {
     if (lastResult?.status === 'error') {
       addAlert('Message not sent!', 'error');
     }
-  }, [lastResult]);
+  }, [lastResult, addAlert]);
 
   const [form, fields] = useForm({
     lastResult: lastResult as iLastResult,

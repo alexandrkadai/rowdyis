@@ -311,13 +311,13 @@ export async function contactFormAction(
       subject: 'New Customer Message',
       react: EmailTemplate(verifiedData),
     });
-    console.log('Success! Message sent !');
+    
 
     return { status: 'success', message: 'Message sent successfully!' };
   } catch (error: any) {
-    console.log(
-      'Failed to send message. Please try again.' + error.message + error
-    );
+    // console.log(
+    //   'Failed to send message. Please try again.' + error.message + error
+    // );
     return { status: 'Failed', message: 'Message not sent, Try again!' };
   }
 }
