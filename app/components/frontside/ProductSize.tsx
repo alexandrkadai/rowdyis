@@ -7,6 +7,7 @@ import { type $Enums } from '@prisma/client';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { unstable_noStore as noStore } from 'next/cache';
 interface iDataProps {
   data: {
     id: string;
@@ -20,6 +21,7 @@ interface iDataProps {
 }
 
 export default function ProductSize({ data }: iDataProps) {
+  noStore();
   const [size, setSize] = useState<string>('');
   const { alerts, addAlert } = useAlertManager();
 
