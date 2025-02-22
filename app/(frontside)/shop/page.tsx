@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import prisma from '@/app/lib/db';
 import ShopImages from '@/app/components/frontside/ShopImages';
-
+import { unstable_noStore as noStore } from 'next/cache';
 async function getData() {
   const data = await prisma.product.findMany({
     orderBy: {
@@ -13,6 +11,7 @@ async function getData() {
 }
 
 export default async function ShopPage() {
+  noStore();
   const data = await getData();
   
   return (

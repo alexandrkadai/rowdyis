@@ -7,8 +7,10 @@ import React, { useEffect, useState, useRef, useActionState } from 'react';
 import SubmitButton from '../SubmitButton';
 import findCities from '@/app/api/FindNovaPoshta/findCities';
 import findWarhouses from '@/app/api/FindNovaPoshta/findWarhouses';
+import { unstable_noStore as noStore } from 'next/cache';
 
 const FormCheckoutUkraine = () => {
+  noStore();
   const [isCitySelectVisible, setIsCitySelectVisible] = useState(false);
   const [isWarhouseVisible, setIsWarhouseVisible] = useState(false);
 

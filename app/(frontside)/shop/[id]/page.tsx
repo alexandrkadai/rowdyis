@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import prisma from '@/app/lib/db';
 import ProductSize from '@/app/components/frontside/ProductSize';
-
+import { unstable_noStore as noStore } from 'next/cache';
 async function getData(productId: string) {
   const data = await prisma.product.findUnique({
     where: {
@@ -14,6 +14,7 @@ async function getData(productId: string) {
 type Params = Promise<{ id: string }>;
 
 export default async function OneProductRoute({ params }: { params: Params }) {
+  noStore();
   const id = await params;
   const data = await getData(id.id);
   const imagesP = data!.images;
