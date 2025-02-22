@@ -15,7 +15,7 @@ export default function Home() {
   if (wokes === true) {
     setTimeout(() => {
       redirect('/shop');
-    }, 4700);
+    }, 4000);
   }
 
   return (
