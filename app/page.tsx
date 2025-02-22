@@ -4,18 +4,25 @@ import Image from 'next/image';
 import sleep from '@/app/assets/animation/RowdYSleep.gif';
 import woke from '@/app/assets/animation/RowdYWoke.gif';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Import useEffect
 import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 export default function Home() {
   const [wokes, setWokes] = useState(false);
   const router = useRouter();
 
-  if (wokes === true) {
-    setTimeout(() => {
-      router.push('/shop');
-    }, 4000);
-  }
+  // Use useEffect to handle the timeout
+  useEffect(() => {
+    if (wokes) {
+      const timer = setTimeout(() => {
+        router.push('/shop');
+      }, 4000); // 4 seconds
+
+      // Cleanup the timer if the component unmounts or wokes changes
+      return () => clearTimeout(timer);
+    }
+  }, [wokes, router]);
 
   return (
     <div
