@@ -12,8 +12,10 @@ import {
 } from '@/components/ui/sheet';
 import GetCart from './GetCart';
 import { deleteOneItem, addOneItem } from '@/app/actions';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export default async function FrontSideNavigation() {
+  noStore();
   const { itemsCart, total } = await GetCart();
 
   return (
