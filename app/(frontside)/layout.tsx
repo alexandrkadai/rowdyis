@@ -13,7 +13,7 @@ export default function FrontSideLayout({ children }: { children: ReactNode }) {
           <span className="flex flex-row gap-4">
             Rowdy <Copyright size={24} />
           </span>
-          <span className="">UKraine, Kiev</span>
+          <span className="text-bold">Ukraine, Kiev</span>
 
           <span>All Rights Reserved</span>
           <Link href="/terms" className="underline">

@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     if (wokes) {
       const timer = setTimeout(() => {
-        router.push('/shop');
+        router.push('/ballers');
       }, 4000); // 4 seconds
 
       // Cleanup the timer if the component unmounts or wokes changes
