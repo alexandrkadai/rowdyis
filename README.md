@@ -2,7 +2,7 @@
 This is project  is Rowdy.is - Eccomerce Online shop made with Next.js, React, Typescript tailwind.css, Prisma, Redis, Neon (PostgresSQL), Kinde Auth.
 
 Project is divided for two parts : 
-Client and Owner. 
+Client Shop and Admin Dashboard
 
 Client has accses only to the shop, while Owner has a protected Dashboard where he can make CRUD actions with Productus, also there dedicated pages to manage categories, collections, and orders.
 
