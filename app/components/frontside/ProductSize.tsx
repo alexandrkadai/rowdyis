@@ -132,7 +132,7 @@ export default function ProductSize({ data }: iDataProps) {
             htmlFor="option-two"
             className={cn(
               size === 'xxl' ? 'text-black' : 'text-gray-300',
-              'pointer-events-none absolute right-[25px] text-[23px] lg:text-[25px] font-bold lg:right-[38px]'
+              'pointer-events-none absolute right-[25px] text-[23px] font-bold lg:right-[38px] lg:text-[25px]'
             )}
           >
             2XL

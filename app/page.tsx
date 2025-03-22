@@ -25,9 +25,8 @@ export default function Home() {
   }, [wokes, router]);
 
   return (
-    <div
-      className="w-full h-[100vh] relative flex text-center justify-center cursor-[url(cursor.cur),_pointer] bg-[#fcfcff]">
-      <div className="absolute top-28 left-0 right-0 m-auto text-center">
+    <div className="relative flex h-[100vh] w-full cursor-[url(cursor.cur),_pointer] justify-center bg-[#fcfcff] text-center">
+      <div className="absolute left-0 right-0 top-28 m-auto text-center">
         <Image
           src={sleep}
           width={100}
@@ -36,7 +35,7 @@ export default function Home() {
           priority
           className={cn(
             wokes ? 'opacity-0' : 'opacity-100',
-            'absolute top-10 left-0 right-0 m-auto text-center w-96 transition-opacity duration-300',
+            'absolute left-0 right-0 top-10 m-auto w-96 text-center transition-opacity duration-300'
           )}
         />
         <Image
@@ -46,13 +45,14 @@ export default function Home() {
           alt="animation woke"
           className={cn(
             wokes ? 'opacity-100' : 'opacity-0',
-            'absolute top-10 left-0 right-0 m-auto text-center w-96 transition-opacity duration-300',
+            'absolute left-0 right-0 top-10 m-auto w-96 text-center transition-opacity duration-300'
           )}
         />
       </div>
       <Button
-        className="uppercase absolute bottom-[20%] m-auto transition-transform hover:scale-105 active:scale-95"
-        onClick={() => setWokes(true)}>
+        className="absolute bottom-[20%] m-auto uppercase transition-transform hover:scale-105 active:scale-95"
+        onClick={() => setWokes(true)}
+      >
         Start
       </Button>
     </div>

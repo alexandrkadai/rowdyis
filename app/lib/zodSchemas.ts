@@ -15,7 +15,9 @@ export const productShema = z.object({
   size3xl: z.number().optional(),
 });
 
-const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
+);
 
 const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
@@ -46,4 +48,4 @@ export const contactFormSchema = z.object({
   phone: z.string().regex(phoneRegex, 'Invalid phone'),
   email: z.string().regex(emailRegex, 'Invalid Email'),
   message: z.string().min(10),
-})
+});

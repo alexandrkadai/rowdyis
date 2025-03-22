@@ -311,7 +311,6 @@ export async function contactFormAction(
       subject: 'New Customer Message',
       react: EmailTemplate(verifiedData),
     });
-    
 
     return { status: 'success', message: 'Message sent successfully!' };
   } catch (error: any) {

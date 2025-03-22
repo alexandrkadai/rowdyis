@@ -105,7 +105,6 @@ const FormCheckoutUkraine = () => {
 
   return (
     <div className="flex w-full flex-col">
-    
       <form
         className="mt-10 flex flex-col gap-4"
         action={action}

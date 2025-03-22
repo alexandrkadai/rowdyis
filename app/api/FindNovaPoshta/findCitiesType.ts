@@ -1,4 +1,4 @@
 export interface iFindCities {
   cityChoose: string;
-  setCity: (value : any) => void;
+  setCity: (value: any) => void;
 }

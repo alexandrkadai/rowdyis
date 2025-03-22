@@ -2,15 +2,19 @@ import { EmailTemplate } from '@/app/components/email-template/emailResend';
 import { Resend } from 'resend';
 
 interface EmailTemplateProps {
-    name: string;
-    phone: string;
-    email: string;
-    message: string;
-  }
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+}
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-
-export async function POST({name, phone, email, message}: EmailTemplateProps) {
+export async function POST({
+  name,
+  phone,
+  email,
+  message,
+}: EmailTemplateProps) {
   try {
     const { data, error } = await resend.emails.send({
       from: 'Acme <onboarding@resend.dev>',

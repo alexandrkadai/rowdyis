@@ -32,7 +32,7 @@ export default async function OneProductRoute({ params }: { params: Params }) {
           />
         ))}
       </div>
-      <div className="flex w-full flex-col text-left p-5 lg:ml-5">
+      <div className="flex w-full flex-col p-5 text-left lg:ml-5">
         <h2 className="text-[45px] font-bold uppercase">{data?.name}</h2>
         <span className="mt-2 text-[45px] font-bold">
           {data?.price} &#8372;

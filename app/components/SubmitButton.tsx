@@ -35,7 +35,7 @@ export default function SubmitButton({
           variant={variant}
           className={cn(className, 'uppercase')}
         >
-          <Loader2Icon size={24} className=" mr-2 h-2 w-2 animate-spin" />
+          <Loader2Icon size={24} className="mr-2 h-2 w-2 animate-spin" />
           Будь Ласка Зачекайте ....
         </Button>
       ) : (

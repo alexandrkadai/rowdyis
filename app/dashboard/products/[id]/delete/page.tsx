@@ -10,13 +10,9 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 
-type Params = Promise<{ id: string }>
+type Params = Promise<{ id: string }>;
 
-export default async function DeleteRoute({
-  params,
-}: {
-  params: Params;
-}) {
+export default async function DeleteRoute({ params }: { params: Params }) {
   const { id } = await params;
   return (
     <div className="flex h-[80vh] w-full items-center justify-center">

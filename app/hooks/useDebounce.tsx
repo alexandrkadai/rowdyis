@@ -24,14 +24,14 @@ export default useDebounce;
 // const FormCheckout = () => {
 //     const [searchTerm, setSearchTerm] = useState('');
 //     const debouncedSearchTerm = useDebounce(searchTerm, 500); // 500ms delay
-  
+
 //     // This effect will only run when the debounced value changes
 //     useEffect(() => {
 //       if (debouncedSearchTerm) {
 //         // Make API call here
 //       }
 //     }, [debouncedSearchTerm]);
-  
+
 //     return (
 //       <input
 //         type="text"

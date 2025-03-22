@@ -57,9 +57,9 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
-      cursor:{
-        'fancy' : 'url(cursor.cur), pointer'
-      }
+      cursor: {
+        fancy: 'url(cursor.cur), pointer',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

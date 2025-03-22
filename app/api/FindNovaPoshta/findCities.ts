@@ -1,9 +1,6 @@
 import { iFindCities } from './findCitiesType';
 
-export default function findCities({
-  cityChoose,
-  setCity,
-}: iFindCities) {
+export default function findCities({ cityChoose, setCity }: iFindCities) {
   const apiKey = process.env.PUBLIC_NOVA_KEY;
   const url: string = 'https://api.novaposhta.ua/v2.0/json/';
 

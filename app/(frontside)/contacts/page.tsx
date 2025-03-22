@@ -10,14 +10,14 @@ import { useActionState } from 'react';
 import { useEffect } from 'react';
 
 type Enum = 'error' | 'success' | undefined;
-interface iLastResult{
+interface iLastResult {
   status: Enum;
   message: string;
 }
 
 export default function ContactsPage() {
   const { alerts, addAlert } = useAlertManager();
-  
+
   const [lastResult, action] = useActionState(contactFormAction, undefined);
 
   useEffect(() => {
@@ -44,11 +44,7 @@ export default function ContactsPage() {
     <div className="mt-14 w-full justify-center text-center lg:mt-10">
       <h2 className="text-2xl font-bold">Будемо на звʼязку</h2>
       <div className="mx-auto mt-5 flex w-[350px] flex-col items-center justify-center lg:mx-auto lg:mt-10">
-        <form
-          action={action}
-          id={form.id}
-          onSubmit={form.onSubmit}
-        >
+        <form action={action} id={form.id} onSubmit={form.onSubmit}>
           <div className="mt-2 text-left">
             <label htmlFor="nameUser" className="font-bold uppercase">
               Імʼя
@@ -112,7 +108,11 @@ export default function ContactsPage() {
             />
             <p className="text-red-500">{fields.message.errors}</p>
           </div>
-          <SubmitButton className="mt-5 w-full font-bold uppercase" variant="default" text="Відправити" />
+          <SubmitButton
+            className="mt-5 w-full font-bold uppercase"
+            variant="default"
+            text="Відправити"
+          />
         </form>
       </div>
       <AlertManager alerts={alerts} />

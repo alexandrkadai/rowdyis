@@ -44,10 +44,7 @@ const FormCheckoutWorld = () => {
     >
       <div className="grid grid-cols-1 gap-4">
         <div>
-          <label
-            htmlFor="firstName"
-            className="block "
-          >
+          <label htmlFor="firstName" className="block">
             First Name
           </label>
           <input
@@ -62,10 +59,7 @@ const FormCheckoutWorld = () => {
           <p className="text-red-500">{fields.firstName.errors}</p>
         </div>
         <div>
-          <label
-            htmlFor="lastName"
-            className="block "
-          >
+          <label htmlFor="lastName" className="block">
             Last Name
           </label>
           <input
@@ -82,10 +76,7 @@ const FormCheckoutWorld = () => {
       </div>
 
       <div>
-        <label
-          htmlFor="email"
-          className="block "
-        >
+        <label htmlFor="email" className="block">
           Email
         </label>
         <input
@@ -101,10 +92,7 @@ const FormCheckoutWorld = () => {
       </div>
 
       <div>
-        <label
-          htmlFor="phone"
-          className="block "
-        >
+        <label htmlFor="phone" className="block">
           Phone
         </label>
         <input
@@ -120,10 +108,7 @@ const FormCheckoutWorld = () => {
       </div>
 
       <div>
-        <label
-          htmlFor="address"
-          className="block "
-        >
+        <label htmlFor="address" className="block">
           Address
         </label>
         <input
@@ -140,10 +125,7 @@ const FormCheckoutWorld = () => {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label
-            htmlFor="city"
-            className="block "
-          >
+          <label htmlFor="city" className="block">
             City
           </label>
           <input
@@ -158,10 +140,7 @@ const FormCheckoutWorld = () => {
           <p className="text-red-500">{fields.city.errors}</p>
         </div>
         <div>
-          <label
-            htmlFor="state"
-            className="block "
-          >
+          <label htmlFor="state" className="block">
             State/Region
           </label>
           <input
@@ -178,10 +157,7 @@ const FormCheckoutWorld = () => {
       </div>
 
       <div>
-        <label
-          htmlFor="zip"
-          className="block "
-        >
+        <label htmlFor="zip" className="block">
           Zip/Postal Code
         </label>
         <input
