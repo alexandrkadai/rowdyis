@@ -11,19 +11,21 @@ export default function OpeningDoorsAnimation() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center min-h-screen bg-gray-100">
-
-      <div className="relative w-full h-[100vh] overflow-hidden"  onClick={toggleDoors}>
+    <div className="flex h-full min-h-screen w-full flex-col items-center justify-center bg-gray-100">
+      <div
+        className="relative h-[100vh] w-full overflow-hidden"
+        onClick={toggleDoors}
+      >
         {/* Left door */}
-        <div 
-          className={`absolute top-0 left-0 w-1/2 h-full bg-indigo-500 transition-transform duration-1000 ease-in-out ${
+        <div
+          className={`absolute left-0 top-0 h-full w-1/2 bg-indigo-500 transition-transform duration-1000 ease-in-out ${
             isOpen ? '-translate-x-full' : 'translate-x-0'
           }`}
         />
 
         {/* Right door */}
-        <div 
-          className={`absolute top-0 right-0 w-1/2 h-full bg-purple-500 transition-transform duration-1000 ease-in-out ${
+        <div
+          className={`absolute right-0 top-0 h-full w-1/2 bg-purple-500 transition-transform duration-1000 ease-in-out ${
             isOpen ? 'translate-x-full' : 'translate-x-0'
           }`}
         />
@@ -36,21 +38,21 @@ export default function OpeningDoorsAnimation() {
             Welcome Inside!
           </p>
         </div> */}
-        <div className="absolute w-full h-full bg-cover bg-center bg-no-repeat">
-        <div className={`text-xl font-bold transition-opacity duration-500 ${
-            isOpen ? 'opacity-100' : 'opacity-0'
-          }`}>
-           
-          
-      <div className='mt-32 flex items-center justify-center flex-col'>
-      <p className= "text-purple-800 m-auto text-3xl">
-            Welcome 
-          </p>
-      <span className='mt-20 text-purple-800 m-auto text-3xl'>TO</span>
-      </div>
-      <h1 className='text-center mt-[50px] text-[144px] text-purple-800'>BALLERS</h1>
-    </div>
-      </div>
+        <div className="absolute h-full w-full bg-cover bg-center bg-no-repeat">
+          <div
+            className={`text-xl font-bold transition-opacity duration-500 ${
+              isOpen ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="mt-32 flex flex-col items-center justify-center">
+              <p className="m-auto text-3xl text-purple-800">Welcome</p>
+              <span className="m-auto mt-20 text-3xl text-purple-800">TO</span>
+            </div>
+            <h1 className="mt-[50px] text-center text-[144px] text-purple-800">
+              BALLERS
+            </h1>
+          </div>
+        </div>
       </div>
     </div>
   );

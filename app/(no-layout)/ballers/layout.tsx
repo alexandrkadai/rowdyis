@@ -5,7 +5,5 @@ interface LayoutBallersProps {
 }
 
 export default function LayoutBallers({ children }: LayoutBallersProps) {
-  return (
-    <main>{children}</main>
-  )
+  return <main>{children}</main>;
 }
