@@ -1,10 +1,11 @@
 'use client';
+
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import sleep from '@/app/assets/animation/RowdYSleep.gif';
 import woke from '@/app/assets/animation/RowdYWoke.gif';
 import { Button } from '@/components/ui/button';
-import { useState, useEffect } from 'react'; // Import useEffect
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
@@ -12,48 +13,55 @@ export default function Home() {
   const [wokes, setWokes] = useState(false);
   const router = useRouter();
 
-  // Use useEffect to handle the timeout
   useEffect(() => {
-    if (wokes) {
-      const timer = setTimeout(() => {
-        router.push('/ballers');
-      }, 4000); // 4 seconds
+    if (!wokes) return;
 
-      // Cleanup the timer if the component unmounts or wokes changes
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      router.push('/shop');
+    }, 5000);
+
+    return () => clearTimeout(timer);
   }, [wokes, router]);
 
+  const handleStart = useCallback(() => {
+    setWokes(true);
+  }, []);
+
+  const imageBaseClass =
+    'absolute left-0 right-0 top-10 m-auto w-96 text-center transition-opacity duration-300';
+
   return (
-    <div className="relative flex h-[100vh] w-full cursor-[url(cursor.cur),_pointer] justify-center bg-[#fcfcff] text-center">
+    <div className="relative flex h-screen w-full cursor-[url(cursor.cur),_pointer] justify-center bg-[#fcfcff] text-center">
       <div className="absolute left-0 right-0 top-28 m-auto text-center">
         <Image
           src={sleep}
-          width={100}
-          height={100}
-          alt="animation sleep"
+          width={384}
+          height={384}
+          alt="sleep animation"
           priority
-          className={cn(
-            wokes ? 'opacity-0' : 'opacity-100',
-            'absolute left-0 right-0 top-10 m-auto w-96 text-center transition-opacity duration-300'
-          )}
+          className={cn(wokes ? 'opacity-0' : 'opacity-100', imageBaseClass)}
         />
         <Image
           src={woke}
-          width={100}
-          height={100}
-          alt="animation woke"
-          className={cn(
-            wokes ? 'opacity-100' : 'opacity-0',
-            'absolute left-0 right-0 top-10 m-auto w-96 text-center transition-opacity duration-300'
-          )}
+          width={384}
+          height={384}
+          alt="woke animation"
+          className={cn(wokes ? 'opacity-100' : 'opacity-0', imageBaseClass)}
         />
       </div>
+
       <Button
+        disabled={wokes}
+        onClick={handleStart}
         className="absolute bottom-[20%] m-auto uppercase transition-transform hover:scale-105 active:scale-95"
-        onClick={() => setWokes(true)}
       >
-        Start
+        {wokes ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading...
+          </>
+        ) : (
+          'Start'
+        )}
       </Button>
     </div>
   );
