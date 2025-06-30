@@ -1,17 +1,21 @@
+// app/shop/page.tsx
 import prisma from '@/app/lib/db';
 import ShopImages from '@/app/components/frontside/ShopImages';
-import { unstable_noStore as noStore } from 'next/cache';
-async function getData() {
+import { cache } from 'react';
+
+export const revalidate = 60; // <-- Regenerate page every 60 seconds
+
+// Wrap the DB call in a cached function
+const getData = cache(async () => {
   const data = await prisma.product.findMany({
     orderBy: {
       createdAt: 'desc',
     },
   });
   return data;
-}
+});
 
 export default async function ShopPage() {
-  noStore();
   const data = await getData();
 
   return (
