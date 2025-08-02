@@ -51,11 +51,11 @@ export default async function FrontSideNavigation() {
             </SheetTrigger>
             <SheetContent className="p-0">
               <SheetHeader>
-                <SheetTitle className="hidden">Cart</SheetTitle>
+                <SheetTitle className="hidden">Кошик</SheetTitle>
               </SheetHeader>
               <div>
                 <h2 className="text-uppercase ml-2 mt-2 text-[35px] font-bold">
-                  Cart
+                  Кошик
                 </h2>
                 <div className="w-full border-b-2 border-black"></div>
                 {itemsCart && itemsCart.length > 0 ? (

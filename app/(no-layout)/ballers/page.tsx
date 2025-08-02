@@ -1,17 +1,23 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import pusher from '../../assets/images/pusher.png';
 import puserOpened from '../../assets/images/pusherOpened.png';
-
+import paper from '../../assets/images/paperCut.png';
+import { cn } from '@/lib/utils';
 export default function Page() {
   const [isHovered, setIsHovered] = useState(false);
-
+  const [paperHover, setPaperHover] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  
   const [stage, setStage] = useState(0);
 
   const handleClick = () => {
     if (stage < appleStages.length - 1) {
       setStage(stage + 1);
+    }
+    if (stage === 8) {
+      setStage(0);
     }
   };
 
@@ -21,10 +27,54 @@ export default function Page() {
     '/apple3.png',
     '/apple4.png',
     '/apple5.png',
+    '/apple6.png',
+    '/apple7.png',
+    '/apple8.png',
+    '/apple9.png',
   ];
 
+   const handleMouseEnter = () => {
+    setPaperHover(false);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0; 
+      videoRef.current.play(); 
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setPaperHover(true);
+  };
+
   return (
-    <div className="relative h-screen w-full bg-[url('/background.png')] bg-cover bg-center bg-no-repeat overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden bg-[url('/background.png')] bg-cover bg-center bg-no-repeat">
+      <Image
+        src={paper}
+        alt="Paper Cut"
+        width={80}
+        height={80}
+        className={cn(
+          paperHover ? 'opacity-100' : 'opacity-0',
+          'absolute bottom-[-20px] left-[55px] h-[80px] w-[80px] object-cover'
+        )}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      />
+      <div>
+        <video
+        ref={videoRef}
+          className={cn(
+            paperHover ? 'opacity-0' : 'opacity-100',
+            'absolute bottom-[25px] left-[55px] h-[105px] w-[170px] object-cover'
+          )}
+          src="/videos/papperAnimation.mp4"
+          autoPlay
+          muted
+          playsInline
+          loop={false}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
+      </div>
       <Image
         src={isHovered ? puserOpened : pusher}
         onMouseEnter={() => setIsHovered(true)}
@@ -32,25 +82,25 @@ export default function Page() {
         alt="Pusher Logo"
         className="absolute right-[200px] top-[150px] h-[240px] w-[179px] rotate-[4deg] transform transition-all duration-300 ease-in-out"
       />
-      <div className="absolute left-[444px] bottom-[-100px] h-[200px] w-[200px] cursor-pointer transition-transform duration-300 ease-in-out">
+      <div className="absolute bottom-[-100px] left-[444px] h-[200px] w-[200px] cursor-pointer transition-transform duration-300 ease-in-out">
         <Image
           key={stage}
           src={appleStages[stage]}
           alt="Apple"
           width={100}
-        height={120}
-        className="h-[120px] w-[100px] cursor-pointer transition-transform duration-300 ease-in-out"
-        onClick={handleClick}
-      />
+          height={120}
+          className="h-[100px] w-[100px] cursor-pointer transition-transform duration-300 ease-in-out"
+          onClick={handleClick}
+        />
       </div>
       <video
-    src="/videos/textDVD.mp4" 
-    className="absolute bottom-[75px] right-[417px] w-[170px] h-[105px] object-cover"
-    autoPlay
-    muted
-    loop
-    playsInline
-  />
+        src="/videos/textDVD.mp4"
+        className="absolute bottom-[75px] right-[417px] h-[105px] w-[170px] object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
     </div>
   );
 }
