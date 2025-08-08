@@ -5,13 +5,18 @@ import pusher from '../../assets/images/pusher.png';
 import puserOpened from '../../assets/images/pusherOpened.png';
 import paper from '../../assets/images/paperCut.png';
 import { cn } from '@/lib/utils';
+import Modal from '@/app/components/frontside/Modal';
+
 export default function Page() {
+  const [isClicked, setIsClicked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [paperHover, setPaperHover] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  
-  const [stage, setStage] = useState(0);
 
+  const [stage, setStage] = useState(0);
+  const handleClickModal = () => {
+    setIsClicked(!isClicked);
+  };
   const handleClick = () => {
     if (stage < appleStages.length - 1) {
       setStage(stage + 1);
@@ -33,11 +38,11 @@ export default function Page() {
     '/apple9.png',
   ];
 
-   const handleMouseEnter = () => {
+  const handleMouseEnter = () => {
     setPaperHover(false);
     if (videoRef.current) {
-      videoRef.current.currentTime = 0; 
-      videoRef.current.play(); 
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
     }
   };
 
@@ -47,6 +52,13 @@ export default function Page() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-[url('/background.png')] bg-cover bg-center bg-no-repeat">
+       {isClicked && <Modal />}
+      <div
+        className="absolute left-[50%] top-[50%] h-[120px] w-[120px] bg-red-300"
+        onClick={handleClickModal}
+      >
+       
+      </div>
       <Image
         src={paper}
         alt="Paper Cut"
@@ -61,7 +73,7 @@ export default function Page() {
       />
       <div>
         <video
-        ref={videoRef}
+          ref={videoRef}
           className={cn(
             paperHover ? 'opacity-0' : 'opacity-100',
             'absolute bottom-[25px] left-[55px] h-[105px] w-[170px] object-cover'
