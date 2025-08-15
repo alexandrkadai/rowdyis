@@ -54,7 +54,7 @@ export default function Page() {
     <div className="relative h-screen w-full overflow-hidden bg-[url('/background.png')] bg-cover bg-center bg-no-repeat">
        {isClicked && <Modal />}
       <div
-        className="absolute left-[50%] top-[50%] h-[120px] w-[120px] bg-red-300"
+        className="absolute left-[50%] top-[50%] h-[120px] w-[120px] bg-red-300 z-1"
         onClick={handleClickModal}
       >
        

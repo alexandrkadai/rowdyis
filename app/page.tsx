@@ -15,23 +15,20 @@ export default function Home() {
 
   useEffect(() => {
     if (!wokes) return;
-
-    const timer = setTimeout(() => {
-      router.push('/shop');
-    }, 5000);
-
+    const timer = setTimeout(() => router.push('/shop'), 5000);
     return () => clearTimeout(timer);
-  }, [wokes, router]);
+  }, [wokes]);
 
   const handleStart = useCallback(() => {
     setWokes(true);
   }, []);
 
   const imageBaseClass =
-    'absolute left-0 right-0 top-10 m-auto w-96 text-center transition-opacity duration-300';
+    'absolute left-0 right-0 top-10 m-auto w-96 text-center transition-opacity duration-500 ease-in-out';
 
   return (
     <div className="relative flex h-screen w-full cursor-[url(cursor.cur),_pointer] justify-center bg-[#fcfcff] text-center">
+      {/* Both animations are preloaded */}
       <div className="absolute left-0 right-0 top-28 m-auto text-center">
         <Image
           src={sleep}
@@ -39,17 +36,25 @@ export default function Home() {
           height={384}
           alt="sleep animation"
           priority
-          className={cn(wokes ? 'opacity-0' : 'opacity-100', imageBaseClass)}
+          className={cn(
+            wokes ? 'opacity-0 pointer-events-none' : 'opacity-100',
+            imageBaseClass
+          )}
         />
         <Image
           src={woke}
           width={384}
           height={384}
           alt="woke animation"
-          className={cn(wokes ? 'opacity-100' : 'opacity-0', imageBaseClass)}
+          priority
+          className={cn(
+            wokes ? 'opacity-100' : 'opacity-0 pointer-events-none',
+            imageBaseClass
+          )}
         />
       </div>
 
+      
       <Button
         disabled={wokes}
         onClick={handleStart}
