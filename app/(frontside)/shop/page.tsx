@@ -1,19 +1,13 @@
-// app/shop/page.tsx
 import prisma from '@/app/lib/db';
 import ShopImages from '@/app/components/frontside/ShopImages';
-import { cache } from 'react';
 
-export const revalidate = 60; // <-- Regenerate page every 60 seconds
+export const revalidate = false;
 
-// Wrap the DB call in a cached function
-const getData = cache(async () => {
-  const data = await prisma.product.findMany({
-    orderBy: {
-      createdAt: 'desc',
-    },
+async function getData() {
+  return await prisma.product.findMany({
+    orderBy: { createdAt: 'desc' },
   });
-  return data;
-});
+}
 
 export default async function ShopPage() {
   const data = await getData();
