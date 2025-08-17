@@ -49,80 +49,78 @@ export default async function FrontSideNavigation() {
             <SheetTrigger className="font-bold uppercase">
               Кошик ({total})
             </SheetTrigger>
-            <SheetContent className="p-0">
+            <SheetContent side="right" className="max-w-none w-[700px]">
               <SheetHeader>
                 <SheetTitle className="hidden">Кошик</SheetTitle>
               </SheetHeader>
               <div>
-                <h2 className="text-uppercase ml-2 mt-2 text-[35px] font-bold">
-                  Кошик
-                </h2>
-                <div className="w-full border-b-2 border-black"></div>
+                <h2 className="text-uppercase ml-2 mt-2 text-[20px]">кошик</h2>
+                
                 {itemsCart && itemsCart.length > 0 ? (
-                  <>
+                    <>
                     {itemsCart.map((item, index) => (
                       <div key={index} className="border-b-2 border-black">
-                        <div className="mt-5 flex flex-row items-center justify-between gap-4 px-4 text-[20px] font-bold uppercase">
-                          <span>{item.name}</span>
-                          <Image
-                            src={item.image}
-                            alt="Product Image"
-                            width={32}
-                            height={32}
-                            className="rounded-xl"
-                          />
+                      <div className="mt-5 flex flex-row items-center justify-between gap-4 px-4 text-[20px] font-bold uppercase">
+                        <span>{item.name}</span>
+                        <Image
+                        src={item.image}
+                        alt="Product Image"
+                        width={32}
+                        height={32}
+                        className="rounded-xl"
+                        />
 
-                          <span>{item.sizeItem}</span>
+                        <span>{item.sizeItem}</span>
+                      </div>
+                      <div className="flex justify-between px-4">
+                        <div className="flex flex-row items-center">
+                        <form action={deleteOneItem}>
+                          <input
+                          type="hidden"
+                          name="itemId"
+                          value={item.id}
+                          />
+                          <input
+                          type="hidden"
+                          name="sizeToD"
+                          value={item.sizeItem}
+                          />
+                          <Button variant="ghost" type="submit" className="border-none">
+                          -
+                          </Button>
+                        </form>
+                        <span>{item.quantity}</span>
+                        <form action={addOneItem}>
+                          <input
+                          type="hidden"
+                          name="itemId"
+                          value={item.id}
+                          />
+                          <input
+                          type="hidden"
+                          name="sizeToD"
+                          value={item.sizeItem}
+                          />
+                          <Button variant="ghost" type="submit" className="border-none">
+                          +
+                          </Button>
+                        </form>
                         </div>
-                        <div className="flex justify-between px-4">
-                          <div className="flex flex-row items-center">
-                            <form action={deleteOneItem}>
-                              <input
-                                type="hidden"
-                                name="itemId"
-                                value={item.id}
-                              />
-                              <input
-                                type="hidden"
-                                name="sizeToD"
-                                value={item.sizeItem}
-                              />
-                              <Button variant="ghost" type="submit">
-                                -
-                              </Button>
-                            </form>
-                            <span>{item.quantity}</span>
-                            <form action={addOneItem}>
-                              <input
-                                type="hidden"
-                                name="itemId"
-                                value={item.id}
-                              />
-                              <input
-                                type="hidden"
-                                name="sizeToD"
-                                value={item.sizeItem}
-                              />
-                              <Button variant="ghost" type="submit">
-                                +
-                              </Button>
-                            </form>
-                          </div>
-                          <span className="flex items-center justify-end font-bold">
-                            {item.price} &#8372;
-                          </span>
-                        </div>
+                        <span className="flex items-center justify-end font-bold">
+                        {item.price} &#8372;
+                        </span>
+                      </div>
                       </div>
                     ))}
                     <SheetClose asChild>
                       <Button
-                        asChild
-                        className="absolute bottom-0 left-0 w-full rounded-none"
+                      asChild
+                      className="absolute bottom-0 left-0 w-full rounded-none border-none"
                       >
-                        <Link href="/checkout">Checkout</Link>
+                      <Link href="/checkout">Checkout</Link>
                       </Button>
                     </SheetClose>
-                  </>
+                    </>
                 ) : (
                   <>
                     <span className="mt-10 block text-center font-bold">

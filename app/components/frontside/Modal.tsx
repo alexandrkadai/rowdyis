@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import tee from '@/app/assets/testimage/Misprint+Tee+1.png';
-import ProductColor from './ProductColor';
-export default function Modal() {
+
+type Props ={
+  handleClickModal: () => void;
+}
+export default function Modal({handleClickModal}: Props) {
   return (
-    <div className="absolute left-0 top-0 h-[100%] w-[100%] bg-black/15 z-10">
-      <div className="absolute left-[50%] top-[50%] flex h-[500px] w-[500px] translate-x-[-50%] translate-y-[-50%] transform justify-between border-2 border-black bg-white">
+    <div>
+    <div onClick={handleClickModal}className="absolute left-0 top-0 h-[100%] w-[100%] bg-black/50 z-10"></div>
+      <div className="absolute left-[50%] top-[50%] flex h-[500px] w-[500px] translate-x-[-50%] translate-y-[-50%] transform justify-between border-2 border-black bg-white z-20">
+        <button className="absolute right-0 top-[-7px] text-[25px]" onClick={handleClickModal}>&times;</button>
         <div className="flex w-[50%] items-center justify-center">
           <Image src={tee} width={200} height={200} alt="Hoody Ballers" />
         </div>
