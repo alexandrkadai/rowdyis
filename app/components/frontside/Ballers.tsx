@@ -1,6 +1,7 @@
 'use client';
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -17,6 +18,7 @@ import paper from '../../assets/images/paperCut.png';
 import { cn } from '@/lib/utils';
 import Modal from '@/app/components/frontside/Modal';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function Ballers() {
   const [isClicked, setIsClicked] = useState(false);
@@ -63,49 +65,78 @@ export default function Ballers() {
   return (
     <div>
       <Sheet>
-        <SheetTrigger className='absolute top-[150px] left-[150px] text-2xl'>кошик</SheetTrigger>
+        <SheetTrigger className="absolute left-[150px] top-[150px] text-2xl">
+          кошик
+        </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle className='relative top-[-13px]'>кошик</SheetTitle>
+            <SheetTitle className="relative top-[-13px]">кошик</SheetTitle>
             <SheetDescription>
-              <div className='flex flex-row gap-[15px] overflow-y-scroll'>
-                
-           <Image className="w-[150px] h-[350px]" src={tee} width={150} height={350} alt="Hoody Ballers" />
-           
-           <div>
-     <div className="flex flex-col justify-between">
-              {/* Title + size */}
-              <div>
-                <h3 className="font-semibold capitalize text-black">Misprint Tee</h3>
-                <p className="text-sm mt-[10px] lowercase text-gray-700">black/s</p>
+              <div className="flex flex-row gap-[15px]">
+                <Image
+                  className="h-[350px] w-[150px]"
+                  src={tee}
+                  width={150}
+                  height={350}
+                  alt="Hoody Ballers"
+                />
+
+                <div className="overflow-y-scroll">
+                  <div className="flex flex-col justify-between">
+                    {/* Title + size */}
+                    <div>
+                      <span className="font-semibold capitalize text-black">
+                        Misprint Tee
+                      </span>
+
+                      <span className="mt-[10px] text-sm lowercase text-gray-700">
+                        black/s
+                      </span>
+                    </div>
+
+                    {/* Price */}
+                    <span className="mt-[15px] font-medium">£200</span>
+
+                    {/* Quantity controls */}
+                    <div className="mt-[30px] flex w-fit items-center gap-2 rounded-md border-[1px] border-black">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="rounded-full px-2"
+                      >
+                        -
+                      </Button>
+                      <span>1</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="rounded-full px-2"
+                      >
+                        +
+                      </Button>
+                    </div>
+
+                    <button className="mt-[30px] w-fit text-left text-sm text-gray-600 underline">
+                      remove
+                    </button>
+                  </div>
+                </div>
+                <SheetClose asChild>
+                  <Button
+                    asChild
+                    className="absolute bottom-[15px] w-[90%] rounded-md border-none"
+                  >
+                    <Link href="/checkout">Checkout</Link>
+                  </Button>
+                </SheetClose>
               </div>
-
-              {/* Price */}
-              <p className="mt-[15px] font-medium">£200</p>
-
-              {/* Quantity controls */}
-              <div className="mt-[30px] flex items-center gap-2 border-[1px] border-black rounded-md w-fit">
-                <Button variant="ghost" size="sm" className="rounded-full px-2">
-                  -
-                </Button>
-                <span>1</span>
-                <Button variant="ghost" size="sm" className="rounded-full px-2">
-                  +
-                </Button>
-              </div>
-
-              
-              <button className="mt-[30px] text-sm text-gray-600 underline text-left w-fit">
-                remove
-              </button>
-            </div>
-           </div>
-           </div>
             </SheetDescription>
           </SheetHeader>
         </SheetContent>
       </Sheet>
+
       {isClicked && <Modal handleClickModal={handleClickModal} />}
+
       <div
         className="z-1 absolute left-[50%] top-[50%] h-[120px] w-[120px] bg-red-300"
         onClick={handleClickModal}
