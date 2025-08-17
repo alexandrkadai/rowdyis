@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!wokes) return;
-    const timer = setTimeout(() => router.push('/shop'), 5000);
+    const timer = setTimeout(() => router.push('/ballers'), 5000);
     return () => clearTimeout(timer);
   }, [wokes]);
 
